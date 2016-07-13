@@ -1,7 +1,8 @@
-main:tcpserver.c servecho.c tcpclient.c clistr.c readline.c
-	gcc -o server.out tcpserver.c servecho.c
-	gcc -o client.out tcpclient.c clistr.c readline.c
+main:tcpclient01.c tcpclient02.c 
+	gcc -o tcpclient01.out tcpclient01.c 
+	gcc -o tcpclient02.out tcpclient02.c 
 
 clean:
-	rm *.out *.o
-
+	rm *.out
+copy:
+	cp tcpclient01.c tcpclient02.c
