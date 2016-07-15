@@ -5,9 +5,7 @@
 #include<unistd.h>
 #include<arpa/inet.h>
 #include<time.h>
-
-#define SERV_PORT 9877
-#define SA struct sockaddr
+#include "common.h"
 
 //void str_cli(FILE *fp,int sockfd);
 
@@ -16,6 +14,7 @@ int main(int argc, char **argv)
     int sockfd;
     struct sockaddr_in servaddr;
     struct timespec now,res;
+    char writebuf[TRANSSIZE];
 
     if (argc !=2){
         printf("argc error");
@@ -30,6 +29,8 @@ int main(int argc, char **argv)
     inet_pton(AF_INET,argv[1],&servaddr.sin_addr);
 
     connect(sockfd,(SA*)&servaddr,sizeof(servaddr));
+    
+    write(sockfd,writebuf,TRANSSIZE);
 
     clock_gettime(CLOCK_MONOTONIC,&now);
     res.tv_sec = now.tv_sec/10*10+10;

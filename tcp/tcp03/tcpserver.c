@@ -8,10 +8,7 @@
 #include<time.h>
 #include<sys/types.h>
 #include<sys/socket.h>
-
-#define SERV_PORT 9877
-#define LISTENQ 1024
-#define SA struct sockaddr
+#include "common.h"
 
 //void str_echo(int sockfd);
 
@@ -22,6 +19,7 @@ void main()
     socklen_t clilen;
     struct sockaddr_in cliaddr, servaddr;
     struct timespec res,now;
+    char readbuf[TRANSSIZE];
 
     listenfd = socket(AF_INET,SOCK_STREAM,0);
 
@@ -42,7 +40,8 @@ void main()
         res.tv_sec = now.tv_sec/10*10+10;
         res.tv_nsec = 0;
         printf("now sec:%ld  nsec:%ld res.sec%ld\n",now.tv_sec,now.tv_nsec,res.tv_sec);
-
+        
+        read(connfd,readbuf,TRANSSIZE);
         clock_nanosleep(CLOCK_MONOTONIC,TIMER_ABSTIME,&res,&now);
         
         close(connfd);
