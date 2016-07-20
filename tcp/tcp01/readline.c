@@ -1,6 +1,4 @@
-#include<unistd.h>
-#include<errno.h>
-#include<stdio.h>
+#include "tcptest.h"
 
 ssize_t readline(int fd, void *vptr, size_t maxlen)
 {

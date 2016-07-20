@@ -1,11 +1,4 @@
-#include<stdio.h>
-#include<string.h>
-#include<sys/socket.h>
-#include<stdlib.h>
-#include<arpa/inet.h>
-
-#define SERV_PORT 9877
-#define SA struct sockaddr
+#include "tcptest.h"
 
 void str_cli(FILE *fp,int sockfd);
 

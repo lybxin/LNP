@@ -1,2 +1,1 @@
-用来测试tcp同开，server和client通过高精度定时器同时发起connect，测试失败
-查看linux内核代码  tcp_rcv_state_process 可以确认linux实现上不支持tcp由syn_sent状态切换到syn_rcv状态  即不支持tcp连接的同开
+用来测试tcp同开，client01和client02绑定本地端口后通过高精度定时器同时发起connect。测试OK

@@ -1,22 +1,9 @@
-#include<stdio.h>
-#include<unistd.h>
-#include<string.h>
-#include<sys/socket.h>
-#include<stdlib.h>
-#include<arpa/inet.h>
-#include<time.h>
-#include<errno.h>
-
-#define SERV_PORT01 9877
-#define SERV_PORT02 10000
-#define SA struct sockaddr
-
-void str_cli(FILE *fp,int sockfd);
+#include "tcpcommon.h"
 
 int main(int argc, char **argv)
 {
     int sockfd;
-    struct sockaddr_in servaddr;
+    struct sockaddr_in bindaddr,servaddr;
     struct timespec now,res;
 
     if (argc !=2){
@@ -26,13 +13,19 @@ int main(int argc, char **argv)
 
     sockfd = socket(AF_INET,SOCK_STREAM,0);
 
+    memset(&bindaddr,0,sizeof(bindaddr));
+    bindaddr.sin_family = AF_INET;
+    bindaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    bindaddr.sin_port = htons(SERV_PORT01);
+    bind(sockfd,(SA*)&bindaddr,sizeof(bindaddr));
+
     memset(&servaddr,0,sizeof(servaddr));
     servaddr.sin_family = AF_INET;
     servaddr.sin_port = htons(SERV_PORT02);
     inet_pton(AF_INET,argv[1],&servaddr.sin_addr);
     
     clock_gettime(CLOCK_MONOTONIC,&now);
-    res.tv_sec = now.tv_sec/10*10+20;
+    res.tv_sec = now.tv_sec/10*10+10;
     res.tv_nsec = 0;
     printf("now sec:%ld  nsec:%ld res.sec%ld\n",now.tv_sec,now.tv_nsec,res.tv_sec);
 
