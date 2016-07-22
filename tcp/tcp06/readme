@@ -1,0 +1,15 @@
+通过双无线网卡测试tcp连接的半开
+server绑定网卡A的地址
+client绑定网卡B的地址并连接server
+
+client发送"hello"消息
+ 
+server正常接收到后"hello"消息后 拔掉网卡A
+
+kill掉server进程 使server的FIN消息不能发送到client
+
+插上网卡A  注意在路由器中绑定IP地址和MAC地址，使得网卡A的地址和之前是一致的,此时client和server即处于半开连接状态
+
+client向server发送"world"消息
+
+server回复rst消息
