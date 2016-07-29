@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<string.h>
-#include<sys/socket.h>
+#include<sys/Socket.h>
 #include<stdlib.h>
 #include<unistd.h>
 #include<arpa/inet.h>
@@ -25,20 +25,20 @@ int main(int argc, char **argv)
     
     for(i = 0; ; i++)
     {
-        sockfd = socket(AF_INET,SOCK_STREAM,0);
+        sockfd = Socket(AF_INET,SOCK_STREAM,0);
 
         memset(&servaddr,0,sizeof(servaddr));
         servaddr.sin_family = AF_INET;
         servaddr.sin_port = htons(SERV_PORT);
         inet_pton(AF_INET,argv[1],&servaddr.sin_addr);
 
-        ret = connect(sockfd,(SA*)&servaddr,sizeof(servaddr));
+        ret = Connect(sockfd,(SA*)&servaddr,sizeof(servaddr));
         if(ret == 0){
             count++;
-            printf("connect success:%d count:%d\n",i,count);
+            printf("Connect success:%d count:%d\n",i,count);
         }
         else{
-            printf("connect error:%d count:%d fd:%d   ",i,count,sockfd);
+            printf("Connect error:%d count:%d fd:%d   ",i,count,sockfd);
 
             perror("error");
             break;
@@ -47,7 +47,7 @@ int main(int argc, char **argv)
     }
 
     //进程退出时候  操作系统自动释放文件描述符号  此处不在记录并释放
-    //close(sockfd);
+    //Close(sockfd);
 
     exit(0);
 

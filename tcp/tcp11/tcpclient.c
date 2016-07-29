@@ -1,5 +1,4 @@
-#include "common.h"
-
+#include "../common/common.h"
 
 int main(int argc, char **argv)
 {
@@ -8,7 +7,7 @@ int main(int argc, char **argv)
     char writebuf[TRANSSIZE],readbuf[TRANSSIZE];   
     
     if (argc !=2){
-        printf("argc error");
+        printf("argc error\n");
         exit(1);
     }
     snprintf(writebuf,TRANSSIZE,"hello");

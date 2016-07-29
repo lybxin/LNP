@@ -1,6 +1,5 @@
-#include<stdio.h>
-#include<unistd.h>  //read write
-#include<errno.h>   //error
+#include "../common/common.h"
+
 #define MAXLINE 1024
 
 void str_echo(int sockfd){
@@ -8,15 +7,15 @@ void str_echo(int sockfd){
     char buf[MAXLINE];
 
   again:
-    while( (n = read(sockfd,buf,MAXLINE)) > 0){
-        printf("server read %d bytes:%s",(int)n,buf);
-        write(sockfd,buf,n);
+    while( (n = Read(sockfd,buf,MAXLINE)) > 0){
+        printf("server Read %d bytes:%s",(int)n,buf);
+        Write(sockfd,buf,n);
     }
 
     if (n < 0 && errno == EINTR)
         goto again;
     else if (n < 0 ){
-        printf("str_echo:read err %d, %d",(int)n,(int)errno);
+        printf("str_echo:Read err %d, %d",(int)n,(int)errno);
         perror("servecho.c:");
     }
 

@@ -1,20 +1,4 @@
-#include<stdio.h>
-#include<time.h>
-#include<string.h>  //memset
-#include<stdlib.h>  //exit
-#include<unistd.h>  //fork close
-//#include <netinet/in.h>   //addr_in?  yes
-#include<arpa/inet.h>  //hton* ntoh*
-#include<time.h>
-#include<sys/types.h>
-#include<sys/socket.h>
-#include<errno.h>
-
-#define SERV_PORT 9877
-#define LISTENQ 1024
-#define SA struct sockaddr
-#define TRANSSIZE 10
-
+#include "common.h"
 
 int Socket(int domain, int type, int protocol)
 {
@@ -24,6 +8,7 @@ int Socket(int domain, int type, int protocol)
     {
         perror("socket error");
     }
+    return ret;
 }
 
 
@@ -36,6 +21,7 @@ int Bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen)
     {
         perror("bind error");
     }
+    return ret;
 }
 
 int Listen(int sockfd, int backlog)
@@ -46,6 +32,7 @@ int Listen(int sockfd, int backlog)
     {
         perror("listen error");
     }
+    return ret;
 }
 
 int Accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen)
@@ -56,6 +43,7 @@ int Accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen)
     {
         perror("accept error");
     }
+    return ret;
 }
 
 
@@ -67,6 +55,7 @@ int Connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen)
     {
         perror("connect error");
     }
+    return ret;
 }
 
 int Shutdown(int sockfd, int how)
@@ -77,6 +66,7 @@ int Shutdown(int sockfd, int how)
     {
         perror("shutdown error");
     }
+    return ret;
 }
 
 int Close(int fd)
@@ -87,16 +77,20 @@ int Close(int fd)
     {
         perror("close error");
     }
+    return ret;
 }
 
 ssize_t Write(int fd, const void *buf, size_t count)
 {
     int ret;
+    
     ret = write(fd, buf, count);
     if(ret < 0)
     {
         perror("write error");
     }
+    
+    return ret;
 }
 
 ssize_t Read(int fd, void *buf, size_t count)
@@ -107,10 +101,6 @@ ssize_t Read(int fd, void *buf, size_t count)
     {
         perror("read error");
     }
+    return ret;
 }
-
-
-
-
-
 

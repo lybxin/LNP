@@ -1,9 +1,12 @@
-#include "tcpcommon.h"
+#include "../common/common.h"
+
+#define SERV_PORT01 SERV_PORT
+#define SERV_PORT02 10000
 
 int main(int argc, char **argv)
 {
     int sockfd;
-    struct sockaddr_in bindaddr,servaddr;
+    struct sockaddr_in Bindaddr,servaddr;
     struct timespec now,res;
 
     if (argc !=2){
@@ -11,13 +14,13 @@ int main(int argc, char **argv)
         exit(1);
     }
 
-    sockfd = socket(AF_INET,SOCK_STREAM,0);
+    sockfd = Socket(AF_INET,SOCK_STREAM,0);
 
-    memset(&bindaddr,0,sizeof(bindaddr));
-    bindaddr.sin_family = AF_INET;
-    bindaddr.sin_addr.s_addr = htonl(INADDR_ANY);
-    bindaddr.sin_port = htons(SERV_PORT01);
-    bind(sockfd,(SA*)&bindaddr,sizeof(bindaddr));
+    memset(&Bindaddr,0,sizeof(Bindaddr));
+    Bindaddr.sin_family = AF_INET;
+    Bindaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    Bindaddr.sin_port = htons(SERV_PORT01);
+    Bind(sockfd,(SA*)&Bindaddr,sizeof(Bindaddr));
 
     memset(&servaddr,0,sizeof(servaddr));
     servaddr.sin_family = AF_INET;
@@ -30,16 +33,15 @@ int main(int argc, char **argv)
     printf("now sec:%ld  nsec:%ld res.sec%ld\n",now.tv_sec,now.tv_nsec,res.tv_sec);
 
     clock_nanosleep(CLOCK_MONOTONIC,TIMER_ABSTIME,&res,&now);
-    connect(sockfd,(SA*)&servaddr,sizeof(servaddr));
+    Connect(sockfd,(SA*)&servaddr,sizeof(servaddr));
     
-    //printf("now sec:%ld  nsec:%ld res.sec%ld",now.tv_sec,now.tv_nsec,res.tv_sec);
-    perror("connect");
+    printf("Connect\n");
     
     sleep(10);
 
-    close(sockfd);
+    Close(sockfd);
 
-    exit(0);
+    return 0;
 
 }
     
