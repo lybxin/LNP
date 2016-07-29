@@ -1,2 +1,4 @@
-半关状态写入数据  返回错误  bad  file  descriptor
+client close后进行write或者close  返回错误  bad  file  descriptor
+client close后  server可以write成功  但是client会返回reset   
+server不能区分client是shutdown半关 还是close全关
 

@@ -1,36 +1,37 @@
 #include "common.h"
 
 
-void main()
+int main()
 {
-    int listenfd,connfd;
-    pid_t childpid;
+    int Listenfd,connfd;
     socklen_t clilen;
     struct sockaddr_in cliaddr, servaddr;
-    struct timespec res,now;
-    char writebuff[TRANSSIZE];
+    char writebuf[TRANSSIZE];
+    
+    snprintf(writebuf,TRANSSIZE,"world");
 
-    listenfd = Socket(AF_INET,SOCK_STREAM,0);
+    Listenfd = Socket(AF_INET,SOCK_STREAM,0);
 
     memset(&servaddr,0,sizeof(servaddr));
     servaddr.sin_family = AF_INET;
     servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
     servaddr.sin_port =  htons(SERV_PORT);
     
-    Bind(listenfd,(SA*)&servaddr,sizeof(servaddr));
+    Bind(Listenfd,(SA*)&servaddr,sizeof(servaddr));
 
-    Listen(listenfd,LISTENQ);
+    Listen(Listenfd,LISTENQ);
     
     for( ; ;){
         clilen = sizeof(cliaddr);
-        connfd = Accept(listenfd,(SA*)&cliaddr,&clilen);
+        connfd = Accept(Listenfd,(SA*)&cliaddr,&clilen);
         
         sleep(3);
-        Write(connfd,writebuff,TRANSSIZE);
+        Write(connfd,writebuf,strlen(writebuf)+1);
 
         sleep(5);
-        close(connfd);
+        Close(connfd);
     }
+    return 0;
 }
     
 
