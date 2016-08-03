@@ -19,7 +19,7 @@ int main()
 
     Listen(Listenfd,LISTENQ);
 
-    ret = setsockopt(Listenfd, SOL_TCP, TCP_FASTOPEN, &qlen, sizeof(qlen)); 
+    ret = Setsockopt(Listenfd, SOL_TCP, TCP_FASTOPEN, &qlen, sizeof(qlen)); 
     printf("server ret %d\n",ret); 
     if (ret < 0) {  
         printf ("setsockopt error: %s(errno: %d)\n", strerror (errno), errno);  

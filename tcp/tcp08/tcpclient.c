@@ -23,7 +23,7 @@ int main(int argc, char **argv)
     so_linger.l_onoff = 1;
     so_linger.l_linger = 0;
 
-    setsockopt(sockfd, SOL_SOCKET, SO_LINGER,
+    Setsockopt(sockfd, SOL_SOCKET, SO_LINGER,
               &so_linger, sizeof so_linger);
 
     Close(sockfd);

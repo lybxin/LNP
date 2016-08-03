@@ -104,3 +104,20 @@ ssize_t Read(int fd, void *buf, size_t count)
     return ret;
 }
 
+int Setsockopt(int sockfd, int level, int optname,
+                      const void *optval, socklen_t optlen)
+{
+    int ret;
+    ret = setsockopt(sockfd, level, optname,optval, optlen);
+    if(ret < 0)
+    {
+        perror("setsockopt error");
+    }
+    return ret;
+}
+
+
+
+
+
+
