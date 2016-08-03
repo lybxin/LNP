@@ -1,4 +1,4 @@
-#include "../common/common.h"
+#include "../../common/common.h"
 
 #define MAXLINE 1024
 

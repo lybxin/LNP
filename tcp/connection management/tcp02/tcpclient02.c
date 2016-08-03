@@ -1,4 +1,4 @@
-#include "../common/common.h"
+#include "../../common/common.h"
 
 #define SERV_PORT01 SERV_PORT
 #define SERV_PORT02 10000
