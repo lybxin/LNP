@@ -13,6 +13,8 @@
 #include<sys/socket.h>
 #include<errno.h>
 #include<netinet/tcp.h>
+#include<netinet/ip.h>
+
 
 #define SERV_PORT 9877
 #define LISTENQ 1024
@@ -40,8 +42,15 @@ ssize_t Read(int fd, void *buf, size_t count);
 
 int Setsockopt(int sockfd, int level, int optname,
                       const void *optval, socklen_t optlen);
+                      
+ssize_t Recv(int sockfd, void *buf, size_t len, int flags);
 
+ssize_t Recvfrom(int sockfd, void *buf, size_t len, int flags,
+                        struct sockaddr *src_addr, socklen_t *addrlen);
+                                             
+ssize_t Send(int sockfd, const void *buf, size_t len, int flags);
 
+                        
 #endif
 
 

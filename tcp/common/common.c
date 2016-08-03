@@ -116,6 +116,41 @@ int Setsockopt(int sockfd, int level, int optname,
     return ret;
 }
 
+ssize_t Recv(int sockfd, void *buf, size_t len, int flags)
+{
+    int ret;
+    ret = recv(sockfd, buf, len, flags);
+    if(ret < 0)
+    {
+        perror("recv error");
+    }
+    return ret;
+}
+
+ssize_t Recvfrom(int sockfd, void *buf, size_t len, int flags,
+                        struct sockaddr *src_addr, socklen_t *addrlen)
+{
+    int ret;
+    ret = recvfrom(sockfd, buf, len, flags, src_addr, addrlen);
+    if(ret < 0)
+    {
+        perror("recvfrom error");
+    }
+    return ret;
+}
+
+ssize_t Send(int sockfd, const void *buf, size_t len, int flags)
+{
+    int ret;
+    ret = send(sockfd, buf, len, flags);
+    if(ret < 0)
+    {
+        perror("send error");
+    }
+    return ret;
+}
+
+
 
 
 

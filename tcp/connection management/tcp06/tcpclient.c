@@ -3,7 +3,7 @@
 int main(int argc, char **argv)
 {
     int sockfd;
-    struct sockaddr_in servaddr,Bindaddr;
+    struct sockaddr_in servaddr,bindaddr;
     struct timespec now,res;
     char writebuf[TRANSSIZE];
 
@@ -14,13 +14,13 @@ int main(int argc, char **argv)
 
     sockfd = Socket(AF_INET,SOCK_STREAM,0);
 
-    memset(&Bindaddr,0,sizeof(Bindaddr));
-    Bindaddr.sin_family = AF_INET;
-    Bindaddr.sin_port =  htons(0);
-    inet_pton(AF_INET,argv[2],&Bindaddr.sin_addr);
+    memset(&bindaddr,0,sizeof(bindaddr));
+    bindaddr.sin_family = AF_INET;
+    bindaddr.sin_port =  htons(0);
+    inet_pton(AF_INET,argv[2],&bindaddr.sin_addr);
     errno = 0;
-    Bind(sockfd,(SA*)&Bindaddr,sizeof(Bindaddr));
-    printf("addr:%s\n",inet_ntoa(Bindaddr.sin_addr));
+    Bind(sockfd,(SA*)&bindaddr,sizeof(bindaddr));
+    printf("addr:%s\n",inet_ntoa(bindaddr.sin_addr));
     perror("Bind");
 
 

@@ -6,7 +6,7 @@
 int main(int argc, char **argv)
 {
     int sockfd;
-    struct sockaddr_in Bindaddr,servaddr;
+    struct sockaddr_in bindaddr,servaddr;
     struct timespec now,res;
 
     if (argc !=2){
@@ -16,11 +16,11 @@ int main(int argc, char **argv)
 
     sockfd = Socket(AF_INET,SOCK_STREAM,0);
 
-    memset(&Bindaddr,0,sizeof(Bindaddr));
-    Bindaddr.sin_family = AF_INET;
-    Bindaddr.sin_addr.s_addr = htonl(INADDR_ANY);
-    Bindaddr.sin_port = htons(SERV_PORT01);
-    Bind(sockfd,(SA*)&Bindaddr,sizeof(Bindaddr));
+    memset(&bindaddr,0,sizeof(bindaddr));
+    bindaddr.sin_family = AF_INET;
+    bindaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    bindaddr.sin_port = htons(SERV_PORT01);
+    Bind(sockfd,(SA*)&bindaddr,sizeof(bindaddr));
 
     memset(&servaddr,0,sizeof(servaddr));
     servaddr.sin_family = AF_INET;
