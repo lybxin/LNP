@@ -290,25 +290,35 @@ void fillnormalopts(struct tcphdr* th)
 
 
 //外层确保buffer len足够长
-u16 buildackpkt(u8 *buffer, u32 acknumber)
+u16 buildackpkt(u8 *buffer, u32 acknumber, u32 flag)
 {
     struct iphdr *iph;
     struct tcphdr *th;
-    u16 tot_len;
+    u16 tot_len, optlen = 0;
+    
+    if(flag&TCP_TSOPT)
+    {
+        optlen = sizeof(struct thnormalopts);
+    }
     
     iph = (struct iphdr*)buffer;
     
-    tot_len = sizeof(struct iphdr)+sizeof(struct tcphdr)+sizeof(struct thnormalopts);
+    tot_len = sizeof(struct iphdr)+sizeof(struct tcphdr)+ optlen;
     
     filliphdr(iph, tot_len);
     
     th = (struct tcphdr*)(buffer + iph->ihl * 4);
     
-    filltcphdr(th, 0, 1, tcpseq, acknumber, sizeof(struct thnormalopts));
+    filltcphdr(th, 0, 1, tcpseq, acknumber, optlen);
     
-    fillnormalopts(th);
+    if(flag&TCP_TSOPT)
+    {
+        fillnormalopts(th);
+    }
     
-    updatetcphdr(th, sizeof(struct thnormalopts) );
+    //printf("[buildackpkt] optlen:%u,tot_len:%u\n",optlen,tot_len);
+    
+    updatetcphdr(th, optlen);
         
     return tot_len;
 }
@@ -446,7 +456,7 @@ u16 rawrecv(int sockfd, u8 *buffer, u16 buflen)
             break;
     }
                
-    printf("[rawrecv]before update rcv state\n");                  
+    printf("\n[rawrecv]before update rcv state\n");                  
     showpkt((u8*)buffer,60);
                         
     updaterecvstate(buffer, recvlen);
@@ -491,7 +501,7 @@ u16 rawsend(int sockfd, u8 *buffer, u16 buflen)
     
     sendlen = Send(sockfd, buffer, buflen, 0);
     
-    printf("[rawsend]before updatesendstate\n");
+    printf("\n[rawsend]before updatesendstate\n");
     showpkt((u8*)buffer,60);
                         
     updatesendstate(buffer, sendlen);
@@ -514,7 +524,7 @@ int rawconnect(int sockfd)
     rawrecv(sockfd, buffer, MAX_PKT_SIZE);
     
     //发送ACK
-    tot_len = buildackpkt(buffer,recvacknumber);
+    tot_len = buildackpkt(buffer,recvacknumber,TCP_TSOPT);
     rawsend(sockfd,buffer,tot_len);
     
     return 0;

@@ -5,6 +5,7 @@
 void *recv_function(void *arg); 
 void *send_function(void *arg); 
 
+
 void *recv_function(void *arg)
 {
 
@@ -23,7 +24,8 @@ void *recv_function(void *arg)
         if(lastacknumber != recvacknumber)
         {
             //acknumber发生变化  接收到了data 发送ACK
-            tot_len = buildackpkt(buffer,recvacknumber);
+            tot_len = buildackpkt(buffer,recvacknumber,TCP_TSOPT);
+            
             rawsend(sockfd,buffer,tot_len);
             lastacknumber = recvacknumber;
         }
@@ -43,6 +45,7 @@ void *send_function(void *arg)
     //处理数据发送和业务逻辑
     tot_len = builddatapkt(buffer, recvacknumber,  strlen((const char *)buffer));
     rawsend(sockfd, buffer, tot_len);
+    //sendflag = 1;
     
     return 0;
 }
@@ -91,6 +94,8 @@ int main(int argc, char **argv)
     sleep(5);
     
     rawconnrst(sockfd);
+    
+    //close之类的清理工作交给OS
     return 0;
 }
 
