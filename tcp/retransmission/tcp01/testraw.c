@@ -1,99 +1,97 @@
 #include "../../common/common.h"
 #include "../../common/rawops.h"
+#include <pthread.h>  
 
+void *recv_function(void *arg); 
+void *send_function(void *arg); 
 
-void showpacket(const unsigned char* const buffer, int buflen);
-
-
-int main(int argc, char **argv)
+void *recv_function(void *arg)
 {
-    int sockfd,recvlen,pktnum;
-    socklen_t socklen;
-    struct sockaddr_in bindaddr, servaddr;
-    unsigned char buffer[65536];
-    struct iphdr *iph;
-    struct tcphdr *th;
+
+    u32 lastacknumber;
+    int sockfd, tot_len;
+    unsigned char buffer[MAX_PKT_SIZE];
     
-    int optval = 1;
+    sockfd = *( (int*)arg );
+    //负责处理接收及ack回复工作
+    lastacknumber = recvacknumber;
+    while(1)
+    {       
+        //等待接收ACK
+        rawrecv(sockfd, buffer, MAX_PKT_SIZE);
+        
+        if(lastacknumber != recvacknumber)
+        {
+            //acknumber发生变化  接收到了data 发送ACK
+            tot_len = buildackpkt(buffer,recvacknumber);
+            rawsend(sockfd,buffer,tot_len);
+            lastacknumber = recvacknumber;
+        }
     
-    struct sockaddr_in in_addr;
-    
-    if(argc == 2)
-    {
-        pktnum = atoi(argv[1]);
-    }else
-    {
-        pktnum = 3;
     }
 
-    
-    socklen=sizeof(struct sockaddr_in);
-    
-    sockfd = Socket(AF_INET, SOCK_RAW, IPPROTO_TCP);
-    //sockfd = socket(AF_INET, SOCK_RAW, IPPROTO_TCP|IPPROTO_UDP|IPPROTO_ICMP);
-    //perror("socket");
-    
-    Setsockopt(sockfd,IPPROTO_IP, IP_HDRINCL, &optval, sizeof(optval));
-    
-    
-    memset(&bindaddr,0,sizeof(bindaddr));
-    bindaddr.sin_family = AF_INET;
-    bindaddr.sin_addr.s_addr = inet_addr(srcip);
-    bindaddr.sin_port = htons(SERV_PORT01);
-    Bind(sockfd,(SA*)&bindaddr,sizeof(bindaddr));
-    
-    
-    memset(&servaddr,0,sizeof(servaddr));
-    servaddr.sin_family = AF_INET;
-    servaddr.sin_port = htons(SERV_PORT);
-    servaddr.sin_addr.s_addr = inet_addr(dstip);
-    //inet_pton(AF_INET,argv[1],&servaddr.sin_addr);
+}
 
-    Connect(sockfd,(SA*)&servaddr,sizeof(servaddr));
-    
-    
-    initrawops();
-    rawconnect(sockfd);
-    
-    /*   
-    while(pktnum > 0)
-    {
-        printf("--------recvfrom start:%d-----------\n",pktnum);
-        recvlen = Recvfrom(sockfd, buffer, sizeof(buffer), 0,
-                        (struct sockaddr *)&in_addr, &socklen);
-        iph = (struct iphdr*)buffer;
-        th = (struct tcphdr*)(buffer + iph->ihl*4);
-        printf("ip ver:%d,ihl:%d tcp srcport:%d,dstport:%d\n",iph->version,iph->ihl,ntohs(th->source),ntohs(th->dest));
-        printf("tcp syn:%d,ack:%d,acknumber:%d  recv:%d\n",th->syn,th->ack,ntohl(th->ack_seq),recvlen);
-        //perror("recvfrom");
-        
-        showpacket(buffer,60);
-        
-        pktnum--;
-    
-    }
-    */
 
+void *send_function(void *arg)
+{
+    int sockfd, tot_len;
+    unsigned char buffer[MAX_PKT_SIZE] = {"hello\n\0"};
+    
+    sockfd = *( (int*)arg );
+    
+    //处理数据发送和业务逻辑
+    tot_len = builddatapkt(buffer, recvacknumber,  strlen((const char *)buffer));
+    rawsend(sockfd, buffer, tot_len);
     
     return 0;
 }
 
 
-void showpacket(const unsigned char* const buffer, int buflen)
+int main(int argc, char **argv)
 {
-   int i=0;
+    //int tot_len, recvlen, sockfd;
+    int sockfd;
+    //u32 lastacknumber;
 
-   for(i=0;i<buflen;i++)
-   {
-       if(i%8 ==0)
-       {
-           if(i%16 == 0)
-               printf("\n");
-           else
-               printf("\t");  
-       }        
-               
-       printf("%02x ",buffer[i]);
-   }
-   printf("\n-------------------------\n");
+    
+    int res;  
+    pthread_t recv_thread, send_thread;  
+    void *thread_result;  
+
+    sockfd = Socket(AF_INET, SOCK_RAW, IPPROTO_TCP);
+  
+    
+    initrawops(sockfd);
+    rawconnect(sockfd);
+    sleep(5);
+    
+
+    res = pthread_create(&recv_thread, NULL, recv_function, (void *)(&sockfd));  
+    if (res != 0)  
+    {  
+        perror("Thread creation failed!");  
+        exit(EXIT_FAILURE);  
+    }  
+    
+    res = pthread_create(&send_thread, NULL, send_function, (void *)(&sockfd));  
+    if (res != 0)  
+    {  
+        perror("Thread creation failed!");  
+        exit(EXIT_FAILURE);  
+    }  
+    
+    res = pthread_join(send_thread, &thread_result);  
+    if (res != 0)  
+    {  
+        perror("Thread join failed!/n");  
+        exit(EXIT_FAILURE);  
+    }  
+    
+    sleep(5);
+    
+    rawconnrst(sockfd);
+    return 0;
 }
+
+

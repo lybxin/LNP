@@ -1,8 +1,8 @@
 main:
-	gcc -Wall -o rawtest.out testraw.c ../../common/common.c ../../common/rawops.c
+	gcc -D_REENTRANT -Wall -o rawtest.out testraw.c ../../common/common.c ../../common/rawops.c -lpthread
 
 nowarn:
-	gcc -o rawtest.out testraw.c ../../common/common.c ../../common/rawops.c
+	gcc -D_REENTRANT -o rawtest.out testraw.c ../../common/common.c ../../common/rawops.c -lpthread
 	
 clean:
 	rm *.out
