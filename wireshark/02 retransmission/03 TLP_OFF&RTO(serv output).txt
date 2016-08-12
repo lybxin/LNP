@@ -1,0 +1,11 @@
+user timeout:0
+before write rto:1504000, retrans:0,rtt:500452
+serv write hello
+i:0,rto:1504000 , retrans:0,rtt:500452
+i:16,rto:3008000 , retrans:1,rtt:500452
+i:46,rto:6016000 , retrans:2,rtt:500452
+serv write world i:100
+serv write world second
+write error: Connection timed out
+close
+

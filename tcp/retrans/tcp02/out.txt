@@ -1,0 +1,24 @@
+总用量 124
+drwxrwxr-x 2 lybxin lybxin  4096 8月   9 11:32 ./
+drwxrwxr-x 4 lybxin lybxin  4096 8月   9 11:17 ../
+-rw-rw-r-- 1 lybxin lybxin   348 8月   9 11:21 makefile
+-rw-rw-r-- 1 lybxin lybxin     0 8月   9 11:32 out.txt
+-rwxrwxr-x 1 lybxin lybxin 89992 8月   9 11:29 rawtest.out*
+-rwxrwxr-x 1 lybxin lybxin 14064 8月   9 11:29 server.out*
+-rw-rw-r-- 1 lybxin lybxin   778 8月   3 10:33 tcpserver.c
+-rw-rw-r-- 1 lybxin lybxin  2247 8月   9 11:28 testraw.c
+总用量 128
+drwxrwxr-x 2 lybxin lybxin  4096 8月   9 11:32 ./
+drwxrwxr-x 4 lybxin lybxin  4096 8月   9 11:17 ../
+-rw-rw-r-- 1 lybxin lybxin   348 8月   9 11:21 makefile
+-rw-rw-r-- 1 lybxin lybxin   469 8月   9 11:32 out.txt
+-rwxrwxr-x 1 lybxin lybxin 89992 8月   9 11:29 rawtest.out*
+-rwxrwxr-x 1 lybxin lybxin 14064 8月   9 11:29 server.out*
+-rw-rw-r-- 1 lybxin lybxin   778 8月   3 10:33 tcpserver.c
+-rw-rw-r-- 1 lybxin lybxin  2247 8月   9 11:28 testraw.c
+makefile
+out.txt
+rawtest.out
+server.out
+tcpserver.c
+testraw.c

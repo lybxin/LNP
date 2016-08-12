@@ -43,6 +43,9 @@ ssize_t Read(int fd, void *buf, size_t count);
 int Setsockopt(int sockfd, int level, int optname,
                       const void *optval, socklen_t optlen);
                       
+int Getsockopt(int sockfd, int level, int optname,
+                      void *optval, socklen_t *optlen);
+            
 ssize_t Recv(int sockfd, void *buf, size_t len, int flags);
 
 ssize_t Recvfrom(int sockfd, void *buf, size_t len, int flags,

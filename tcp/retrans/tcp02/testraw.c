@@ -6,12 +6,34 @@ void *recv_function(void *arg);
 void *send_function(void *arg); 
 
 
+
+void *send_function(void *arg)
+{
+    int sockfd, tot_len;
+    unsigned char buffer[MAX_PKT_SIZE] = {"hello\n\0"};
+    
+    sockfd = *( (int*)arg );
+    
+    //处理数据发送和业务逻辑
+    tot_len = builddatapkt(buffer, recvacknumber,  strlen((const char *)buffer));
+    rawsend(sockfd, buffer, tot_len);
+    //sendflag = 1;
+    
+    sleep(200);
+    
+    return 0;
+}
+
+
 void *recv_function(void *arg)
 {
 
     u32 lastacknumber;
     int sockfd, tot_len;
     unsigned char buffer[MAX_PKT_SIZE];
+    
+    //接收线程detach自己
+    pthread_detach(pthread_self());
     
     sockfd = *( (int*)arg );
     //负责处理接收及ack回复工作
@@ -26,28 +48,12 @@ void *recv_function(void *arg)
             //acknumber发生变化  接收到了data 发送ACK
             tot_len = buildackpkt(buffer,recvacknumber,TCP_TSOPT);
             
-            rawsend(sockfd,buffer,tot_len);
+            //rawsend(sockfd,buffer,tot_len);
             lastacknumber = recvacknumber;
         }
     
     }
 
-}
-
-
-void *send_function(void *arg)
-{
-    int sockfd, tot_len;
-    unsigned char buffer[MAX_PKT_SIZE] = {"hello\n\0"};
-    
-    sockfd = *( (int*)arg );
-    
-    //处理数据发送和业务逻辑
-    tot_len = builddatapkt(buffer, recvacknumber,  strlen((const char *)buffer));
-    rawsend(sockfd, buffer, tot_len);
-    //sendflag = 1;
-    
-    return 0;
 }
 
 
@@ -61,13 +67,16 @@ int main(int argc, char **argv)
     int res;  
     pthread_t recv_thread, send_thread;  
     void *thread_result;  
+    
+    //延迟500ms发包 模拟500ms的rtt
+    senddelay = 500;
 
     sockfd = Socket(AF_INET, SOCK_RAW, IPPROTO_TCP);
   
     
     initrawops(sockfd);
     rawconnect(sockfd);
-    sleep(5);
+    //sleep(5);
     
 
     res = pthread_create(&recv_thread, NULL, recv_function, (void *)(&sockfd));  
@@ -91,7 +100,6 @@ int main(int argc, char **argv)
         exit(EXIT_FAILURE);  
     }  
     
-    sleep(5);
     
     rawconnrst(sockfd);
     

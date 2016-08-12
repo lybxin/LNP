@@ -7,6 +7,8 @@ int Socket(int domain, int type, int protocol)
     if(ret < 0)
     {
         perror("socket error");
+        //socket创建失败直接退出
+        exit(ret);
     }
     return ret;
 }
@@ -112,6 +114,18 @@ int Setsockopt(int sockfd, int level, int optname,
     if(ret < 0)
     {
         perror("setsockopt error");
+    }
+    return ret;
+}
+
+int Getsockopt(int sockfd, int level, int optname,
+                      void *optval, socklen_t *optlen)
+{
+    int ret;
+    ret = getsockopt(sockfd, level, optname,optval, optlen);
+    if(ret < 0)
+    {
+        perror("getsockopt error");
     }
     return ret;
 }

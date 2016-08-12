@@ -8,8 +8,11 @@ u16 tcpseq = 8156;
 u16 mssval = 1460;
 u16 tcpwz = 4096;
 
+
 u32 recvtsval = 0;
 u32 recvacknumber = 0;
+
+u32 senddelay = 0;   //延迟发送报文 单位ms
 
 char srcip[32] = {"127.0.0.1"};
 char dstip[32] = {"127.0.0.1"};
@@ -498,6 +501,15 @@ void updatesendstate(u8 *buffer, u16 sendlen)
 u16 rawsend(int sockfd, u8 *buffer, u16 buflen)
 {
     u16 sendlen;
+    struct timespec req;
+    
+    if(senddelay > 0)
+    {
+        req.tv_sec = senddelay/1000;
+        req.tv_nsec = (senddelay%1000) * 1000000;
+    	clock_nanosleep(CLOCK_MONOTONIC,0,&req,NULL);
+    
+    }
     
     sendlen = Send(sockfd, buffer, buflen, 0);
     

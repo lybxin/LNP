@@ -1,0 +1,11 @@
+user timeout:0
+before write rto:204000
+serv write hello
+i:0,rto:204000
+i:5,rto:408000
+i:9,rto:816000
+i:17,rto:1632000
+i:33,rto:3264000
+i:66,rto:6528000
+serv write world i:100
+

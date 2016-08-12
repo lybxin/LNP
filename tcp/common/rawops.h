@@ -9,6 +9,7 @@ typedef unsigned int u32;
 
 extern u32 recvacknumber;
 extern u16 tcpseq;
+extern u32 senddelay;
 extern char srcip[];
 extern char dstip[];
 
