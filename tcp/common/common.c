@@ -7,7 +7,7 @@ int Socket(int domain, int type, int protocol)
     if(ret < 0)
     {
         perror("socket error");
-        //socketåˆ›å»ºå¤±è´¥ç›´æŽ¥é€€å‡º
+        //socket´´½¨Ê§°ÜÖ±½ÓÍË³ö
         exit(ret);
     }
     return ret;

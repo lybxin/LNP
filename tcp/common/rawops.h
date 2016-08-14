@@ -28,5 +28,7 @@ u16 builddatapkt(u8 *buffer, u32 acknumber,u16 buflen);
 u16 rawrecv(int sockfd, u8 *buffer, u16 buflen);
 u16 rawsend(int sockfd, u8 *buffer, u16 buflen);
 u16 buildackpkt(u8 *buffer, u32 acknumber, u32 flag);
+void sleep_ms(int timeval);
+
 
 #endif

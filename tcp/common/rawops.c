@@ -12,7 +12,7 @@ u16 tcpwz = 4096;
 u32 recvtsval = 0;
 u32 recvacknumber = 0;
 
-u32 senddelay = 0;   //å»¶è¿Ÿå‘é€æŠ¥æ–‡ å•ä½ms
+u32 senddelay = 0;   //ÑÓ³Ù·¢ËÍ±¨ÎÄ µ¥Î»ms
 
 char srcip[32] = {"127.0.0.1"};
 char dstip[32] = {"127.0.0.1"};
@@ -63,7 +63,7 @@ struct thnormalopts
        
 };
 
-//è°ƒè¯•ä½¿ç”¨  ä¸wiresharkè¾“å‡ºæ ¼å¼ç›¸åŒ æ–¹ä¾¿å¯¹æ¯”
+//µ÷ÊÔÊ¹ÓÃ  ÓëwiresharkÊä³ö¸ñÊ½ÏàÍ¬ ·½±ã¶Ô±È
 void showpkt(const unsigned char* const buffer, int buflen)
 {
    int i=0;
@@ -88,7 +88,7 @@ void initrawops(int sockfd)
     int optval = 1;
     struct sockaddr_in bindaddr, servaddr;
     
-    //åˆå§‹åŒ–ipidå’Œtcpseq
+    //³õÊ¼»¯ipidºÍtcpseq
     srandom(time(NULL));
     ipid = (u16)random();
     tcpseq = (u16)random();
@@ -97,14 +97,14 @@ void initrawops(int sockfd)
     
     Setsockopt(sockfd,IPPROTO_IP, IP_HDRINCL, &optval, sizeof(optval));
     
-    //ç»‘å®šæœ¬åœ°æ¥æ”¶åœ°å€  åªæ¥æ”¶å‘å¾€srcipçš„æŠ¥æ–‡
+    //°ó¶¨±¾µØ½ÓÊÕµØÖ·  Ö»½ÓÊÕ·¢ÍùsrcipµÄ±¨ÎÄ
     memset(&bindaddr,0,sizeof(bindaddr));
     bindaddr.sin_family = AF_INET;
     bindaddr.sin_addr.s_addr = inet_addr(srcip);
     //bindaddr.sin_port = htons(SERV_PORT01);
     Bind(sockfd,(SA*)&bindaddr,sizeof(bindaddr));
     
-    //ç»‘å®šæœ¬åœ°å‘é€åœ°å€  ä½¿ç”¨sendç›´æ¥å‘é€æŠ¥æ–‡
+    //°ó¶¨±¾µØ·¢ËÍµØÖ·  Ê¹ÓÃsendÖ±½Ó·¢ËÍ±¨ÎÄ
     memset(&servaddr,0,sizeof(servaddr));
     servaddr.sin_family = AF_INET;
     servaddr.sin_port = htons(SERV_PORT);
@@ -113,7 +113,7 @@ void initrawops(int sockfd)
     Connect(sockfd,(SA*)&servaddr,sizeof(servaddr));
 }
 
-//è·å–TSoptä¸­çš„tsval  æ¯1msè‡ªå¢1
+//»ñÈ¡TSoptÖĞµÄtsval  Ã¿1ms×ÔÔö1
 u32 gettsval()
 {
     struct timespec res;
@@ -154,7 +154,7 @@ unsigned short csum(unsigned short *ptr,int nbytes)
 	return(answer);
 }
 
-//æ³¨æ„checksumå’Œtot_len
+//×¢ÒâchecksumºÍtot_len
 void filliphdr(struct iphdr *iph, u16 tot_len)
 {
     //Fill in the IP Header
@@ -173,7 +173,7 @@ void filliphdr(struct iphdr *iph, u16 tot_len)
     iph->check = htons(csum ((unsigned short *) iph, iph->tot_len*4));
 }
 
-//å¤´é•¿doff check  ç¡®ä¿optlenå››å­—èŠ‚å¯¹é½
+//Í·³¤doff check  È·±£optlenËÄ×Ö½Ú¶ÔÆë
 void filltcphdr(struct tcphdr *th, int syn, int ack, u32 seq, u32 acknumber, u16 optlen)
 {
 	
@@ -192,11 +192,11 @@ void filltcphdr(struct tcphdr *th, int syn, int ack, u32 seq, u32 acknumber, u16
     //th->ece=0;
     //th->cwr=0;
     th->window = htons(tcpwz);    
-    th->check = 0;                 //è®¡ç®—checksumå‰ éœ€è¦å…ˆå°†checkè®¾ç½®ä¸º0
+    th->check = 0;                 //¼ÆËãchecksumÇ° ĞèÒªÏÈ½«checkÉèÖÃÎª0
     th->urg_ptr = 0;
 }
 
-//æ›´æ–°tcp checksum
+//¸üĞÂtcp checksum
 void updatetcphdr(struct tcphdr *th, u16 optdatalen)
 {
     struct pseudo_header psh;
@@ -221,7 +221,7 @@ void updatetcphdr(struct tcphdr *th, u16 optdatalen)
     free(psddata);
 }
 
-//å¡«å……SYNæŠ¥æ–‡TCPé€‰é¡¹
+//Ìî³äSYN±¨ÎÄTCPÑ¡Ïî
 void fillsynopts(struct tcphdr* th)
 {
     struct thsynopts *options;
@@ -248,7 +248,7 @@ void fillsynopts(struct tcphdr* th)
 
 }
 
-//å»ºç«‹SYNæŠ¥æ–‡ å¤–å±‚ç¡®ä¿buffer lenè¶³å¤Ÿé•¿
+//½¨Á¢SYN±¨ÎÄ Íâ²ãÈ·±£buffer len×ã¹»³¤
 u16 buildsynpkt(u8 *buffer)
 {
     struct iphdr *iph;
@@ -273,8 +273,8 @@ u16 buildsynpkt(u8 *buffer)
 }
 
 
-//å¡«å……ACKæŠ¥æ–‡å’Œæ™®é€šæ•°æ®æŠ¥æ–‡çš„TCPé€‰é¡¹ tsecr éœ€è¦recvæ›´æ–°
-//æ·»åŠ SACKæ”¯æŒçš„æ—¶å€™ éœ€è¦æ³¨æ„sizeof(struct thnormalopts)
+//Ìî³äACK±¨ÎÄºÍÆÕÍ¨Êı¾İ±¨ÎÄµÄTCPÑ¡Ïî tsecr ĞèÒªrecv¸üĞÂ
+//Ìí¼ÓSACKÖ§³ÖµÄÊ±ºò ĞèÒª×¢Òâsizeof(struct thnormalopts)
 void fillnormalopts(struct tcphdr* th)
 {
     struct thnormalopts *options;
@@ -292,7 +292,7 @@ void fillnormalopts(struct tcphdr* th)
 }
 
 
-//å¤–å±‚ç¡®ä¿buffer lenè¶³å¤Ÿé•¿
+//Íâ²ãÈ·±£buffer len×ã¹»³¤
 u16 buildackpkt(u8 *buffer, u32 acknumber, u32 flag)
 {
     struct iphdr *iph;
@@ -326,7 +326,7 @@ u16 buildackpkt(u8 *buffer, u32 acknumber, u32 flag)
     return tot_len;
 }
 
-//å¤–å±‚ç¡®ä¿buffer lenè¶³å¤Ÿé•¿  è¿”å›æ·»åŠ hdråçš„tot_len
+//Íâ²ãÈ·±£buffer len×ã¹»³¤  ·µ»ØÌí¼ÓhdrºóµÄtot_len
 u16 builddatapkt(u8 *buffer, u32 acknumber,u16 buflen)
 {
     struct iphdr *iph;
@@ -354,7 +354,7 @@ u16 builddatapkt(u8 *buffer, u32 acknumber,u16 buflen)
     return tot_len;
 }
 
-//å¤–å±‚ç¡®ä¿buffer lenè¶³å¤Ÿé•¿
+//Íâ²ãÈ·±£buffer len×ã¹»³¤
 u16 buildrstpkt(u8 *buffer)
 {
     struct iphdr *iph;
@@ -426,7 +426,7 @@ void updaterecvstate(u8 *buffer, u16 recvlen)
     
 }
 
-//åˆ¤æ–­ç›®çš„ç«¯å£æ˜¯å¦ä¸ºè¦å¤„ç†çš„ç«¯å£
+//ÅĞ¶ÏÄ¿µÄ¶Ë¿ÚÊÇ·ñÎªÒª´¦ÀíµÄ¶Ë¿Ú
 u32 pktforme(u8 *buffer)
 {    
     struct iphdr *iph;
@@ -454,7 +454,7 @@ u16 rawrecv(int sockfd, u8 *buffer, u16 buflen)
             return recvlen;
         }
         
-        //bindæ“ä½œåªèƒ½è¿‡æ»¤ipåœ°å€  æ­¤å¤„è¿›ä¸€æ­¥è¿‡æ»¤ç«¯å£
+        //bind²Ù×÷Ö»ÄÜ¹ıÂËipµØÖ·  ´Ë´¦½øÒ»²½¹ıÂË¶Ë¿Ú
         if(pktforme(buffer))
             break;
     }
@@ -480,7 +480,7 @@ u32 issynpkt(u8 *buffer, u16 buflen)
 }
 */
 
-//å¤–å±‚ç¡®ä¿sendlenæœ‰æ•ˆ
+//Íâ²ãÈ·±£sendlenÓĞĞ§
 void updatesendstate(u8 *buffer, u16 sendlen)
 {
     struct iphdr *iph;
@@ -492,23 +492,29 @@ void updatesendstate(u8 *buffer, u16 sendlen)
          
     datalen = sendlen - iph->ihl*4 - th->doff*4;
     
-    //æ›´æ–°ä¸‹ä¸€ä¸ªpktçš„seq
+    //¸üĞÂÏÂÒ»¸öpktµÄseq
     tcpseq = ntohl(th->seq) + th->syn + th->fin + datalen;
-    //æ›´æ–°ipid
+    //¸üĞÂipid
     ipid++;
+}
+
+void sleep_ms(int timeval)
+{
+    struct timespec req;
+    req.tv_sec = senddelay/1000;
+    req.tv_nsec = (senddelay%1000) * 1000000;
+    clock_nanosleep(CLOCK_MONOTONIC,0,&req,NULL);
+
 }
 
 u16 rawsend(int sockfd, u8 *buffer, u16 buflen)
 {
     u16 sendlen;
-    struct timespec req;
+    
     
     if(senddelay > 0)
     {
-        req.tv_sec = senddelay/1000;
-        req.tv_nsec = (senddelay%1000) * 1000000;
-    	clock_nanosleep(CLOCK_MONOTONIC,0,&req,NULL);
-    
+        sleep_ms(senddelay);
     }
     
     sendlen = Send(sockfd, buffer, buflen, 0);
@@ -522,20 +528,20 @@ u16 rawsend(int sockfd, u8 *buffer, u16 buflen)
 }
 
 
-//è¿”å›é”™è¯¯éœ€è¦å¤„ç†
+//·µ»Ø´íÎóĞèÒª´¦Àí
 int rawconnect(int sockfd)
 {
     u8 buffer[MAX_PKT_SIZE];
     u16 tot_len;
     
-    //å‘é€SYN
+    //·¢ËÍSYN
     tot_len = buildsynpkt(buffer);
     rawsend(sockfd,buffer,tot_len);
     
-    //ç­‰å¾…æ¥æ”¶SYN-ACK
+    //µÈ´ı½ÓÊÕSYN-ACK
     rawrecv(sockfd, buffer, MAX_PKT_SIZE);
     
-    //å‘é€ACK
+    //·¢ËÍACK
     tot_len = buildackpkt(buffer,recvacknumber,TCP_TSOPT);
     rawsend(sockfd,buffer,tot_len);
     
@@ -548,7 +554,7 @@ int rawconnrst(int sockfd)
     u8 buffer[MAX_PKT_SIZE];
     u16 tot_len;
     
-    //ç›´æ¥RSTå…³é—­è¿æ¥
+    //Ö±½ÓRST¹Ø±ÕÁ¬½Ó
     tot_len = buildrstpkt(buffer);
     rawsend(sockfd,buffer,tot_len);
     

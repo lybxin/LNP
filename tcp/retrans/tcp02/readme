@@ -1,7 +1,7 @@
 RTO超时重传示例
 1、设置/proc/sys/net/ipv4/tcp_early_retrans为2，关掉TLP功能(后面内容介绍TLP)。设置/proc/sys/net/ipv4/tcp_retries2为8，减少重传次数，这样方便wireshark抓包演示。同时设置/proc/sys/net/ipv4/tcp_discard_on_port为9877，以让client可以精确的控制发出的TCP报文，而不受到内核TCP模块的影响。
 
-2、client通过raw socket直接在IP层之上构造TCP报文，与server通过三次握手建立连接，其中client为127.0.0.1：10000，server为127.0.0.1:9877。这个步骤对应No1--No3报文。
+2、client通过raw socket直接在IP层之上构造TCP报文，在每次发送TCP数据包之前都通过定时器延迟500ms发送，这样构造出500ms左右的RTT时延，client与server通过三次握手建立连接，其中client为127.0.0.1：10000，server为127.0.0.1:9877。这个步骤对应No1--No3报文。
 
 3、TCP连接建立后client发送"hello"消息给服务器，服务器则回复ACK，这个步骤对应No4--No5报文。
 
