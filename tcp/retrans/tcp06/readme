@@ -1,2 +1,2 @@
 3次dupack触发快速重传
-关闭sack  ER TLP选项
+设置tcp_retries2=8,tcp_early_retrans=0,tcp_sack=0,tcp_discard_on_port =9877;

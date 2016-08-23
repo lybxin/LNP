@@ -1,0 +1,12 @@
+ER相关测试
+
+设置tcp_retries2=8,tcp_recovery=0,tcp_retrans_collapse=0,tcp_discard_on_port =9877;
+默认设置tcp_thin_dupack=0
+
+
+1、设置tcp_early_retrans=1,有新的待发送数据不会触发ER
+2、设置tcp_early_retrans=1,没有新的待发送数据可以触发ER
+3、设置tcp_early_retrans=2,没有新的待发数据 可以触发ER  但是会延迟RTT/4
+4、设置tcp_early_retrans=0,没有新的待发送数据  RTO超时重传
+
+

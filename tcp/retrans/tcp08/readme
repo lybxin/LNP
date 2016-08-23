@@ -1,0 +1,6 @@
+FR写入新数据示例(nagle不生效场景)
+1、FR4&nocollapse&frto
+设置tcp_retries2=8,tcp_early_retrans=0,tcp_sack=0,tcp_retrans_collapse=0,tcp_frto=2,tcp_discard_on_port =9877;
+1、FR4&nocollapse&nofrto
+设置tcp_retries2=8,tcp_early_retrans=0,tcp_sack=0,tcp_retrans_collapse=0,tcp_frto=0,tcp_discard_on_port =9877;
+

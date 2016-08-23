@@ -1,0 +1,5 @@
+FR&RTO&collapse示例(nagle不生效场景)  
+<07 FR3&RTO&collapse.pcapng> 
+设置tcp_retries2=8,tcp_early_retrans=0,tcp_sack=0,tcp_retrans_collapse=1,tcp_discard_on_port =9877;
+<12 FR3&RTO&nocollapse>
+设置tcp_retries2=8,tcp_early_retrans=0,tcp_sack=0,tcp_retrans_collapse=0,tcp_discard_on_port =9877;

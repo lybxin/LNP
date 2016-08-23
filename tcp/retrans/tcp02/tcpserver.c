@@ -37,6 +37,7 @@ int main()
         Write(connfd,writebuf,strlen(writebuf)+1);
         printf("serv write hello\n");
         
+        i = 0;
         while(i < 100)
         {
             len = sizeof(info);

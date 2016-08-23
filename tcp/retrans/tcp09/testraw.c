@@ -46,12 +46,12 @@ void *recv_function(void *arg)
         //判断是否收到了需要回复ACK的报文
         if(lastacknumber != recvacknumber)
         {
-            //第一个数据包的ACK不回复 因此判断i>0
-            if(i > 0 && i < 5)
+            //第2个数据包的ACK不回复 因此判断i>1
+            if( (i==0) || (i > 1 && i < 5) )
             {
-                recvacknumber = recvacknumber - (i+1) * 8;
+                recvacknumber = recvacknumber - i * 8;
                 
-                if(i == 1)
+                if(i <= 2)
                 {
                     senddelay = 500;
                 }else

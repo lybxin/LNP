@@ -46,6 +46,7 @@ int main()
         Write(connfd,writebuf,strlen(writebuf)+1);
         printf("serv write hello  and  world i:%d\n",i);;
         
+        i = 0;
         while(i < 1300)
         {
             len = sizeof(info);

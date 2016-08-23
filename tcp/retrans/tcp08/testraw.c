@@ -28,7 +28,8 @@ void *send_function(void *arg)
 void *recv_function(void *arg)
 {
 
-    u32 lastacknumber;
+    //u32 lastacknumber;
+    u16 recvlen;
     int sockfd, tot_len,i = 0;
     unsigned char buffer[MAX_PKT_SIZE];
     
@@ -37,16 +38,16 @@ void *recv_function(void *arg)
     
     sockfd = *( (int*)arg );
     //负责处理接收及ack回复工作
-    lastacknumber = recvacknumber;
+    //lastacknumber = recvacknumber;
     while(1)
     {       
         //等待接收ACK
-        rawrecv(sockfd, buffer, MAX_PKT_SIZE);
+        recvlen = rawrecv(sockfd, buffer, MAX_PKT_SIZE);
         
-        //判断是否收到了需要回复ACK的报文
-        if(lastacknumber != recvacknumber)
+        //判断是否收到了包含数据的报文
+        if( containdata(buffer,recvlen) )
         {
-            //第一个数据包的ACK不回复 因此判断i>0
+            //构造dup ack 第一个数据包的ACK不回复 因此判断i>0
             if(i > 0 && i < 5)
             {
                 recvacknumber = recvacknumber - (i+1) * 8;
@@ -66,8 +67,14 @@ void *recv_function(void *arg)
                 
             }
 
-            
-            lastacknumber = recvacknumber;
+            if(i > 7)
+            {
+                senddelay = 500;
+                tot_len = buildackpkt(buffer,recvacknumber,TCP_TSOPT);
+                //回复一个ACK报文 
+                rawsend(sockfd,buffer,tot_len);
+            }
+            //lastacknumber = recvacknumber;
             i++;
         }
         

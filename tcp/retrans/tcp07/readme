@@ -1,0 +1,7 @@
+FR&RTO示例(nagle不生效场景)
+1、FR4&collapse
+设置tcp_retries2=8,tcp_early_retrans=0,tcp_sack=0,tcp_retrans_collapse=1,tcp_discard_on_port =9877;
+
+2、FR4&nocollapse
+设置tcp_retries2=8,tcp_early_retrans=0,tcp_sack=0,tcp_retrans_collapse=0,tcp_discard_on_port =9877;
+

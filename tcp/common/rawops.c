@@ -12,6 +12,14 @@ u16 tcpwz = 4096;
 u32 recvtsval = 0;
 u32 recvacknumber = 0;
 
+//SACK相关信息
+#define MAX_SACK_BLK 4
+u32 sackblock[MAX_SACK_BLK][2]={0};
+u32 startidx = 0;
+u32 sackblknum = 0;
+u32 curhighseq = 0;
+
+
 u32 senddelay = 0;   //延迟发送报文 单位ms
 
 char srcip[32] = {"127.0.0.1"};
@@ -50,7 +58,7 @@ struct thsynopts
         wsshift:8;
 };
 
-struct thnormalopts
+struct thtsopt
 {
         
     u16 nop1:8,
@@ -92,6 +100,9 @@ void initrawops(int sockfd)
     srandom(time(NULL));
     ipid = (u16)random();
     tcpseq = (u16)random();
+    startidx = 0;
+    sackblknum = 0;
+	curhighseq = 0;
     
     printf("[initrawops] ipid:%u,tcpseq:%u\n",ipid,tcpseq);
     
@@ -274,20 +285,51 @@ u16 buildsynpkt(u8 *buffer)
 
 
 //填充ACK报文和普通数据报文的TCP选项 tsecr 需要recv更新
-//添加SACK支持的时候 需要注意sizeof(struct thnormalopts)
-void fillnormalopts(struct tcphdr* th)
+//添加SACK支持的时候 需要注意sizeof(struct thtsopt)
+void fillnormalopts(struct tcphdr* th, u32 flag)
 {
-    struct thnormalopts *options;
+    struct thtsopt *tsopt;
+    u32 *ptr,idx;
+
+	if(flag&TCP_TSOPT)
+	{
+	    tsopt = (struct thtsopt*)((u8*)th + 20);
     
-    options = (struct thnormalopts*)((u8*)th + 20);
-    
-    options->nop1 = 1;
-    options->nop2 = 1;
-    
-    options->tskind = 8;
-    options->tslen = 10;
-    options->tsval = htonl(gettsval());
-    options->tsecr = htonl(recvtsval);
+	    tsopt->nop1 = 1;
+	    tsopt->nop2 = 1;
+	    
+	    tsopt->tskind = 8;
+	    tsopt->tslen = 10;
+	    tsopt->tsval = htonl(gettsval());
+	    tsopt->tsecr = htonl(recvtsval);
+	    
+	    ptr = (u32*) ((u8*)th + 20 + sizeof(struct thtsopt));
+	}else
+	{
+	    ptr = (u32*) ((u8*)th + 20);
+	}
+    sackblknum = (sackblknum>3)?3:sackblknum;
+    if((flag&TCP_SACKOPT) && (sackblknum > 0))
+    {
+
+        *ptr++ = htonl((1  << 24) |
+		               (1  << 16) |
+			           (5 <<  8)  |
+			           (2 + sackblknum *8) );
+		idx = startidx;	           
+			               
+		while(sackblknum>0)
+		{
+		    
+		    *ptr++ = htonl(sackblock[idx][0]);
+		    *ptr++ = htonl(sackblock[idx][1]);
+			idx = (idx + MAX_SACK_BLK - 1)%MAX_SACK_BLK ;
+		    --sackblknum;
+		}	                     
+        
+    }
+		
+	
 
 }
 
@@ -301,7 +343,12 @@ u16 buildackpkt(u8 *buffer, u32 acknumber, u32 flag)
     
     if(flag&TCP_TSOPT)
     {
-        optlen = sizeof(struct thnormalopts);
+        optlen += sizeof(struct thtsopt);
+    }
+
+    if(flag&TCP_SACKOPT && sackblknum>0)
+    {
+        optlen += sackblknum * 8 + 4;
     }
     
     iph = (struct iphdr*)buffer;
@@ -314,10 +361,7 @@ u16 buildackpkt(u8 *buffer, u32 acknumber, u32 flag)
     
     filltcphdr(th, 0, 1, tcpseq, acknumber, optlen);
     
-    if(flag&TCP_TSOPT)
-    {
-        fillnormalopts(th);
-    }
+    fillnormalopts(th, flag);
     
     //printf("[buildackpkt] optlen:%u,tot_len:%u\n",optlen,tot_len);
     
@@ -333,7 +377,7 @@ u16 builddatapkt(u8 *buffer, u32 acknumber,u16 buflen)
     struct tcphdr *th;
     u16 tot_len,hdrlen;
     
-    hdrlen = sizeof(struct iphdr)+sizeof(struct tcphdr)+sizeof(struct thnormalopts);
+    hdrlen = sizeof(struct iphdr)+sizeof(struct tcphdr)+sizeof(struct thtsopt);
     
     memmove((buffer + hdrlen), buffer, buflen);
     
@@ -345,11 +389,11 @@ u16 builddatapkt(u8 *buffer, u32 acknumber,u16 buflen)
     
     th = (struct tcphdr*)(buffer + iph->ihl * 4);
     
-    filltcphdr(th, 0, 1, tcpseq, acknumber, sizeof(struct thnormalopts));
+    filltcphdr(th, 0, 1, tcpseq, acknumber, sizeof(struct thtsopt));
     
-    fillnormalopts(th);
+    fillnormalopts(th,TCP_TSOPT);
     
-    updatetcphdr(th, ( sizeof(struct thnormalopts) + buflen ) );
+    updatetcphdr(th, ( sizeof(struct thtsopt) + buflen ) );
     
     return tot_len;
 }
@@ -363,25 +407,25 @@ u16 buildrstpkt(u8 *buffer)
     
     iph = (struct iphdr*)buffer;
     
-    tot_len = sizeof(struct iphdr)+sizeof(struct tcphdr)+sizeof(struct thnormalopts);
+    tot_len = sizeof(struct iphdr)+sizeof(struct tcphdr)+sizeof(struct thtsopt);
     
     filliphdr(iph, tot_len);
     
     th = (struct tcphdr*)(buffer + iph->ihl * 4);
     
-    filltcphdr(th, 0, 1, tcpseq, recvacknumber, sizeof(struct thnormalopts));
+    filltcphdr(th, 0, 1, tcpseq, recvacknumber, sizeof(struct thtsopt));
     
     th->rst = 1;
     
-    fillnormalopts(th);
+    fillnormalopts(th,TCP_TSOPT);
     
-    updatetcphdr(th, sizeof(struct thnormalopts) );
+    updatetcphdr(th, sizeof(struct thtsopt) );
     
     return tot_len;
 }
 
 
-void updaterecvstate(u8 *buffer, u16 recvlen)
+void updaterecvstate(u8 *buffer, u16 recvlen,u32 flag)
 {
     struct iphdr *iph;
     struct tcphdr *th;
@@ -393,6 +437,26 @@ void updaterecvstate(u8 *buffer, u16 recvlen)
     
     datalen = recvlen - iph->ihl*4 - th->doff*4;
     recvacknumber = ntohl(th->seq) + th->syn + th->fin + datalen;
+
+
+	if( (flag & TCP_SACKOPT) && (recvacknumber > ntohl(th->seq)) &&(recvacknumber > sackblock[startidx][1]) )
+	{
+	    if(sackblock[startidx][1] == ntohl(th->seq))
+	    {
+	        sackblock[startidx][1] = recvacknumber;
+	    }else
+	    {
+            startidx = (startidx + 1) % MAX_SACK_BLK;
+		    sackblock[startidx][0] = ntohl(th->seq);
+	        sackblock[startidx][1] = recvacknumber;
+		    //暂时不考虑系列号翻转
+		    //curhighseq = recvacknumber;
+	        
+	        sackblknum ++ ;
+	    }
+
+	}
+	
         
     options = buffer + iph->ihl * 4 + 20;
     optsend = buffer + iph->ihl * 4 + (th->doff * 4);
@@ -437,9 +501,22 @@ u32 pktforme(u8 *buffer)
     
     return ( th->dest == htons (SERV_PORT02) );
 }
+u16 containdata(u8 *buffer, u16 recvlen)
+{
+    struct iphdr *iph;
+    struct tcphdr *th;
+	u16 datalen;
 
+    iph = (struct iphdr*)buffer;
+    th = (struct tcphdr*)(buffer + iph->ihl * 4);
+    
+    datalen = recvlen - iph->ihl*4 - th->doff*4;
+    datalen = th->syn + th->fin + datalen;
 
-u16 rawrecv(int sockfd, u8 *buffer, u16 buflen)
+	return datalen;
+}
+
+u16 rawadvrecv(int sockfd, u8 *buffer, u16 buflen, u32 flag)
 {
     u16 recvlen;
     u16 len;
@@ -462,9 +539,20 @@ u16 rawrecv(int sockfd, u8 *buffer, u16 buflen)
     printf("\n[rawrecv]before update rcv state\n");                  
     showpkt((u8*)buffer,60);
                         
-    updaterecvstate(buffer, recvlen);
+    updaterecvstate(buffer, recvlen, flag);
                         
     return recvlen;
+
+
+}
+
+
+
+u16 rawrecv(int sockfd, u8 *buffer, u16 buflen)
+{
+
+                        
+    return rawadvrecv(sockfd, buffer, buflen, 0);
 }
 
 /*
@@ -501,8 +589,8 @@ void updatesendstate(u8 *buffer, u16 sendlen)
 void sleep_ms(int timeval)
 {
     struct timespec req;
-    req.tv_sec = senddelay/1000;
-    req.tv_nsec = (senddelay%1000) * 1000000;
+    req.tv_sec = timeval/1000;
+    req.tv_nsec = (timeval%1000) * 1000000;
     clock_nanosleep(CLOCK_MONOTONIC,0,&req,NULL);
 
 }
@@ -562,7 +650,20 @@ int rawconnrst(int sockfd)
 }
 
 
+void resetsackblk()
+{
+    startidx = 0;
+    sackblknum = 0;
+}
 
+void appendsackblk(u32 blkbegin, u32 blkend)
+{
+    startidx = (startidx +1) % MAX_SACK_BLK;
+    sackblock[startidx][0] = blkbegin;
+    sackblock[startidx][1] = blkend;
+    
+    sackblknum++;
+}
 
 
 

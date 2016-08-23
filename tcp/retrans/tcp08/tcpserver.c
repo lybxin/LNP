@@ -3,22 +3,6 @@
 #include "../../common/rawops.h"
 #include "../../common/tcp_private.h"
 
-/*
-void printinfo(struct tcp_info_user *info)
-{
-    printf("--------------------------------------------------------------------------\n");
-    printf("tcpi_segs_in:%u,tcpi_segs_out:%u\n",info->tcpi_segs_in,info->tcpi_segs_out);
-    printf("tcpi_unacked(packets_out):%u,tcpi_sacked:%u,tcpi_lost:%u,tcpi_fackets:%u,tcpi_retrans:%u\n",
-            info->tcpi_unacked,info->tcpi_sacked,info->tcpi_lost,info->tcpi_fackets,info->tcpi_retrans);
-    printf("tcpi_ca_state:%u,tcpi_rto:%u,tcpi_reordering:%u,rcv_nxt:%u,rcv_wup:%u,snd_nxt:%u,rcv_wnd:%u\n",
-            info->tcpi_ca_state,info->tcpi_rto,info->tcpi_reordering,
-            info->rcv_nxt,info->rcv_wup,info->snd_nxt,info->rcv_wnd);
-    printf("gso_segs:%u,tcp_header_len:%u,pred_flags:%u,snd_una:%u,snd_wl1:%u,snd_wnd:%u,tcpi_snd_cwnd:%u\n",
-            info->gso_segs,info->tcp_header_len,info->pred_flags,
-            info->snd_una,info->snd_wl1,info->snd_wnd,info->tcpi_snd_cwnd);
-    
-}
-*/
 
 int main()
 {
@@ -44,9 +28,6 @@ int main()
 
     Listen(Listenfd,LISTENQ);
     
-    len = sizeof(int);
-    Getsockopt(Listenfd, SOL_TCP, TCP_USER_TIMEOUT,(void *)&val, (socklen_t *)&len);
-	printf("user_timeout:%d\n",val);
     for( ; ;){
         clilen = sizeof(cliaddr);
         connfd = Accept(Listenfd,(SA*)&cliaddr,&clilen);
@@ -90,7 +71,16 @@ int main()
                 Getsockopt(connfd, SOL_TCP, TCP_INFO,(void *)&info, (socklen_t *)&len);
                 
                 printftcpinfo(&info);
+                                
+                if((last_in != info.tcpi_segs_in) && (last_out != info.tcpi_segs_out))
+                {
+                    //收到dup ACK并触发了快速重传  尝试写入新数据
+                    Write(connfd,writebuf,strlen(writebuf)+1);
+                    printf("----write new data-----\n");
+                }
+                
                 printf("i=%d\n",i);
+                
                 last_in = info.tcpi_segs_in;
                 last_out = info.tcpi_segs_out;
             }
@@ -99,18 +89,14 @@ int main()
             i++;
         }
 
-        //printf("after write rto:%u, retrans:%u,rtt:%u,reorder:%u\n",info.tcpi_rto,info.tcpi_retransmits,info.tcpi_rtt,info.tcpi_reordering);
-        
-        
         
         //sleep(200);
  
         
         len = sizeof(info);
         Getsockopt(connfd, SOL_TCP, TCP_INFO,(void *)&info, (socklen_t *)&len);
-        //printf("before close rto:%u, retrans:%u,rtt:%u,reorder:%u\n",info.tcpi_rto,info.tcpi_retransmits,info.tcpi_rtt,info.tcpi_reordering);
-        
         printftcpinfo(&info);
+        
         printf("close\n");
         Close(connfd);
     }
