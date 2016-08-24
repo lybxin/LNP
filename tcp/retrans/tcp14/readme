@@ -1,0 +1,10 @@
+ER相关测试
+
+设置tcp_retries2=8,tcp_recovery=0,tcp_retrans_collapse=0,tcp_discard_on_port =9877;
+默认设置tcp_thin_dupack=0  tcp_thin_linear_timeouts=0
+
+
+1、设置tcp_early_retrans=1,dup ACK没有达到(oseg-1)的门限就会触发ER
+
+
+

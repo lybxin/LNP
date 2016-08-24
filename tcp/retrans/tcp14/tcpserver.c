@@ -39,11 +39,11 @@ int main()
         snprintf(writebuf,TRANSSIZE,"world01");
         Write(connfd,writebuf,strlen(writebuf)+1);
         
-        sleep_ms(15000);
+        sleep_ms(20);
         snprintf(writebuf,TRANSSIZE,"world02");
         Write(connfd,writebuf,strlen(writebuf)+1);
         
-        sleep_ms(30);
+        sleep_ms(20);
         snprintf(writebuf,TRANSSIZE,"world03");
         Write(connfd,writebuf,strlen(writebuf)+1);
         
