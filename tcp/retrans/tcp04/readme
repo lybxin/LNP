@@ -9,3 +9,10 @@ RTO定时器管理示例(nagle不生效场景)
 
 5、client收到server的"hello"报文后，直接丢弃并不回复ACK。
 
+
+
+接着触发RTO超时重传分两种场景
+1、tcp_retrans_collapse=1  cilent回复(recvacknumber-6)  RTO定时器不能撤销 继续重传
+
+1、tcp_retrans_collapse=0  cilent回复(recvacknumber)  触发快速重传
+
