@@ -17,6 +17,8 @@ u32 recvacknumber = 0;
 u32 sackblock[MAX_SACK_BLK][2]={0};
 u32 startidx = 0;
 u32 sackblknum = 0;
+u32 validblknum = 0;
+u32 sackcollapse=1;
 u32 curhighseq = 0;
 
 
@@ -282,14 +284,62 @@ u16 buildsynpkt(u8 *buffer)
     
     return tot_len;
 }
+void collapseacknum(u32 *acknumber)
+{
+    u8 idx,blknum = sackblknum;
+    
+    //尝试collapse
+    if(sackcollapse == 1)
+    {
+	    idx = startidx;			               
+		while(blknum>0)
+		{
+			if( (*acknumber == sackblock[idx][0])  )
+			{
+			    *acknumber = sackblock[idx][1];
+			    
+			    idx = startidx;	
+			    blknum = sackblknum;
+			}else
+			{
+			    idx = (idx + MAX_SACK_BLK - 1)%MAX_SACK_BLK ;
+			    --blknum;		
+			}
 
+		}    
+    }  
+}
+
+u8 getsackblknum(u32 acknumber)
+{
+    u8 idx,num = 0,blknum = sackblknum;
+
+    
+	idx = startidx;			               
+	while(blknum>0)
+	{
+		if( acknumber < sackblock[idx][0] )
+		{
+		    
+		    num++;
+		}
+	  
+	   idx = (idx + MAX_SACK_BLK - 1)%MAX_SACK_BLK ;
+	   --blknum;		
+
+	}
+
+	validblknum = num;
+    return num;
+}
 
 //填充ACK报文和普通数据报文的TCP选项 tsecr 需要recv更新
 //添加SACK支持的时候 需要注意sizeof(struct thtsopt)
-void fillnormalopts(struct tcphdr* th, u32 flag)
+void fillnormalopts(struct tcphdr* th, u32 flag, u32 acknumber)
 {
     struct thtsopt *tsopt;
     u32 *ptr,idx;
+	u8 blknum = sackblknum;
 
 	if(flag&TCP_TSOPT)
 	{
@@ -308,23 +358,28 @@ void fillnormalopts(struct tcphdr* th, u32 flag)
 	{
 	    ptr = (u32*) ((u8*)th + 20);
 	}
-    sackblknum = (sackblknum>3)?3:sackblknum;
-    if((flag&TCP_SACKOPT) && (sackblknum > 0))
+	//暂时不考虑被collapse的sack数量
+    blknum = (blknum>3)?3:sackblknum;
+    if((flag&TCP_SACKOPT) && (blknum > 0))
     {
 
         *ptr++ = htonl((1  << 24) |
 		               (1  << 16) |
 			           (5 <<  8)  |
-			           (2 + sackblknum *8) );
+			           (2 + validblknum *8) );
 		idx = startidx;	           
 			               
-		while(sackblknum>0)
+		while(blknum>0)
 		{
+		    if(acknumber < sackblock[idx][0])
+		    {
+		    	*ptr++ = htonl(sackblock[idx][0]);
+		        *ptr++ = htonl(sackblock[idx][1]);
+		    }
 		    
-		    *ptr++ = htonl(sackblock[idx][0]);
-		    *ptr++ = htonl(sackblock[idx][1]);
+
 			idx = (idx + MAX_SACK_BLK - 1)%MAX_SACK_BLK ;
-		    --sackblknum;
+		    --blknum;
 		}	                     
         
     }
@@ -346,9 +401,10 @@ u16 buildackpkt(u8 *buffer, u32 acknumber, u32 flag)
         optlen += sizeof(struct thtsopt);
     }
 
-    if(flag&TCP_SACKOPT && sackblknum>0)
+	collapseacknum(&acknumber);
+    if(flag&TCP_SACKOPT && getsackblknum(acknumber)>0)
     {
-        optlen += sackblknum * 8 + 4;
+        optlen += getsackblknum(acknumber) * 8 + 4;
     }
     
     iph = (struct iphdr*)buffer;
@@ -361,9 +417,9 @@ u16 buildackpkt(u8 *buffer, u32 acknumber, u32 flag)
     
     filltcphdr(th, 0, 1, tcpseq, acknumber, optlen);
     
-    fillnormalopts(th, flag);
+    fillnormalopts(th, flag, acknumber);
     
-    //printf("[buildackpkt] optlen:%u,tot_len:%u\n",optlen,tot_len);
+    printf("[buildackpkt] optlen:%u,tot_len:%u,Ack:%u,sacknum:%u\n",optlen,tot_len,acknumber,getsackblknum(acknumber));
     
     updatetcphdr(th, optlen);
         
@@ -391,7 +447,7 @@ u16 builddatapkt(u8 *buffer, u32 acknumber,u16 buflen)
     
     filltcphdr(th, 0, 1, tcpseq, acknumber, sizeof(struct thtsopt));
     
-    fillnormalopts(th,TCP_TSOPT);
+    fillnormalopts(th,TCP_TSOPT,acknumber);
     
     updatetcphdr(th, ( sizeof(struct thtsopt) + buflen ) );
     
@@ -417,7 +473,7 @@ u16 buildrstpkt(u8 *buffer)
     
     th->rst = 1;
     
-    fillnormalopts(th,TCP_TSOPT);
+    fillnormalopts(th,TCP_TSOPT,0);
     
     updatetcphdr(th, sizeof(struct thtsopt) );
     
@@ -661,6 +717,8 @@ void appendsackblk(u32 blkbegin, u32 blkend)
     startidx = (startidx +1) % MAX_SACK_BLK;
     sackblock[startidx][0] = blkbegin;
     sackblock[startidx][1] = blkend;
+
+	printf("sack block info begin:%u,end:%u\n",blkbegin,blkend);
     
     sackblknum++;
 }

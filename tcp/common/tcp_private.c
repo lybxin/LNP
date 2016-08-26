@@ -43,8 +43,15 @@ void printftcpinfo(struct tcp_info_user *info)
             info->snd_una,info->snd_wl1,info->snd_wnd,info->max_window,
             info->snd_cwnd_cnt,info->snd_cwnd_clamp,info->snd_cwnd_used);
     
-    printf("snd_cwnd_stamp:%u,rcv_wnd:%u,write_seq:%u,pushed_seq:%u,prior_ssthresh:%u,high_seq:%u\n",
+    printf("snd_cwnd_stamp:%u,rcv_wnd:%u,write_seq:%u,pushed_seq:%u,prior_ssthresh:%u,high_seq:%u,icsk_pending:%u\n",
             info->snd_cwnd_stamp,info->rcv_wnd,info->write_seq,info->pushed_seq,
-            info->prior_ssthresh,info->high_seq);
+            info->prior_ssthresh,info->high_seq,info->icsk_pending);
+            
+    printf("probe_size:%u,nonagle:%u,thin_lto:%u,thin_dupack:%u,repair:%u,frto:%u,rack_advanced:%u,rack_reord:%u\n",
+            info->probe_size,info->nonagle,info->thin_lto,info->thin_dupack,
+            info->repair,info->frto,info->rack_advanced,info->rack_reord);        
+   
+    printf("retrans_stamp:%u,undo_marker:%u,undo_retrans:%u,tlp_high_seq:%u\n",
+            info->retrans_stamp,info->undo_marker,info->undo_retrans,info->tlp_high_seq);         
    
 }

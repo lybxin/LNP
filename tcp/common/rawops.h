@@ -10,6 +10,7 @@ extern u32 recvacknumber;
 extern u16 tcpseq;
 extern u32 senddelay;
 extern u32 sackblknum;
+extern u16 mssval;
 extern char srcip[];
 extern char dstip[];
 

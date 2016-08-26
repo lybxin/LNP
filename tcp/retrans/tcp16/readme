@@ -1,0 +1,16 @@
+TLP与FACK和RTO交互测试
+设置tcp_retries2=8,tcp_recovery=0,tcp_retrans_collapse=0,tcp_discard_on_port =9877,tcp_sack=1,
+
+1、设置tcp_early_retrans=3,tcp_fack=1,server端传输5个报文。client正常ACK报文1,报文5被TLP重传，client SACK报文5,FACK重传生效,但是FR失败，最终RTO。
+2、设置tcp_early_retrans=3,tcp_fack=0,server端传输5个报文。client正常ACK报文1,报文5被TLP重传，client SACK报文5,FACK重传未生效，最终直接依靠RTO超时重传进行恢复。
+
+
+3、设置tcp_early_retrans=3,tcp_fack=1,server端传输5个报文。client正常ACK报文1,报文5被TLP重传，client SACK报文5,FACK重传生效,执行快速恢复过程。
+4、设置tcp_early_retrans=3,tcp_fack=0,server端传输5个报文。client正常ACK报文1,报文5被TLP重传，client SACK报文5,FACK重传未生效，最终直接依靠RTO超时重传进行恢复。
+
+
+
+
+
+
+

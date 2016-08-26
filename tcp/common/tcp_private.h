@@ -87,7 +87,33 @@ struct tcp_info_user
 	u_int32_t	pushed_seq;	/* Last pushed seq, required to talk to windows */
 	u_int32_t	prior_ssthresh; /* ssthresh saved at recovery start	*/
 	u_int32_t	high_seq;	/* snd_nxt at onset of congestion	*/
-	u_int32_t   rto_max;
+
+	//user define 2
+	
+	u_int32_t   probe_size;
+
+
+    u_int8_t	nonagle     : 4,/* Disable Nagle algorithm?             */
+		    thin_lto    : 1,/* Use linear timeouts for thin streams */
+		    thin_dupack : 1,/* Fast retransmit on first dupack      */
+		    repair      : 1,
+		    frto        : 1;/* F-RTO (RFC5682) activated in CA_Loss */
+    u_int8_t    rack_advanced;
+	u_int8_t    rack_reord;
+	u_int8_t    icsk_pending;
+
+
+    u_int32_t	retrans_stamp;	/* Timestamp of the last retransmit,
+				 * also used in SYN-SENT to remember stamp of
+				 * the first SYN. */
+    u_int32_t	undo_marker;	/* snd_una upon a new recovery episode. */
+
+	u_int32_t   undo_retrans;	
+
+	u_int32_t   tlp_high_seq;
+	
+	
+	
 };
 
 

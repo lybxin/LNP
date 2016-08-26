@@ -1,5 +1,5 @@
 基于FACK的快速重传测试
-
-1、设置tcp_retries2=8,tcp_recovery=0,tcp_early_retrans=0,tcp_retrans_collapse=0,tcp_discard_on_port =9877,tcp_sack=1,tcp_fack=1;
-2、设置tcp_retries2=8,tcp_recovery=0,tcp_early_retrans=0,tcp_retrans_collapse=0,tcp_discard_on_port =9877,tcp_sack=1,tcp_fack=0;
-
+设置tcp_retries2=8,tcp_recovery=0,tcp_early_retrans=0,tcp_retrans_collapse=0,tcp_discard_on_port =9877,tcp_sack=1,
+1、tcp_fack=1;构造合适的SACK信息触发快速重传进行测试
+2、tcp_fack=0;使用与1相同的SACK信息  不会触发快速重传
+2、tcp_fack=1;构造SACK信息低于dup ACK门限不会触发快速重传。

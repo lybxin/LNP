@@ -45,7 +45,7 @@ void *recv_function(void *arg)
     while(1)
     {       
         //等待接收ACK
-        recvlen = rawadvrecv(sockfd, buffer, MAX_PKT_SIZE,TCP_SACKOPT);
+        recvlen = rawadvrecv(sockfd, buffer, MAX_PKT_SIZE,0);
         
         //判断是否收到了需要回复ACK的报文
         if(containdata(buffer, recvlen))
@@ -62,12 +62,13 @@ void *recv_function(void *arg)
             
 
             
-            if(i==4)
+            if(i==5)
             {
                 senddelay = 400;
-                recvacknumber = recvacknumber - (i) * 8;
+                recvacknumber = recvacknumber - (i-1) * 8;
                 resetsackblk();
                 appendsackblk((recvacknumber+ (i-2)*8),(recvacknumber+(i-1)*8));
+                //printf("sackb");
                 tot_len = buildackpkt(buffer,recvacknumber,TCP_TSOPT|TCP_SACKOPT);
                 //tot_len = buildackpkt(buffer,recvacknumber,TCP_TSOPT);
                 //回复一个ACK报文 
@@ -76,15 +77,16 @@ void *recv_function(void *arg)
             }             
                       
             
-            if(i > 7)
+            //if(i > 7)
+            if(i > 5)
             {
                 senddelay = 500;
-                tot_len = buildackpkt(buffer,recvacknumber,TCP_TSOPT);
+                tot_len = buildackpkt(buffer,recvacknumber,TCP_TSOPT|TCP_SACKOPT);
                 //回复一个ACK报文 
                 rawsend(sockfd,buffer,tot_len);
             }
             
-
+            printf("------recv_function i=%d-----",i);
             i++;
 
         } 

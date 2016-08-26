@@ -1,0 +1,18 @@
+FRTO
+设置tcp_retries2=8,tcp_recovery=0,tcp_retrans_collapse=0,tcp_discard_on_port =9877,tcp_sack=1,tcp_dsack=0,tcp_early_retrans=0
+client设置mss为50+12(tsopt)
+
+1、设置tcp_frto=2,server端传输1个报文。RTO超时缩小拥塞窗口后，接着传输5个报文(250bytes)。第一个报文正常ACK，第二个报文RTO超时回复SACK触发FRTO探测
+
+2、设置tcp_frto=0,server端传输1个报文。RTO超时缩小拥塞窗口后，接着传输5个报文(250bytes)。第一个报文正常ACK，第二个报文RTO超时回复SACK不会触发FRTO接着进行慢启动重传
+
+3、设置tcp_frto=2,server端传输1个报文。RTO超时缩小拥塞窗口后，接着传输4个报文(200bytes)。第一个报文正常ACK，第二个报文RTO超时回复SACK触发FRTO探测,去掉其余报文的loss状态，RTO超时后才重传第三个报文
+
+4、设置tcp_frto=0,server端传输1个报文。RTO超时缩小拥塞窗口后，接着传输4个报文(200bytes)。第一个报文正常ACK，第二个报文RTO超时回复SACK不会触发FRTO接着进行慢启动重传
+
+
+
+
+
+
+

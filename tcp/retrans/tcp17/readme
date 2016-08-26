@@ -1,0 +1,13 @@
+TLP与ER交互测试
+设置tcp_retries2=8,tcp_recovery=0,tcp_retrans_collapse=0,tcp_discard_on_port =9877,tcp_sack=1,
+
+1、设置tcp_early_retrans=3,tcp_fack=0,server端传输4个报文。client正常ACK报文1,报文4被TLP重传，client SACK报文4,增强ER重传生效触发快速恢复。
+2、设置tcp_early_retrans=4,tcp_fack=0,server端传输4个报文。client正常ACK报文1,报文4被TLP重传，client SACK报文4,ER重传未生效，最终依靠RTO超时重传进行恢复。
+
+
+
+
+
+
+
+
