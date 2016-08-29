@@ -183,7 +183,7 @@ void filliphdr(struct iphdr *iph, u16 tot_len)
     iph->saddr = inet_addr(srcip); 
     iph->daddr = inet_addr(dstip);;
     
-    iph->check = htons(csum ((unsigned short *) iph, iph->tot_len*4));
+    iph->check = htons(csum ((unsigned short *) iph, ntohs(iph->tot_len)*4));
 }
 
 //头长doff check  确保optlen四字节对齐
@@ -565,7 +565,8 @@ u16 containdata(u8 *buffer, u16 recvlen)
 
     iph = (struct iphdr*)buffer;
     th = (struct tcphdr*)(buffer + iph->ihl * 4);
-    
+
+	//caution:ihl doff is bigger endian
     datalen = recvlen - iph->ihl*4 - th->doff*4;
     datalen = th->syn + th->fin + datalen;
 

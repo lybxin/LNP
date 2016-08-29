@@ -1,0 +1,4 @@
+COLLAPSE&FACK
+设置tcp_retrans_collapse=1,tcp_discard_on_port =9877
+1、tcp_fack=1;构造合适的SACK信息触发快速重传进行测试 然后观察重传重组包
+

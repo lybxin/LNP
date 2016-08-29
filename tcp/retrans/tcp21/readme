@@ -1,0 +1,12 @@
+DSACK测试
+设置cp_discard_on_port =9877
+client设置mss为50+12(tsopt)
+
+1、设置tcp_dsack=1 client发送acknumber之前的数据包(代码比较简单  不在保留)
+2、设置tcp_dsack=1 client发送acknumber之后的重复数据包，并构造多个SACK块
+
+
+
+
+
+
