@@ -13,8 +13,7 @@ int main()
     struct sockaddr_in cliaddr, servaddr;
     int val,len,i,last_in = 0,last_out = 0;
     struct tcp_info_user info;
-    char writebuf[MAX_PKT_SIZE];
-
+    
     Listenfd = Socket(AF_INET,SOCK_STREAM,0);
 
     memset(&servaddr,0,sizeof(servaddr));
@@ -29,36 +28,10 @@ int main()
         clilen = sizeof(cliaddr);
         connfd = Accept(Listenfd,(SA*)&cliaddr,&clilen);
         
-        sleep(3);
         
         val = 1;
         len = sizeof(int);
-        Setsockopt(connfd, SOL_TCP, TCP_NODELAY,(void *)&val, len);
-        
-        val = 100;
-        len = sizeof(int);
-        Setsockopt(connfd, SOL_TCP, TCP_MAXSEG,(void *)&val, len);
-        
-        snprintf(writebuf,TRANSSIZE,"world01");
-        Write(connfd,writebuf,strlen(writebuf)+1);
-        
-        
-        sleep_ms(6*1000);
-        snprintf(writebuf,TRANSSIZE,"world02");
-        Write(connfd,writebuf,/*strlen(writebuf)+1+*/200);
-        
-        /*
-        sleep_ms(20);
-        snprintf(writebuf,TRANSSIZE,"world03");
-        Write(connfd,writebuf,strlen(writebuf)+1);
-        
-        
-        sleep_ms(10);
-        snprintf(writebuf,TRANSSIZE,"world04");
-        Write(connfd,writebuf,strlen(writebuf)+1);
-        */
-
-        
+        Setsockopt(connfd, SOL_SOCKET, SO_DEBUG,(void *)&val, len);
         
         i = 0;
         while(i < 100*200)
@@ -75,7 +48,6 @@ int main()
 
                 printf("i=%d\n",i);
                 
-
                 
                 last_in = info.tcpi_segs_in;
                 last_out = info.tcpi_segs_out;

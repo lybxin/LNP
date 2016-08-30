@@ -1,0 +1,10 @@
+DSACK测试
+设置cp_discard_on_port =9877
+client设置mss为50+12(tsopt)
+
+1、设置tcp_dsack=1 client构造partial duplicate segment  tcp_ofo_queue好象是bug啊
+
+
+
+
+

@@ -75,10 +75,6 @@ int main()
 
                 printf("i=%d\n",i);
                 
-                if(last_out != info.tcpi_segs_out)
-                {
-                
-                }
                 
                 last_in = info.tcpi_segs_in;
                 last_out = info.tcpi_segs_out;
