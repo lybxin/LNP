@@ -8,7 +8,6 @@
 int main()
 {
     int Listenfd,connfd;
-    struct timespec;
     socklen_t clilen;
     struct sockaddr_in cliaddr, servaddr;
 

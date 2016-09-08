@@ -8,7 +8,6 @@
 int main()
 {
     int Listenfd,connfd;
-    struct timespec;
     socklen_t clilen;
     struct sockaddr_in cliaddr, servaddr;
     int val,len,i,last_in = 0,last_out = 0;
@@ -47,18 +46,7 @@ int main()
         snprintf(writebuf,TRANSSIZE,"world02");
         Write(connfd,writebuf,/*strlen(writebuf)+1+*/250);
         
-        /*
-        sleep_ms(20);
-        snprintf(writebuf,TRANSSIZE,"world03");
-        Write(connfd,writebuf,strlen(writebuf)+1);
-        
-        
-        sleep_ms(10);
-        snprintf(writebuf,TRANSSIZE,"world04");
-        Write(connfd,writebuf,strlen(writebuf)+1);
-        */
-
-        
+       
         
         i = 0;
         while(i < 100*200)

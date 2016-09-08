@@ -1,0 +1,10 @@
+SWS示例
+设置sudo ip route change local 127.0.0.1 dev lo  src 127.0.0.2  mtu 1530
+
+1、模拟测试tcpip详解中SWS的示例
+2、测试SWS&TLP&延迟ACK交互 client第二次发送Write(sockfd,buffer,204);
+
+
+
+
+

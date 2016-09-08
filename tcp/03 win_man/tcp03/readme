@@ -1,0 +1,14 @@
+Nagle算法与延迟ACK交互测试示例
+设置tcp_discard_on_port =9877   
+ethtool -K lo tso off
+ethtool -K lo gso off
+client设置mss为50+12(tsopt)
+
+
+
+
+
+
+
+
+

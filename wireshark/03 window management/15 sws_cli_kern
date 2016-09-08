@@ -1,0 +1,385 @@
+
+Sep  7 12:15:34 Inspiron kernel: [12088.759538] [sk_forced_mem_schedule]sk_forward_alloc:0,size:1280,amt:1,SK_MEM_QUANTUM:4096
+Sep  7 12:15:34 Inspiron kernel: [12088.759543] [sk_mem_charge]sk_forward_alloc:2816,size:1280
+Sep  7 12:15:34 Inspiron kernel: [12088.759546] [tcp_transmit_skb] seq:825994781, end_seq:825994782, pcount:1,pid:28482,uid:0 
+Sep  7 12:15:34 Inspiron kernel: [12088.759588] [tcp_v4_rcv] seq:1403444569,len:1,pid:28482,uid:0,sk_state:2,sk_addr:ffff880071e06900
+Sep  7 12:15:34 Inspiron kernel: [12088.759593] [tcp_rcv_state_process] sk_state:2,seq:1403444569,end_seq:1403444570,len:40,data_len:0,truesize:1280 
+Sep  7 12:15:34 Inspiron kernel: [12088.759597] [sk_mem_uncharge]sk_forward_alloc:4096,size:1280
+Sep  7 12:15:34 Inspiron kernel: [12088.759607] [tcp_transmit_skb] seq:825994782, end_seq:825994782, pcount:1,pid:28482,uid:0 
+Sep  7 12:15:34 Inspiron kernel: [12088.759971] [tcp_sendmsg]copy:0,copied:0,size_goal:1478,mss_now:1478,sk_route_caps:86974889065,dataleft:2048
+Sep  7 12:15:34 Inspiron kernel: [12088.759976] [select_size]MAX_TCP_HEADER:304,MAX_SKB_FRAGS:17,PAGE_SIZE:4096,sg:1,gso:1,tmp:1424,max_header:304
+Sep  7 12:15:34 Inspiron kernel: [12088.759979] [sk_forced_mem_schedule]sk_forward_alloc:4096,size:2304,amt:1,SK_MEM_QUANTUM:4096
+Sep  7 12:15:34 Inspiron kernel: [12088.759982] [tcp_sendmsg]head:ffff8800b6ed3800,data:ffff8800b6ed3930,tail:304,end:1728,reserved_tailroom:0,data_len:0
+Sep  7 12:15:34 Inspiron kernel: [12088.759984] [sk_mem_charge]sk_forward_alloc:1792,size:2304
+Sep  7 12:15:34 Inspiron kernel: [12088.759988] [tcp_sendmsg]seq:825994782,end_seq:825996206,ip_summed:3,copy:54,copied:1424,size_goal:1478,mss_now:1478,dataleft:624
+Sep  7 12:15:34 Inspiron kernel: [12088.759992] [sk_mem_charge]sk_forward_alloc:1738,size:54
+Sep  7 12:15:34 Inspiron kernel: [12088.759994] [tcp_push_one]mss_now:1478,seq:825994782,end_seq:825996260
+Sep  7 12:15:34 Inspiron kernel: [12088.759996] [tcp_write_xmit] seq:825994782,tso_segs:1,push_one:1,qlen:1 
+Sep  7 12:15:34 Inspiron kernel: [12088.759999] [tcp_transmit_skb] seq:825994782, end_seq:825996260, pcount:1,pid:28486,uid:0 
+Sep  7 12:15:34 Inspiron kernel: [12088.760021] [tcp_v4_rcv] seq:1403444570,len:0,pid:28486,uid:0,sk_state:1,sk_addr:ffff880071e06900
+Sep  7 12:15:34 Inspiron kernel: [12088.760027] [tcp_sendmsg]seq:825994782,end_seq:825996260,ip_summed:3,copy:0,copied:1478,size_goal:1478,mss_now:1478,dataleft:570
+Sep  7 12:15:34 Inspiron kernel: [12088.760030] [select_size]MAX_TCP_HEADER:304,MAX_SKB_FRAGS:17,PAGE_SIZE:4096,sg:1,gso:1,tmp:1424,max_header:304
+Sep  7 12:15:34 Inspiron kernel: [12088.760032] [__sk_mem_schedule]sk_forward_alloc:5834,size:2304,amt:1,SK_MEM_QUANTUM:4096
+Sep  7 12:15:34 Inspiron kernel: [12088.760035] [tcp_sendmsg]head:ffff8800b6ed5000,data:ffff8800b6ed5130,tail:304,end:1728,reserved_tailroom:0,data_len:0
+Sep  7 12:15:34 Inspiron kernel: [12088.760037] [sk_mem_charge]sk_forward_alloc:3530,size:2304
+Sep  7 12:15:34 Inspiron kernel: [12088.760039] [tcp_push]seq:825996260,end_seq:825996830,size_goal:1478
+Sep  7 12:15:34 Inspiron kernel: [12088.760041] [__tcp_push_pending_frames]cur_mss:1478,timeer:52
+Sep  7 12:15:34 Inspiron kernel: [12088.760043] [tcp_write_xmit] seq:825996260,tso_segs:1,push_one:0,qlen:2 
+Sep  7 12:15:34 Inspiron kernel: [12088.760045] [tcp_transmit_skb] seq:825996260, end_seq:825996830, pcount:1,pid:28486,uid:0 
+Sep  7 12:15:34 Inspiron kernel: [12088.760055] [tcp_rcv_established]sk_forward_alloc:3530,seq:1403444570,end_seq:1403444570,len:32,data_len:0,truesize:2,pfmemalloc:0,tailroom:400
+Sep  7 12:15:34 Inspiron kernel: [12088.760058] [sk_mem_uncharge]sk_forward_alloc:5888,size:2358
+Sep  7 12:15:34 Inspiron kernel: [12088.760064] [tcp_sendmsg]seq:825996260,end_seq:825996830,ip_summed:3,copy:0,copied:0,size_goal:1478,mss_now:1478,dataleft:2048
+Sep  7 12:15:34 Inspiron kernel: [12088.760067] [select_size]MAX_TCP_HEADER:304,MAX_SKB_FRAGS:17,PAGE_SIZE:4096,sg:1,gso:1,tmp:1424,max_header:304
+Sep  7 12:15:34 Inspiron kernel: [12088.760070] [tcp_sendmsg]head:ffff8800b6ed7800,data:ffff8800b6ed7930,tail:304,end:1728,reserved_tailroom:0,data_len:0
+Sep  7 12:15:34 Inspiron kernel: [12088.760071] [sk_mem_charge]sk_forward_alloc:3584,size:2304
+Sep  7 12:15:34 Inspiron kernel: [12088.760074] [tcp_sendmsg]seq:825996830,end_seq:825998254,ip_summed:3,copy:54,copied:1424,size_goal:1478,mss_now:1478,dataleft:624
+Sep  7 12:15:34 Inspiron kernel: [12088.760076] [sk_mem_charge]sk_forward_alloc:3530,size:54
+Sep  7 12:15:34 Inspiron kernel: [12088.760077] [tcp_push_one]mss_now:1478,seq:825996830,end_seq:825998308
+Sep  7 12:15:34 Inspiron kernel: [12088.760079] [tcp_write_xmit] seq:825996830,tso_segs:1,push_one:1,qlen:2 
+Sep  7 12:15:34 Inspiron kernel: [12088.760082] [tcp_sendmsg]seq:825996830,end_seq:825998308,ip_summed:3,copy:0,copied:1478,size_goal:1478,mss_now:1478,dataleft:570
+Sep  7 12:15:34 Inspiron kernel: [12088.760084] [select_size]MAX_TCP_HEADER:304,MAX_SKB_FRAGS:17,PAGE_SIZE:4096,sg:1,gso:1,tmp:1424,max_header:304
+Sep  7 12:15:34 Inspiron kernel: [12088.760087] [tcp_sendmsg]head:ffff8800b6ed7000,data:ffff8800b6ed7130,tail:304,end:1728,reserved_tailroom:0,data_len:0
+Sep  7 12:15:34 Inspiron kernel: [12088.760089] [sk_mem_charge]sk_forward_alloc:1226,size:2304
+Sep  7 12:15:34 Inspiron kernel: [12088.760090] [tcp_push]seq:825998308,end_seq:825998878,size_goal:1478
+Sep  7 12:15:34 Inspiron kernel: [12088.760092] [__tcp_push_pending_frames]cur_mss:1478,timeer:51
+Sep  7 12:15:34 Inspiron kernel: [12088.760094] [tcp_write_xmit] seq:825996830,tso_segs:1,push_one:0,qlen:3 
+Sep  7 12:15:34 Inspiron kernel: [12088.760097] [tcp_sendmsg]seq:825998308,end_seq:825998878,ip_summed:3,copy:908,copied:0,size_goal:1478,mss_now:1478,dataleft:2048
+Sep  7 12:15:34 Inspiron kernel: [12088.760100] [tcp_sendmsg]seq:825998308,end_seq:825999732,ip_summed:3,copy:54,copied:854,size_goal:1478,mss_now:1478,dataleft:1194
+Sep  7 12:15:34 Inspiron kernel: [12088.760102] [sk_mem_charge]sk_forward_alloc:1172,size:54
+Sep  7 12:15:34 Inspiron kernel: [12088.760105] [tcp_sendmsg]seq:825998308,end_seq:825999786,ip_summed:3,copy:0,copied:908,size_goal:1478,mss_now:1478,dataleft:1140
+Sep  7 12:15:34 Inspiron kernel: [12088.760107] [select_size]MAX_TCP_HEADER:304,MAX_SKB_FRAGS:17,PAGE_SIZE:4096,sg:1,gso:1,tmp:1424,max_header:304
+Sep  7 12:15:34 Inspiron kernel: [12088.760110] [__sk_mem_schedule]sk_forward_alloc:5268,size:2304,amt:1,SK_MEM_QUANTUM:4096
+Sep  7 12:15:34 Inspiron kernel: [12088.760112] [tcp_sendmsg]head:ffff8800b6ed4000,data:ffff8800b6ed4130,tail:304,end:1728,reserved_tailroom:0,data_len:0
+Sep  7 12:15:34 Inspiron kernel: [12088.760113] [sk_mem_charge]sk_forward_alloc:2964,size:2304
+Sep  7 12:15:34 Inspiron kernel: [12088.760115] [tcp_push]seq:825999786,end_seq:826000926,size_goal:1478
+Sep  7 12:15:34 Inspiron kernel: [12088.760117] [__tcp_push_pending_frames]cur_mss:1478,timeer:51
+Sep  7 12:15:34 Inspiron kernel: [12088.760118] [tcp_write_xmit] seq:825996830,tso_segs:1,push_one:0,qlen:4 
+Sep  7 12:15:34 Inspiron kernel: [12088.796665] [tcp_v4_rcv] seq:1403444570,len:0,pid:13,uid:0,sk_state:1,sk_addr:ffff880071e06900
+Sep  7 12:15:34 Inspiron kernel: [12088.796675] [tcp_rcv_established]sk_forward_alloc:2964,seq:1403444570,end_seq:1403444570,len:32,data_len:0,truesize:2,pfmemalloc:0,tailroom:400
+Sep  7 12:15:34 Inspiron kernel: [12088.796680] [sk_mem_uncharge]sk_forward_alloc:5268,size:2304
+Sep  7 12:15:34 Inspiron kernel: [12088.796685] [tcp_push_pending_frames]
+Sep  7 12:15:34 Inspiron kernel: [12088.796688] [__tcp_push_pending_frames]cur_mss:1478,timeer:52
+Sep  7 12:15:34 Inspiron kernel: [12088.796691] [tcp_write_xmit] seq:825996830,tso_segs:1,push_one:0,qlen:3 
+Sep  7 12:15:35 Inspiron kernel: [12089.004614] [tcp_send_probe0] 
+Sep  7 12:15:35 Inspiron kernel: [12089.004625] [tcp_write_wakeup] seq:825996830 
+Sep  7 12:15:35 Inspiron kernel: [12089.004636] [sk_forced_mem_schedule]sk_forward_alloc:5268,size:1280,amt:1,SK_MEM_QUANTUM:4096
+Sep  7 12:15:35 Inspiron kernel: [12089.004641] [sk_mem_charge]sk_forward_alloc:3988,size:1280
+Sep  7 12:15:35 Inspiron kernel: [12089.004649] [tcp_transmit_skb] seq:825996830, end_seq:825998282, pcount:1,pid:0,uid:0 
+Sep  7 12:15:35 Inspiron kernel: [12089.004774] [tcp_v4_rcv] seq:1403444570,len:0,pid:13,uid:0,sk_state:1,sk_addr:ffff880071e06900
+Sep  7 12:15:35 Inspiron kernel: [12089.004783] [tcp_rcv_established]sk_forward_alloc:3988,seq:1403444570,end_seq:1403444570,len:32,data_len:0,truesize:2,pfmemalloc:0,tailroom:400
+Sep  7 12:15:35 Inspiron kernel: [12089.004790] [sk_mem_uncharge]sk_forward_alloc:6320,size:2332
+Sep  7 12:15:35 Inspiron kernel: [12089.004798] [tcp_push_pending_frames]
+Sep  7 12:15:35 Inspiron kernel: [12089.004802] [__tcp_push_pending_frames]cur_mss:1478,timeer:52
+Sep  7 12:15:35 Inspiron kernel: [12089.004808] [tcp_write_xmit] seq:825998282,tso_segs:1,push_one:0,qlen:3 
+Sep  7 12:15:35 Inspiron kernel: [12089.212604] [tcp_send_probe0] 
+Sep  7 12:15:35 Inspiron kernel: [12089.212615] [tcp_write_wakeup] seq:825998282 
+Sep  7 12:15:35 Inspiron kernel: [12089.212622] [tcp_xmit_probe_skb] seq:0 
+Sep  7 12:15:35 Inspiron kernel: [12089.212628] [tcp_transmit_skb] seq:825998281, end_seq:825998281, pcount:1,pid:0,uid:0 
+Sep  7 12:15:35 Inspiron kernel: [12089.212661] [__sk_mem_reclaim]sk_forward_alloc:2224,amount:1,SK_MEM_QUANTUM_SHIFT:12
+Sep  7 12:15:35 Inspiron kernel: [12089.212694] [tcp_v4_rcv] seq:1403444570,len:0,pid:0,uid:0,sk_state:1,sk_addr:ffff880071e06900
+Sep  7 12:15:35 Inspiron kernel: [12089.212698] [tcp_rcv_established]sk_forward_alloc:2224,seq:1403444570,end_seq:1403444570,len:32,data_len:0,truesize:2,pfmemalloc:0,tailroom:400
+Sep  7 12:15:35 Inspiron kernel: [12089.212702] [tcp_push_pending_frames]
+Sep  7 12:15:35 Inspiron kernel: [12089.212704] [__tcp_push_pending_frames]cur_mss:1478,timeer:52
+Sep  7 12:15:35 Inspiron kernel: [12089.212707] [tcp_write_xmit] seq:825998282,tso_segs:1,push_one:0,qlen:3 
+Sep  7 12:15:35 Inspiron kernel: [12089.628623] [tcp_send_probe0] 
+Sep  7 12:15:35 Inspiron kernel: [12089.628632] [tcp_write_wakeup] seq:825998282 
+Sep  7 12:15:35 Inspiron kernel: [12089.628639] [tcp_xmit_probe_skb] seq:0 
+Sep  7 12:15:35 Inspiron kernel: [12089.628642] [tcp_transmit_skb] seq:825998281, end_seq:825998281, pcount:1,pid:3059,uid:1000 
+Sep  7 12:15:36 Inspiron kernel: [12090.460638] [tcp_send_probe0] 
+Sep  7 12:15:36 Inspiron kernel: [12090.460647] [tcp_write_wakeup] seq:825998282 
+Sep  7 12:15:36 Inspiron kernel: [12090.460652] [tcp_xmit_probe_skb] seq:0 
+Sep  7 12:15:36 Inspiron kernel: [12090.460657] [tcp_transmit_skb] seq:825998281, end_seq:825998281, pcount:1,pid:0,uid:0 
+Sep  7 12:15:36 Inspiron kernel: [12090.460724] [tcp_v4_rcv] seq:1403444570,len:0,pid:0,uid:0,sk_state:1,sk_addr:ffff880071e06900
+Sep  7 12:15:36 Inspiron kernel: [12090.460731] [tcp_rcv_established]sk_forward_alloc:2224,seq:1403444570,end_seq:1403444570,len:32,data_len:0,truesize:2,pfmemalloc:0,tailroom:400
+Sep  7 12:15:36 Inspiron kernel: [12090.460736] [tcp_push_pending_frames]
+Sep  7 12:15:36 Inspiron kernel: [12090.460740] [__tcp_push_pending_frames]cur_mss:1478,timeer:52
+Sep  7 12:15:36 Inspiron kernel: [12090.460745] [tcp_write_xmit] seq:825998282,tso_segs:1,push_one:0,qlen:3 
+Sep  7 12:15:38 Inspiron kernel: [12092.128641] [tcp_send_probe0] 
+Sep  7 12:15:38 Inspiron kernel: [12092.128650] [tcp_write_wakeup] seq:825998282 
+Sep  7 12:15:38 Inspiron kernel: [12092.128655] [tcp_xmit_probe_skb] seq:0 
+Sep  7 12:15:38 Inspiron kernel: [12092.128661] [tcp_transmit_skb] seq:825998281, end_seq:825998281, pcount:1,pid:0,uid:0 
+Sep  7 12:15:38 Inspiron kernel: [12092.128745] [tcp_v4_rcv] seq:1403444570,len:0,pid:13,uid:0,sk_state:1,sk_addr:ffff880071e06900
+Sep  7 12:15:38 Inspiron kernel: [12092.128753] [tcp_rcv_established]sk_forward_alloc:2224,seq:1403444570,end_seq:1403444570,len:32,data_len:0,truesize:2,pfmemalloc:0,tailroom:400
+Sep  7 12:15:38 Inspiron kernel: [12092.128756] [tcp_push_pending_frames]
+Sep  7 12:15:38 Inspiron kernel: [12092.128759] [__tcp_push_pending_frames]cur_mss:1478,timeer:52
+Sep  7 12:15:38 Inspiron kernel: [12092.128761] [tcp_write_xmit] seq:825998282,tso_segs:1,push_one:0,qlen:3 
+Sep  7 12:15:41 Inspiron kernel: [12095.468694] [tcp_send_probe0] 
+Sep  7 12:15:41 Inspiron kernel: [12095.468701] [tcp_write_wakeup] seq:825998282 
+Sep  7 12:15:41 Inspiron kernel: [12095.468705] [tcp_xmit_probe_skb] seq:0 
+Sep  7 12:15:41 Inspiron kernel: [12095.468708] [tcp_transmit_skb] seq:825998281, end_seq:825998281, pcount:1,pid:3045,uid:1000 
+Sep  7 12:15:41 Inspiron kernel: [12095.468785] [tcp_v4_rcv] seq:1403444570,len:0,pid:13,uid:0,sk_state:1,sk_addr:ffff880071e06900
+Sep  7 12:15:41 Inspiron kernel: [12095.468790] [tcp_rcv_established]sk_forward_alloc:2224,seq:1403444570,end_seq:1403444570,len:32,data_len:0,truesize:2,pfmemalloc:0,tailroom:400
+Sep  7 12:15:41 Inspiron kernel: [12095.468793] [tcp_push_pending_frames]
+Sep  7 12:15:41 Inspiron kernel: [12095.468796] [__tcp_push_pending_frames]cur_mss:1478,timeer:52
+Sep  7 12:15:41 Inspiron kernel: [12095.468799] [tcp_write_xmit] seq:825998282,tso_segs:1,push_one:0,qlen:3 
+Sep  7 12:15:48 Inspiron kernel: [12102.140794] [tcp_send_probe0] 
+Sep  7 12:15:48 Inspiron kernel: [12102.140804] [tcp_write_wakeup] seq:825998282 
+Sep  7 12:15:48 Inspiron kernel: [12102.140808] [tcp_xmit_probe_skb] seq:0 
+Sep  7 12:15:48 Inspiron kernel: [12102.140813] [tcp_transmit_skb] seq:825998281, end_seq:825998281, pcount:1,pid:0,uid:0 
+Sep  7 12:15:48 Inspiron kernel: [12102.140904] [tcp_v4_rcv] seq:1403444570,len:0,pid:13,uid:0,sk_state:1,sk_addr:ffff880071e06900
+Sep  7 12:15:48 Inspiron kernel: [12102.140909] [tcp_rcv_established]sk_forward_alloc:2224,seq:1403444570,end_seq:1403444570,len:32,data_len:0,truesize:2,pfmemalloc:0,tailroom:400
+Sep  7 12:15:48 Inspiron kernel: [12102.140913] [tcp_push_pending_frames]
+Sep  7 12:15:48 Inspiron kernel: [12102.140916] [__tcp_push_pending_frames]cur_mss:1478,timeer:52
+Sep  7 12:15:48 Inspiron kernel: [12102.140919] [tcp_write_xmit] seq:825998282,tso_segs:1,push_one:0,qlen:3 
+Sep  7 12:16:01 Inspiron kernel: [12115.484971] [tcp_send_probe0] 
+Sep  7 12:16:01 Inspiron kernel: [12115.484980] [tcp_write_wakeup] seq:825998282 
+Sep  7 12:16:01 Inspiron kernel: [12115.484985] [tcp_xmit_probe_skb] seq:0 
+Sep  7 12:16:01 Inspiron kernel: [12115.484990] [tcp_transmit_skb] seq:825998281, end_seq:825998281, pcount:1,pid:0,uid:0 
+Sep  7 12:16:01 Inspiron kernel: [12115.485086] [tcp_v4_rcv] seq:1403444570,len:0,pid:13,uid:0,sk_state:1,sk_addr:ffff880071e06900
+Sep  7 12:16:01 Inspiron kernel: [12115.485092] [tcp_rcv_established]sk_forward_alloc:2224,seq:1403444570,end_seq:1403444570,len:32,data_len:0,truesize:2,pfmemalloc:0,tailroom:400
+Sep  7 12:16:01 Inspiron kernel: [12115.485096] [tcp_push_pending_frames]
+Sep  7 12:16:01 Inspiron kernel: [12115.485099] [__tcp_push_pending_frames]cur_mss:1478,timeer:52
+Sep  7 12:16:01 Inspiron kernel: [12115.485102] [tcp_write_xmit] seq:825998282,tso_segs:1,push_one:0,qlen:3 
+Sep  7 12:16:03 Inspiron kernel: [12117.761105] [tcp_v4_rcv] seq:1403444570,len:0,pid:28487,uid:1000,sk_state:1,sk_addr:ffff880071e06900
+Sep  7 12:16:03 Inspiron kernel: [12117.761119] [tcp_rcv_established]sk_forward_alloc:2224,seq:1403444570,end_seq:1403444570,len:32,data_len:0,truesize:2,pfmemalloc:0,tailroom:400
+Sep  7 12:16:03 Inspiron kernel: [12117.761127] [tcp_push_pending_frames]
+Sep  7 12:16:03 Inspiron kernel: [12117.761131] [__tcp_push_pending_frames]cur_mss:1478,timeer:52
+Sep  7 12:16:03 Inspiron kernel: [12117.761136] [tcp_write_xmit] seq:825998282,tso_segs:1,push_one:0,qlen:3 
+Sep  7 12:16:03 Inspiron kernel: [12117.761141] [tcp_transmit_skb] seq:825998282, end_seq:825998308, pcount:1,pid:28487,uid:1000 
+Sep  7 12:16:03 Inspiron kernel: [12117.761155] [tcp_write_xmit] seq:825998308,tso_segs:1,push_one:0,qlen:3 
+Sep  7 12:16:03 Inspiron kernel: [12117.761184] [tcp_v4_rcv] seq:1403444570,len:0,pid:28487,uid:1000,sk_state:1,sk_addr:ffff880071e06900
+Sep  7 12:16:03 Inspiron kernel: [12117.761190] [tcp_rcv_established]sk_forward_alloc:2224,seq:1403444570,end_seq:1403444570,len:32,data_len:0,truesize:2,pfmemalloc:0,tailroom:400
+Sep  7 12:16:03 Inspiron kernel: [12117.761195] [sk_mem_uncharge]sk_forward_alloc:3530,size:1306
+Sep  7 12:16:03 Inspiron kernel: [12117.761201] [tcp_push_pending_frames]
+Sep  7 12:16:03 Inspiron kernel: [12117.761204] [__tcp_push_pending_frames]cur_mss:1478,timeer:51
+Sep  7 12:16:03 Inspiron kernel: [12117.761208] [tcp_write_xmit] seq:825998308,tso_segs:1,push_one:0,qlen:2 
+Sep  7 12:16:03 Inspiron kernel: [12117.761212] [tcp_transmit_skb] seq:825998308, end_seq:825999786, pcount:1,pid:28487,uid:1000 
+Sep  7 12:16:03 Inspiron kernel: [12117.761222] [tcp_write_xmit] seq:825999786,tso_segs:1,push_one:0,qlen:2 
+Sep  7 12:16:03 Inspiron kernel: [12117.761239] [tcp_v4_rcv] seq:1403444570,len:0,pid:28487,uid:1000,sk_state:1,sk_addr:ffff880071e06900
+Sep  7 12:16:03 Inspiron kernel: [12117.761244] [tcp_rcv_established]sk_forward_alloc:3530,seq:1403444570,end_seq:1403444570,len:32,data_len:0,truesize:2,pfmemalloc:0,tailroom:400
+Sep  7 12:16:03 Inspiron kernel: [12117.761248] [sk_mem_uncharge]sk_forward_alloc:5888,size:2358
+Sep  7 12:16:03 Inspiron kernel: [12117.761251] [tcp_push_pending_frames]
+Sep  7 12:16:03 Inspiron kernel: [12117.761254] [__tcp_push_pending_frames]cur_mss:1478,timeer:51
+Sep  7 12:16:03 Inspiron kernel: [12117.761257] [tcp_write_xmit] seq:825999786,tso_segs:1,push_one:0,qlen:1 
+Sep  7 12:16:04 Inspiron kernel: [12117.964961] [tcp_send_probe0] 
+Sep  7 12:16:04 Inspiron kernel: [12117.964969] [tcp_write_wakeup] seq:825999786 
+Sep  7 12:16:04 Inspiron kernel: [12117.964972] [tcp_xmit_probe_skb] seq:0 
+Sep  7 12:16:04 Inspiron kernel: [12117.964976] [tcp_transmit_skb] seq:825999785, end_seq:825999785, pcount:1,pid:0,uid:0 
+Sep  7 12:16:04 Inspiron kernel: [12117.965003] [__sk_mem_reclaim]sk_forward_alloc:1792,amount:1,SK_MEM_QUANTUM_SHIFT:12
+Sep  7 12:16:04 Inspiron kernel: [12117.965068] [tcp_v4_rcv] seq:1403444570,len:0,pid:18,uid:0,sk_state:1,sk_addr:ffff880071e06900
+Sep  7 12:16:04 Inspiron kernel: [12117.965073] [tcp_rcv_established]sk_forward_alloc:1792,seq:1403444570,end_seq:1403444570,len:32,data_len:0,truesize:2,pfmemalloc:0,tailroom:400
+Sep  7 12:16:04 Inspiron kernel: [12117.965077] [tcp_push_pending_frames]
+Sep  7 12:16:04 Inspiron kernel: [12117.965080] [__tcp_push_pending_frames]cur_mss:1478,timeer:51
+Sep  7 12:16:04 Inspiron kernel: [12117.965083] [tcp_write_xmit] seq:825999786,tso_segs:1,push_one:0,qlen:1 
+Sep  7 12:16:04 Inspiron kernel: [12118.372949] [tcp_send_probe0] 
+Sep  7 12:16:04 Inspiron kernel: [12118.372958] [tcp_write_wakeup] seq:825999786 
+Sep  7 12:16:04 Inspiron kernel: [12118.372962] [tcp_xmit_probe_skb] seq:0 
+Sep  7 12:16:04 Inspiron kernel: [12118.372967] [tcp_transmit_skb] seq:825999785, end_seq:825999785, pcount:1,pid:0,uid:0 
+Sep  7 12:16:05 Inspiron kernel: [12119.192958] [tcp_send_probe0] 
+Sep  7 12:16:05 Inspiron kernel: [12119.192970] [tcp_write_wakeup] seq:825999786 
+Sep  7 12:16:05 Inspiron kernel: [12119.192977] [tcp_xmit_probe_skb] seq:0 
+Sep  7 12:16:05 Inspiron kernel: [12119.192984] [tcp_transmit_skb] seq:825999785, end_seq:825999785, pcount:1,pid:0,uid:0 
+Sep  7 12:16:05 Inspiron kernel: [12119.193110] [tcp_v4_rcv] seq:1403444570,len:0,pid:18,uid:0,sk_state:1,sk_addr:ffff880071e06900
+Sep  7 12:16:05 Inspiron kernel: [12119.193117] [tcp_rcv_established]sk_forward_alloc:1792,seq:1403444570,end_seq:1403444570,len:32,data_len:0,truesize:2,pfmemalloc:0,tailroom:400
+Sep  7 12:16:05 Inspiron kernel: [12119.193122] [tcp_push_pending_frames]
+Sep  7 12:16:05 Inspiron kernel: [12119.193126] [__tcp_push_pending_frames]cur_mss:1478,timeer:51
+Sep  7 12:16:05 Inspiron kernel: [12119.193130] [tcp_write_xmit] seq:825999786,tso_segs:1,push_one:0,qlen:1 
+Sep  7 12:16:06 Inspiron kernel: [12120.828975] [tcp_send_probe0] 
+Sep  7 12:16:06 Inspiron kernel: [12120.828982] [tcp_write_wakeup] seq:825999786 
+Sep  7 12:16:06 Inspiron kernel: [12120.828986] [tcp_xmit_probe_skb] seq:0 
+Sep  7 12:16:06 Inspiron kernel: [12120.828989] [tcp_transmit_skb] seq:825999785, end_seq:825999785, pcount:1,pid:0,uid:0 
+Sep  7 12:16:06 Inspiron kernel: [12120.829049] [tcp_v4_rcv] seq:1403444570,len:0,pid:18,uid:0,sk_state:1,sk_addr:ffff880071e06900
+Sep  7 12:16:06 Inspiron kernel: [12120.829052] [tcp_rcv_established]sk_forward_alloc:1792,seq:1403444570,end_seq:1403444570,len:32,data_len:0,truesize:2,pfmemalloc:0,tailroom:400
+Sep  7 12:16:06 Inspiron kernel: [12120.829055] [tcp_push_pending_frames]
+Sep  7 12:16:06 Inspiron kernel: [12120.829057] [__tcp_push_pending_frames]cur_mss:1478,timeer:51
+Sep  7 12:16:06 Inspiron kernel: [12120.829059] [tcp_write_xmit] seq:825999786,tso_segs:1,push_one:0,qlen:1 
+Sep  7 12:16:10 Inspiron kernel: [12124.101017] [tcp_send_probe0] 
+Sep  7 12:16:10 Inspiron kernel: [12124.101024] [tcp_write_wakeup] seq:825999786 
+Sep  7 12:16:10 Inspiron kernel: [12124.101028] [tcp_xmit_probe_skb] seq:0 
+Sep  7 12:16:10 Inspiron kernel: [12124.101031] [tcp_transmit_skb] seq:825999785, end_seq:825999785, pcount:1,pid:0,uid:0 
+Sep  7 12:16:10 Inspiron kernel: [12124.101109] [tcp_v4_rcv] seq:1403444570,len:0,pid:18,uid:0,sk_state:1,sk_addr:ffff880071e06900
+Sep  7 12:16:10 Inspiron kernel: [12124.101115] [tcp_rcv_established]sk_forward_alloc:1792,seq:1403444570,end_seq:1403444570,len:32,data_len:0,truesize:2,pfmemalloc:0,tailroom:400
+Sep  7 12:16:10 Inspiron kernel: [12124.101119] [tcp_push_pending_frames]
+Sep  7 12:16:10 Inspiron kernel: [12124.101122] [__tcp_push_pending_frames]cur_mss:1478,timeer:51
+Sep  7 12:16:10 Inspiron kernel: [12124.101125] [tcp_write_xmit] seq:825999786,tso_segs:1,push_one:0,qlen:1 
+Sep  7 12:16:15 Inspiron kernel: [12129.762026] [tcp_v4_rcv] seq:1403444570,len:0,pid:28487,uid:1000,sk_state:1,sk_addr:ffff880071e06900
+Sep  7 12:16:15 Inspiron kernel: [12129.762035] [tcp_rcv_established]sk_forward_alloc:1792,seq:1403444570,end_seq:1403444570,len:32,data_len:0,truesize:2,pfmemalloc:0,tailroom:400
+Sep  7 12:16:15 Inspiron kernel: [12129.762040] [tcp_push_pending_frames]
+Sep  7 12:16:15 Inspiron kernel: [12129.762043] [__tcp_push_pending_frames]cur_mss:1478,timeer:51
+Sep  7 12:16:15 Inspiron kernel: [12129.762046] [tcp_write_xmit] seq:825999786,tso_segs:1,push_one:0,qlen:1 
+Sep  7 12:16:15 Inspiron kernel: [12129.762048] [tcp_transmit_skb] seq:825999786, end_seq:826000926, pcount:1,pid:28487,uid:1000 
+Sep  7 12:16:15 Inspiron kernel: [12129.762072] [tcp_v4_rcv] seq:1403444570,len:0,pid:28487,uid:1000,sk_state:1,sk_addr:ffff880071e06900
+Sep  7 12:16:15 Inspiron kernel: [12129.762075] [tcp_rcv_established]sk_forward_alloc:1792,seq:1403444570,end_seq:1403444570,len:32,data_len:0,truesize:2,pfmemalloc:0,tailroom:400
+Sep  7 12:16:15 Inspiron kernel: [12129.762078] [sk_mem_uncharge]sk_forward_alloc:4096,size:2304
+Sep  7 12:16:16 Inspiron kernel: [12129.965095] [__sk_mem_reclaim]sk_forward_alloc:0,amount:1,SK_MEM_QUANTUM_SHIFT:12
+Sep  7 12:16:27 Inspiron kernel: [12141.762879] [tcp_v4_rcv] seq:1403444570,len:0,pid:28487,uid:1000,sk_state:1,sk_addr:ffff880071e06900
+Sep  7 12:16:27 Inspiron kernel: [12141.762892] [tcp_rcv_established]sk_forward_alloc:0,seq:1403444570,end_seq:1403444570,len:32,data_len:0,truesize:2,pfmemalloc:0,tailroom:400
+Sep  7 12:16:31 Inspiron NetworkManager[729]: <info>  [1473221791.7941] dhcp4 (wlx7844769888f4): state changed bound -> expire
+Sep  7 12:16:31 Inspiron NetworkManager[729]: <info>  [1473221791.8265] dhcp4 (wlx7844769888f4): canceled DHCP transaction, DHCP client pid 25705
+Sep  7 12:16:31 Inspiron NetworkManager[729]: <info>  [1473221791.8265] dhcp4 (wlx7844769888f4): state changed expire -> done
+Sep  7 12:16:31 Inspiron NetworkManager[729]: <info>  [1473221791.8272] device (wlx7844769888f4): state change: activated -> failed (reason 'ip-config-expired') [100 120 6]
+Sep  7 12:16:31 Inspiron NetworkManager[729]: <warn>  [1473221791.8767] device (wlx7844769888f4): Activation: failed for connection 'CC Plus Free WIFI 1'
+Sep  7 12:16:31 Inspiron NetworkManager[729]: <info>  [1473221791.8796] device (wlx7844769888f4): state change: failed -> disconnected (reason 'none') [120 30 0]
+Sep  7 12:16:31 Inspiron kernel: [12145.759730] wlx7844769888f4: deauthenticating from 90:17:ac:c1:0b:00 by local choice (Reason: 3=DEAUTH_LEAVING)
+Sep  7 12:16:31 Inspiron NetworkManager[729]: <info>  [1473221791.8819] dns-mgr: Writing DNS information to /sbin/resolvconf
+Sep  7 12:16:31 Inspiron NetworkManager[729]: <info>  [1473221791.9067] policy: auto-activating connection 'CC Plus Free WIFI 1'
+Sep  7 12:16:31 Inspiron NetworkManager[729]: <info>  [1473221791.9111] device (wlx7844769888f4): Activation: starting connection 'CC Plus Free WIFI 1' (35d5a0b3-03c6-41c1-9c94-415826919ada)
+Sep  7 12:16:31 Inspiron NetworkManager[729]: <info>  [1473221791.9114] device (wlx7844769888f4): state change: disconnected -> prepare (reason 'none') [30 40 0]
+Sep  7 12:16:31 Inspiron NetworkManager[729]: <info>  [1473221791.9122] device (wlx7844769888f4): state change: prepare -> config (reason 'none') [40 50 0]
+Sep  7 12:16:31 Inspiron NetworkManager[729]: <info>  [1473221791.9174] device (wlx7844769888f4): Activation: (wifi) connection 'CC Plus Free WIFI 1' requires no security.  No secrets needed.
+Sep  7 12:16:31 Inspiron NetworkManager[729]: <info>  [1473221791.9175] Config: added 'ssid' value 'CC Plus Free WIFI'
+Sep  7 12:16:31 Inspiron NetworkManager[729]: <info>  [1473221791.9175] Config: added 'scan_ssid' value '1'
+Sep  7 12:16:31 Inspiron NetworkManager[729]: <info>  [1473221791.9175] Config: added 'key_mgmt' value 'NONE'
+Sep  7 12:16:31 Inspiron NetworkManager[729]: <warn>  [1473221791.9254] sup-iface[0xc46790,wlx7844769888f4]: connection disconnected (reason -3)
+Sep  7 12:16:31 Inspiron NetworkManager[729]: <info>  [1473221791.9262] device (wlx7844769888f4): supplicant interface state: completed -> disconnected
+Sep  7 12:16:31 Inspiron NetworkManager[729]: <info>  [1473221791.9269] sup-iface[0xc46790,wlx7844769888f4]: config: set interface ap_scan to 1
+Sep  7 12:16:32 Inspiron kernel: [12146.654648] wlx7844769888f4: authenticate with 90:17:ac:c1:0b:00
+Sep  7 12:16:32 Inspiron kernel: [12146.678879] wlx7844769888f4: send auth to 90:17:ac:c1:0b:00 (try 1/3)
+Sep  7 12:16:32 Inspiron NetworkManager[729]: <info>  [1473221792.8163] device (wlx7844769888f4): supplicant interface state: disconnected -> authenticating
+Sep  7 12:16:32 Inspiron kernel: [12146.687474] wlx7844769888f4: authenticated
+Sep  7 12:16:32 Inspiron kernel: [12146.689423] wlx7844769888f4: associate with 90:17:ac:c1:0b:00 (try 1/3)
+Sep  7 12:16:32 Inspiron NetworkManager[729]: <info>  [1473221792.8263] device (wlx7844769888f4): supplicant interface state: authenticating -> associating
+Sep  7 12:16:32 Inspiron kernel: [12146.710410] wlx7844769888f4: RX AssocResp from 90:17:ac:c1:0b:00 (capab=0x1421 status=0 aid=1)
+Sep  7 12:16:32 Inspiron kernel: [12146.722985] wlx7844769888f4: associated
+Sep  7 12:16:32 Inspiron NetworkManager[729]: <info>  [1473221792.8592] device (wlx7844769888f4): supplicant interface state: associating -> completed
+Sep  7 12:16:32 Inspiron NetworkManager[729]: <info>  [1473221792.8594] device (wlx7844769888f4): Activation: (wifi) Stage 2 of 5 (Device Configure) successful.  Connected to wireless network 'CC Plus Free WIFI'.
+Sep  7 12:16:32 Inspiron NetworkManager[729]: <info>  [1473221792.8600] device (wlx7844769888f4): state change: config -> ip-config (reason 'none') [50 70 0]
+Sep  7 12:16:32 Inspiron NetworkManager[729]: <info>  [1473221792.8607] dhcp4 (wlx7844769888f4): activation: beginning transaction (timeout in 45 seconds)
+Sep  7 12:16:32 Inspiron NetworkManager[729]: <info>  [1473221792.8927] dhcp4 (wlx7844769888f4): dhclient started with pid 28581
+Sep  7 12:16:33 Inspiron kernel: [12146.913751] wlx7844769888f4: Limiting TX power to 20 (20 - 0) dBm as advertised by 90:17:ac:c1:0b:00
+Sep  7 12:16:35 Inspiron kernel: [12149.763370] [tcp_v4_rcv] seq:1403444570,len:0,pid:28487,uid:1000,sk_state:1,sk_addr:ffff880071e06900
+Sep  7 12:16:35 Inspiron kernel: [12149.763384] [tcp_rcv_established]sk_forward_alloc:0,seq:1403444570,end_seq:1403444570,len:32,data_len:0,truesize:2,pfmemalloc:0,tailroom:400
+Sep  7 12:16:37 Inspiron NetworkManager[729]: <info>  [1473221797.8226]   address 172.16.53.161
+Sep  7 12:16:37 Inspiron NetworkManager[729]: <info>  [1473221797.8227]   plen 22 (255.255.252.0)
+Sep  7 12:16:37 Inspiron NetworkManager[729]: <info>  [1473221797.8227]   gateway 172.16.55.254
+Sep  7 12:16:37 Inspiron NetworkManager[729]: <info>  [1473221797.8227]   server identifier 10.0.0.74
+Sep  7 12:16:37 Inspiron NetworkManager[729]: <info>  [1473221797.8228]   lease time 1200
+Sep  7 12:16:37 Inspiron NetworkManager[729]: <info>  [1473221797.8228]   nameserver '192.168.95.1'
+Sep  7 12:16:37 Inspiron NetworkManager[729]: <info>  [1473221797.8229]   nameserver '192.168.95.2'
+Sep  7 12:16:37 Inspiron NetworkManager[729]: <info>  [1473221797.8229] dhcp4 (wlp18s0): state changed bound -> bound
+Sep  7 12:16:58 Inspiron kernel: [12172.052557] ata5: exception Emask 0x10 SAct 0x0 SErr 0x4000000 action 0xe frozen
+Sep  7 12:16:58 Inspiron kernel: [12172.052566] ata5: irq_stat 0x00000040, connection status changed
+Sep  7 12:16:58 Inspiron kernel: [12172.052570] ata5: SError: { DevExch }
+Sep  7 12:16:58 Inspiron kernel: [12172.052579] ata5: hard resetting link
+Sep  7 12:16:58 Inspiron kernel: [12172.773631] ata5: SATA link down (SStatus 0 SControl 300)
+Sep  7 12:16:58 Inspiron kernel: [12172.773648] ata5: EH complete
+Sep  7 12:17:09 Inspiron kernel: [12183.050777] ata5: exception Emask 0x10 SAct 0x0 SErr 0x4000000 action 0xe frozen
+Sep  7 12:17:09 Inspiron kernel: [12183.050787] ata5: irq_stat 0x00000040, connection status changed
+Sep  7 12:17:09 Inspiron kernel: [12183.050792] ata5: SError: { DevExch }
+Sep  7 12:17:09 Inspiron kernel: [12183.050802] ata5: hard resetting link
+Sep  7 12:17:09 Inspiron kernel: [12183.773767] ata5: SATA link down (SStatus 0 SControl 300)
+Sep  7 12:17:09 Inspiron kernel: [12183.773788] ata5: EH complete
+Sep  7 12:17:18 Inspiron NetworkManager[729]: <warn>  [1473221838.3889] dhcp4 (wlx7844769888f4): request timed out
+Sep  7 12:17:18 Inspiron NetworkManager[729]: <info>  [1473221838.3889] dhcp4 (wlx7844769888f4): state changed unknown -> timeout
+Sep  7 12:17:18 Inspiron NetworkManager[729]: <info>  [1473221838.4218] dhcp4 (wlx7844769888f4): canceled DHCP transaction, DHCP client pid 28581
+Sep  7 12:17:18 Inspiron NetworkManager[729]: <info>  [1473221838.4218] dhcp4 (wlx7844769888f4): state changed timeout -> done
+Sep  7 12:17:18 Inspiron NetworkManager[729]: <info>  [1473221838.4222] device (wlx7844769888f4): state change: ip-config -> failed (reason 'ip-config-unavailable') [70 120 5]
+Sep  7 12:17:18 Inspiron NetworkManager[729]: <warn>  [1473221838.4227] device (wlx7844769888f4): Activation: failed for connection 'CC Plus Free WIFI 1'
+Sep  7 12:17:18 Inspiron NetworkManager[729]: <info>  [1473221838.4235] device (wlx7844769888f4): state change: failed -> disconnected (reason 'none') [120 30 0]
+Sep  7 12:17:18 Inspiron kernel: [12192.299055] wlx7844769888f4: deauthenticating from 90:17:ac:c1:0b:00 by local choice (Reason: 3=DEAUTH_LEAVING)
+Sep  7 12:17:18 Inspiron NetworkManager[729]: <info>  [1473221838.4452] policy: auto-activating connection 'CC Plus Free WIFI 1'
+Sep  7 12:17:18 Inspiron NetworkManager[729]: <info>  [1473221838.4467] device (wlx7844769888f4): Activation: starting connection 'CC Plus Free WIFI 1' (35d5a0b3-03c6-41c1-9c94-415826919ada)
+Sep  7 12:17:18 Inspiron NetworkManager[729]: <info>  [1473221838.4470] device (wlx7844769888f4): state change: disconnected -> prepare (reason 'none') [30 40 0]
+Sep  7 12:17:18 Inspiron NetworkManager[729]: <info>  [1473221838.4478] device (wlx7844769888f4): state change: prepare -> config (reason 'none') [40 50 0]
+Sep  7 12:17:18 Inspiron NetworkManager[729]: <info>  [1473221838.4482] device (wlx7844769888f4): Activation: (wifi) connection 'CC Plus Free WIFI 1' requires no security.  No secrets needed.
+Sep  7 12:17:18 Inspiron NetworkManager[729]: <info>  [1473221838.4482] Config: added 'ssid' value 'CC Plus Free WIFI'
+Sep  7 12:17:18 Inspiron NetworkManager[729]: <info>  [1473221838.4482] Config: added 'scan_ssid' value '1'
+Sep  7 12:17:18 Inspiron NetworkManager[729]: <info>  [1473221838.4483] Config: added 'key_mgmt' value 'NONE'
+Sep  7 12:17:18 Inspiron NetworkManager[729]: <warn>  [1473221838.4666] sup-iface[0xc46790,wlx7844769888f4]: connection disconnected (reason -3)
+Sep  7 12:17:18 Inspiron NetworkManager[729]: <info>  [1473221838.4699] device (wlx7844769888f4): supplicant interface state: completed -> disconnected
+Sep  7 12:17:18 Inspiron NetworkManager[729]: <info>  [1473221838.4764] sup-iface[0xc46790,wlx7844769888f4]: config: set interface ap_scan to 1
+Sep  7 12:17:19 Inspiron kernel: [12193.186571] wlx7844769888f4: authenticate with 90:17:ac:c1:0b:00
+Sep  7 12:17:19 Inspiron kernel: [12193.220979] wlx7844769888f4: send auth to 90:17:ac:c1:0b:00 (try 1/3)
+Sep  7 12:17:19 Inspiron NetworkManager[729]: <info>  [1473221839.3515] device (wlx7844769888f4): supplicant interface state: disconnected -> authenticating
+Sep  7 12:17:19 Inspiron kernel: [12193.224676] wlx7844769888f4: authenticated
+Sep  7 12:17:19 Inspiron NetworkManager[729]: <info>  [1473221839.3614] device (wlx7844769888f4): supplicant interface state: authenticating -> associating
+Sep  7 12:17:19 Inspiron kernel: [12193.229842] wlx7844769888f4: associate with 90:17:ac:c1:0b:00 (try 1/3)
+Sep  7 12:17:19 Inspiron kernel: [12193.248705] wlx7844769888f4: RX AssocResp from 90:17:ac:c1:0b:00 (capab=0x1421 status=0 aid=1)
+Sep  7 12:17:19 Inspiron kernel: [12193.250427] wlx7844769888f4: associated
+Sep  7 12:17:19 Inspiron NetworkManager[729]: <info>  [1473221839.3863] device (wlx7844769888f4): supplicant interface state: associating -> completed
+Sep  7 12:17:19 Inspiron NetworkManager[729]: <info>  [1473221839.3864] device (wlx7844769888f4): Activation: (wifi) Stage 2 of 5 (Device Configure) successful.  Connected to wireless network 'CC Plus Free WIFI'.
+Sep  7 12:17:19 Inspiron NetworkManager[729]: <info>  [1473221839.3868] device (wlx7844769888f4): state change: config -> ip-config (reason 'none') [50 70 0]
+Sep  7 12:17:19 Inspiron NetworkManager[729]: <info>  [1473221839.3874] dhcp4 (wlx7844769888f4): activation: beginning transaction (timeout in 45 seconds)
+Sep  7 12:17:19 Inspiron NetworkManager[729]: <info>  [1473221839.3900] dhcp4 (wlx7844769888f4): dhclient started with pid 28613
+Sep  7 12:17:19 Inspiron kernel: [12193.304320] wlx7844769888f4: Limiting TX power to 20 (20 - 0) dBm as advertised by 90:17:ac:c1:0b:00
+Sep  7 12:17:25 Inspiron kernel: [12199.603060] ata5: exception Emask 0x10 SAct 0x0 SErr 0x4000000 action 0xe frozen
+Sep  7 12:17:25 Inspiron kernel: [12199.603067] ata5: irq_stat 0x00000040, connection status changed
+Sep  7 12:17:25 Inspiron kernel: [12199.603071] ata5: SError: { DevExch }
+Sep  7 12:17:25 Inspiron kernel: [12199.603079] ata5: limiting SATA link speed to 1.5 Gbps
+Sep  7 12:17:25 Inspiron kernel: [12199.603083] ata5: hard resetting link
+Sep  7 12:17:26 Inspiron kernel: [12200.329942] ata5: SATA link down (SStatus 0 SControl 310)
+Sep  7 12:17:26 Inspiron kernel: [12200.329962] ata5: EH complete
+Sep  7 12:17:34 Inspiron kernel: [12207.921215] ata5: exception Emask 0x10 SAct 0x0 SErr 0x4000000 action 0xe frozen
+Sep  7 12:17:34 Inspiron kernel: [12207.921226] ata5: irq_stat 0x00000040, connection status changed
+Sep  7 12:17:34 Inspiron kernel: [12207.921234] ata5: SError: { DevExch }
+Sep  7 12:17:34 Inspiron kernel: [12207.921248] ata5: limiting SATA link speed to 1.5 Gbps
+Sep  7 12:17:34 Inspiron kernel: [12207.921257] ata5: hard resetting link
+Sep  7 12:17:34 Inspiron kernel: [12208.642044] ata5: SATA link down (SStatus 0 SControl 310)
+Sep  7 12:17:34 Inspiron kernel: [12208.642065] ata5: EH complete
+Sep  7 12:17:37 Inspiron kernel: [12211.809259] ata5: exception Emask 0x10 SAct 0x0 SErr 0x4000000 action 0xe frozen
+Sep  7 12:17:37 Inspiron kernel: [12211.809266] ata5: irq_stat 0x00000040, connection status changed
+Sep  7 12:17:37 Inspiron kernel: [12211.809270] ata5: SError: { DevExch }
+Sep  7 12:17:37 Inspiron kernel: [12211.809278] ata5: limiting SATA link speed to 1.5 Gbps
+Sep  7 12:17:37 Inspiron kernel: [12211.809282] ata5: hard resetting link
+Sep  7 12:17:38 Inspiron kernel: [12212.690102] ata5: SATA link down (SStatus 0 SControl 310)
+Sep  7 12:17:38 Inspiron kernel: [12212.690121] ata5: EH complete
+Sep  7 12:17:45 Inspiron kernel: [12218.923458] ata5: exception Emask 0x10 SAct 0x0 SErr 0x4000000 action 0xe frozen
+Sep  7 12:17:45 Inspiron kernel: [12218.923469] ata5: irq_stat 0x00000040, connection status changed
+Sep  7 12:17:45 Inspiron kernel: [12218.923475] ata5: SError: { DevExch }
+Sep  7 12:17:45 Inspiron kernel: [12218.923487] ata5: limiting SATA link speed to 1.5 Gbps
+Sep  7 12:17:45 Inspiron kernel: [12218.923495] ata5: hard resetting link
+Sep  7 12:17:45 Inspiron kernel: [12219.650201] ata5: SATA link down (SStatus 0 SControl 310)
+Sep  7 12:17:45 Inspiron kernel: [12219.650222] ata5: EH complete
+Sep  7 12:18:04 Inspiron NetworkManager[729]: <warn>  [1473221884.3894] dhcp4 (wlx7844769888f4): request timed out
+Sep  7 12:18:04 Inspiron NetworkManager[729]: <info>  [1473221884.3894] dhcp4 (wlx7844769888f4): state changed unknown -> timeout
+Sep  7 12:18:04 Inspiron NetworkManager[729]: <info>  [1473221884.4059] dhcp4 (wlx7844769888f4): canceled DHCP transaction, DHCP client pid 28613
+Sep  7 12:18:04 Inspiron NetworkManager[729]: <info>  [1473221884.4060] dhcp4 (wlx7844769888f4): state changed timeout -> done
+Sep  7 12:18:04 Inspiron NetworkManager[729]: <info>  [1473221884.4066] device (wlx7844769888f4): state change: ip-config -> failed (reason 'ip-config-unavailable') [70 120 5]
+Sep  7 12:18:04 Inspiron NetworkManager[729]: <warn>  [1473221884.4076] device (wlx7844769888f4): Activation: failed for connection 'CC Plus Free WIFI 1'
+Sep  7 12:18:04 Inspiron NetworkManager[729]: <info>  [1473221884.4083] device (wlx7844769888f4): state change: failed -> disconnected (reason 'none') [120 30 0]
+Sep  7 12:18:04 Inspiron NetworkManager[729]: <info>  [1473221884.4203] policy: auto-activating connection 'CC Plus Free WIFI 1'
+Sep  7 12:18:04 Inspiron NetworkManager[729]: <info>  [1473221884.4218] device (wlx7844769888f4): Activation: starting connection 'CC Plus Free WIFI 1' (35d5a0b3-03c6-41c1-9c94-415826919ada)
+Sep  7 12:18:04 Inspiron kernel: [12238.294400] wlx7844769888f4: deauthenticating from 90:17:ac:c1:0b:00 by local choice (Reason: 3=DEAUTH_LEAVING)
+Sep  7 12:18:04 Inspiron NetworkManager[729]: <info>  [1473221884.4274] device (wlx7844769888f4): state change: disconnected -> prepare (reason 'none') [30 40 0]
+Sep  7 12:18:04 Inspiron NetworkManager[729]: <info>  [1473221884.4344] device (wlx7844769888f4): state change: prepare -> config (reason 'none') [40 50 0]
+Sep  7 12:18:04 Inspiron NetworkManager[729]: <info>  [1473221884.4399] device (wlx7844769888f4): Activation: (wifi) connection 'CC Plus Free WIFI 1' requires no security.  No secrets needed.
+Sep  7 12:18:04 Inspiron NetworkManager[729]: <info>  [1473221884.4400] Config: added 'ssid' value 'CC Plus Free WIFI'
+Sep  7 12:18:04 Inspiron NetworkManager[729]: <info>  [1473221884.4400] Config: added 'scan_ssid' value '1'
+Sep  7 12:18:04 Inspiron NetworkManager[729]: <info>  [1473221884.4400] Config: added 'key_mgmt' value 'NONE'
+Sep  7 12:18:04 Inspiron NetworkManager[729]: <warn>  [1473221884.4431] sup-iface[0xc46790,wlx7844769888f4]: connection disconnected (reason -3)
+Sep  7 12:18:04 Inspiron NetworkManager[729]: <info>  [1473221884.4438] device (wlx7844769888f4): supplicant interface state: completed -> disconnected
+Sep  7 12:18:04 Inspiron NetworkManager[729]: <info>  [1473221884.4503] sup-iface[0xc46790,wlx7844769888f4]: config: set interface ap_scan to 1
+Sep  7 12:18:05 Inspiron kernel: [12239.151345] wlx7844769888f4: authenticate with 90:17:ac:c1:0b:00
+Sep  7 12:18:05 Inspiron kernel: [12239.173648] wlx7844769888f4: send auth to 90:17:ac:c1:0b:00 (try 1/3)
+Sep  7 12:18:05 Inspiron kernel: [12239.180655] wlx7844769888f4: authenticated
+Sep  7 12:18:05 Inspiron NetworkManager[729]: <info>  [1473221885.3117] device (wlx7844769888f4): supplicant interface state: disconnected -> authenticating
+Sep  7 12:18:05 Inspiron kernel: [12239.182963] wlx7844769888f4: associate with 90:17:ac:c1:0b:00 (try 1/3)
+Sep  7 12:18:05 Inspiron NetworkManager[729]: <info>  [1473221885.3184] device (wlx7844769888f4): supplicant interface state: authenticating -> associating
+Sep  7 12:18:05 Inspiron kernel: [12239.190607] wlx7844769888f4: RX AssocResp from 90:17:ac:c1:0b:00 (capab=0x1421 status=0 aid=1)
+Sep  7 12:18:05 Inspiron kernel: [12239.192719] wlx7844769888f4: associated
+Sep  7 12:18:05 Inspiron NetworkManager[729]: <info>  [1473221885.3284] device (wlx7844769888f4): supplicant interface state: associating -> completed
+Sep  7 12:18:05 Inspiron NetworkManager[729]: <info>  [1473221885.3285] device (wlx7844769888f4): Activation: (wifi) Stage 2 of 5 (Device Configure) successful.  Connected to wireless network 'CC Plus Free WIFI'.
+Sep  7 12:18:05 Inspiron NetworkManager[729]: <info>  [1473221885.3290] device (wlx7844769888f4): state change: config -> ip-config (reason 'none') [50 70 0]
+Sep  7 12:18:05 Inspiron NetworkManager[729]: <info>  [1473221885.3297] dhcp4 (wlx7844769888f4): activation: beginning transaction (timeout in 45 seconds)
+Sep  7 12:18:05 Inspiron NetworkManager[729]: <info>  [1473221885.3363] dhcp4 (wlx7844769888f4): dhclient started with pid 28630
+Sep  7 12:18:05 Inspiron kernel: [12239.386161] wlx7844769888f4: Limiting TX power to 20 (20 - 0) dBm as advertised by 90:17:ac:c1:0b:00
+Sep  7 12:18:50 Inspiron NetworkManager[729]: <warn>  [1473221930.3914] dhcp4 (wlx7844769888f4): request timed out
+Sep  7 12:18:50 Inspiron NetworkManager[729]: <info>  [1473221930.3915] dhcp4 (wlx7844769888f4): state changed unknown -> timeout
+Sep  7 12:18:50 Inspiron NetworkManager[729]: <info>  [1473221930.4240] dhcp4 (wlx7844769888f4): canceled DHCP transaction, DHCP client pid 28630
+Sep  7 12:18:50 Inspiron NetworkManager[729]: <info>  [1473221930.4240] dhcp4 (wlx7844769888f4): state changed timeout -> done
+Sep  7 12:18:50 Inspiron NetworkManager[729]: <info>  [1473221930.4245] device (wlx7844769888f4): state change: ip-config -> failed (reason 'ip-config-unavailable') [70 120 5]
+Sep  7 12:18:50 Inspiron NetworkManager[729]: <info>  [1473221930.4250] policy: disabling autoconnect for connection 'CC Plus Free WIFI 1'.
+Sep  7 12:18:50 Inspiron NetworkManager[729]: <warn>  [1473221930.4253] device (wlx7844769888f4): Activation: failed for connection 'CC Plus Free WIFI 1'
+Sep  7 12:18:50 Inspiron NetworkManager[729]: <info>  [1473221930.4265] device (wlx7844769888f4): state change: failed -> disconnected (reason 'none') [120 30 0]
+Sep  7 12:18:50 Inspiron NetworkManager[729]: <info>  [1473221930.4331] policy: auto-activating connection 'CC+2016'
+Sep  7 12:18:50 Inspiron NetworkManager[729]: <info>  [1473221930.4347] device (wlx7844769888f4): Activation: starting connection 'CC+2016' (98bcfbb0-5b76-43f3-ab46-087705f49fdd)
+Sep  7 12:18:50 Inspiron NetworkManager[729]: <info>  [1473221930.4349] device (wlx7844769888f4): state change: disconnected -> prepare (reason 'none') [30 40 0]
+Sep  7 12:18:50 Inspiron kernel: [12284.308336] wlx7844769888f4: deauthenticating from 90:17:ac:c1:0b:00 by local choice (Reason: 3=DEAUTH_LEAVING)
+Sep  7 12:18:50 Inspiron NetworkManager[729]: <info>  [1473221930.4373] device (wlx7844769888f4): state change: prepare -> config (reason 'none') [40 50 0]
+Sep  7 12:18:50 Inspiron NetworkManager[729]: <info>  [1473221930.4542] device (wlx7844769888f4): Activation: (wifi) connection 'CC+2016' requires no security.  No secrets needed.
+Sep  7 12:18:50 Inspiron NetworkManager[729]: <info>  [1473221930.4543] Config: added 'ssid' value 'CC+2016'
+Sep  7 12:18:50 Inspiron NetworkManager[729]: <info>  [1473221930.4543] Config: added 'scan_ssid' value '1'
+Sep  7 12:18:50 Inspiron NetworkManager[729]: <info>  [1473221930.4543] Config: added 'key_mgmt' value 'NONE'
+Sep  7 12:18:50 Inspiron NetworkManager[729]: <warn>  [1473221930.4638] sup-iface[0xc46790,wlx7844769888f4]: connection disconnected (reason -3)
+Sep  7 12:18:50 Inspiron NetworkManager[729]: <info>  [1473221930.4640] device (wlx7844769888f4): supplicant interface state: completed -> disconnected
+Sep  7 12:18:50 Inspiron NetworkManager[729]: <info>  [1473221930.4642] sup-iface[0xc46790,wlx7844769888f4]: config: set interface ap_scan to 1
+Sep  7 12:18:51 Inspiron NetworkManager[729]: <info>  [1473221931.4794] device (wlx7844769888f4): supplicant interface state: disconnected -> scanning
+Sep  7 12:18:54 Inspiron kernel: [12288.762512] [sk_forced_mem_schedule]sk_forward_alloc:0,size:1280,amt:1,SK_MEM_QUANTUM:4096
+Sep  7 12:18:54 Inspiron kernel: [12288.762517] [sk_mem_charge]sk_forward_alloc:2816,size:1280
+Sep  7 12:18:54 Inspiron kernel: [12288.762520] [__tcp_push_pending_frames]cur_mss:1478,timeer:51
+Sep  7 12:18:54 Inspiron kernel: [12288.762522] [tcp_write_xmit] seq:826000926,tso_segs:1,push_one:0,qlen:1 
+Sep  7 12:18:54 Inspiron kernel: [12288.762525] [tcp_transmit_skb] seq:826000926, end_seq:826000927, pcount:1,pid:28482,uid:0 
+Sep  7 12:18:54 Inspiron kernel: [12288.798989] [tcp_v4_rcv] seq:1403444570,len:0,pid:3045,uid:1000,sk_state:4,sk_addr:ffff880071e06900
+Sep  7 12:18:54 Inspiron kernel: [12288.799001] [tcp_rcv_state_process] sk_state:4,seq:1403444570,end_seq:1403444570,len:32,data_len:0,truesize:2 
+Sep  7 12:18:54 Inspiron kernel: [12288.799008] [sk_mem_uncharge]sk_forward_alloc:4096,size:1280
+Sep  7 12:18:54 Inspiron kernel: [12288.799026] [__sk_mem_reclaim]sk_forward_alloc:0,amount:1,SK_MEM_QUANTUM_SHIFT:12

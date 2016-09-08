@@ -1,0 +1,119 @@
+Sep  4 12:08:58 Inspiron kernel: [ 9649.925455] [tcp_v4_rcv] seq:47049,len:1150,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.925466] [tcp_rcv_established]sk_forward_alloc:0,seq:47049,end_seq:48199,len:1182,data_len:0,truesize:2304 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.925475] [sk_forced_mem_schedule]sk_forward_alloc:0,size:2304,amt:1,SK_MEM_QUANTUM:4096
+Sep  4 12:08:58 Inspiron kernel: [ 9649.925483] [sk_mem_charge]sk_forward_alloc:1792,size:2304
+Sep  4 12:08:58 Inspiron kernel: [ 9649.925491] [tcp_transmit_skb] seq:1013632433, end_seq:1013632433, pcount:1,pid:20457,uid:0 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.925768] [tcp_v4_rcv] seq:48199,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.925774] [tcp_rcv_established]sk_forward_alloc:1792,seq:48199,end_seq:48219,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.925777] [sk_mem_charge]sk_forward_alloc:1792,size:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.925781] [tcp_send_delayed_ack]ato:40000, rcv_nxt:48219, snd_nxt:1013632433 timeout:4297304625
+Sep  4 12:08:58 Inspiron kernel: [ 9649.925911] [tcp_v4_rcv] seq:48219,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.925916] [tcp_rcv_established]sk_forward_alloc:1792,seq:48219,end_seq:48239,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.925919] [sk_mem_charge]sk_forward_alloc:1792,size:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.925925] [tcp_send_delayed_ack]ato:40000, rcv_nxt:48239, snd_nxt:1013632433 timeout:4297304625
+Sep  4 12:08:58 Inspiron kernel: [ 9649.925973] [tcp_v4_rcv] seq:48239,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.925976] [tcp_rcv_established]sk_forward_alloc:1792,seq:48239,end_seq:48259,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.925978] [sk_mem_charge]sk_forward_alloc:1792,size:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.925980] [tcp_send_delayed_ack]ato:40000, rcv_nxt:48259, snd_nxt:1013632433 timeout:4297304625
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926023] [tcp_v4_rcv] seq:48259,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926026] [tcp_rcv_established]sk_forward_alloc:1792,seq:48259,end_seq:48279,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926028] [sk_mem_charge]sk_forward_alloc:1792,size:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926030] [tcp_send_delayed_ack]ato:40000, rcv_nxt:48279, snd_nxt:1013632433 timeout:4297304625
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926071] [tcp_v4_rcv] seq:48279,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926074] [tcp_rcv_established]sk_forward_alloc:1792,seq:48279,end_seq:48299,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926075] [sk_mem_charge]sk_forward_alloc:1792,size:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926078] [tcp_send_delayed_ack]ato:40000, rcv_nxt:48299, snd_nxt:1013632433 timeout:4297304625
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926119] [tcp_v4_rcv] seq:48299,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926122] [tcp_rcv_established]sk_forward_alloc:1792,seq:48299,end_seq:48319,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926123] [sk_mem_charge]sk_forward_alloc:1792,size:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926126] [tcp_send_delayed_ack]ato:40000, rcv_nxt:48319, snd_nxt:1013632433 timeout:4297304625
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926168] [tcp_v4_rcv] seq:48319,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926171] [tcp_rcv_established]sk_forward_alloc:1792,seq:48319,end_seq:48339,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926173] [sk_mem_charge]sk_forward_alloc:1792,size:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926175] [tcp_send_delayed_ack]ato:40000, rcv_nxt:48339, snd_nxt:1013632433 timeout:4297304625
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926216] [tcp_v4_rcv] seq:48339,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926219] [tcp_rcv_established]sk_forward_alloc:1792,seq:48339,end_seq:48359,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926221] [sk_mem_charge]sk_forward_alloc:1792,size:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926223] [tcp_send_delayed_ack]ato:40000, rcv_nxt:48359, snd_nxt:1013632433 timeout:4297304625
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926429] [tcp_v4_rcv] seq:48359,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926435] [tcp_rcv_established]sk_forward_alloc:1792,seq:48359,end_seq:48379,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926443] [sk_mem_charge]sk_forward_alloc:1792,size:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926447] [tcp_send_delayed_ack]ato:40000, rcv_nxt:48379, snd_nxt:1013632433 timeout:4297304625
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926542] [tcp_v4_rcv] seq:48379,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926548] [tcp_rcv_established]sk_forward_alloc:1792,seq:48379,end_seq:48399,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926551] [sk_mem_charge]sk_forward_alloc:1792,size:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926555] [tcp_send_delayed_ack]ato:40000, rcv_nxt:48399, snd_nxt:1013632433 timeout:4297304625
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926655] [tcp_v4_rcv] seq:48399,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926660] [tcp_rcv_established]sk_forward_alloc:1792,seq:48399,end_seq:48419,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926663] [sk_mem_charge]sk_forward_alloc:1792,size:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926666] [tcp_send_delayed_ack]ato:40000, rcv_nxt:48419, snd_nxt:1013632433 timeout:4297304625
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926760] [tcp_v4_rcv] seq:48419,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926765] [tcp_rcv_established]sk_forward_alloc:1792,seq:48419,end_seq:48439,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926768] [sk_mem_charge]sk_forward_alloc:1792,size:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926772] [tcp_send_delayed_ack]ato:40000, rcv_nxt:48439, snd_nxt:1013632433 timeout:4297304625
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926865] [tcp_v4_rcv] seq:48439,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926870] [tcp_rcv_established]sk_forward_alloc:1792,seq:48439,end_seq:48459,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926873] [sk_mem_charge]sk_forward_alloc:1792,size:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926876] [tcp_send_delayed_ack]ato:40000, rcv_nxt:48459, snd_nxt:1013632433 timeout:4297304625
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926973] [tcp_v4_rcv] seq:48459,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926978] [tcp_rcv_established]sk_forward_alloc:1792,seq:48459,end_seq:48479,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926981] [sk_mem_charge]sk_forward_alloc:1792,size:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.926984] [tcp_send_delayed_ack]ato:40000, rcv_nxt:48479, snd_nxt:1013632433 timeout:4297304625
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927077] [tcp_v4_rcv] seq:48479,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927082] [tcp_rcv_established]sk_forward_alloc:1792,seq:48479,end_seq:48499,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927085] [sk_mem_charge]sk_forward_alloc:1792,size:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927088] [tcp_send_delayed_ack]ato:40000, rcv_nxt:48499, snd_nxt:1013632433 timeout:4297304625
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927179] [tcp_v4_rcv] seq:48499,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927184] [tcp_rcv_established]sk_forward_alloc:1792,seq:48499,end_seq:48519,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927187] [sk_mem_charge]sk_forward_alloc:1792,size:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927190] [tcp_send_delayed_ack]ato:40000, rcv_nxt:48519, snd_nxt:1013632433 timeout:4297304625
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927281] [tcp_v4_rcv] seq:48519,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927286] [tcp_rcv_established]sk_forward_alloc:1792,seq:48519,end_seq:48539,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927289] [sk_mem_charge]sk_forward_alloc:1792,size:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927292] [tcp_send_delayed_ack]ato:40000, rcv_nxt:48539, snd_nxt:1013632433 timeout:4297304625
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927383] [tcp_v4_rcv] seq:48539,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927388] [tcp_rcv_established]sk_forward_alloc:1792,seq:48539,end_seq:48559,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927391] [sk_mem_charge]sk_forward_alloc:1792,size:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927394] [tcp_send_delayed_ack]ato:40000, rcv_nxt:48559, snd_nxt:1013632433 timeout:4297304625
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927486] [tcp_v4_rcv] seq:48559,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927491] [tcp_rcv_established]sk_forward_alloc:1792,seq:48559,end_seq:48579,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927494] [sk_mem_charge]sk_forward_alloc:1792,size:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927497] [tcp_send_delayed_ack]ato:40000, rcv_nxt:48579, snd_nxt:1013632433 timeout:4297304625
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927590] [tcp_v4_rcv] seq:48579,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927595] [tcp_rcv_established]sk_forward_alloc:1792,seq:48579,end_seq:48599,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927598] [sk_mem_charge]sk_forward_alloc:1792,size:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927601] [tcp_send_delayed_ack]ato:40000, rcv_nxt:48599, snd_nxt:1013632433 timeout:4297304625
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927694] [tcp_v4_rcv] seq:48599,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927699] [tcp_rcv_established]sk_forward_alloc:1792,seq:48599,end_seq:48619,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927702] [sk_mem_charge]sk_forward_alloc:1792,size:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927706] [tcp_send_delayed_ack]ato:40000, rcv_nxt:48619, snd_nxt:1013632433 timeout:4297304625
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927800] [tcp_v4_rcv] seq:48619,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927805] [tcp_rcv_established]sk_forward_alloc:1792,seq:48619,end_seq:48639,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927809] [sk_mem_charge]sk_forward_alloc:1792,size:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927812] [tcp_send_delayed_ack]ato:40000, rcv_nxt:48639, snd_nxt:1013632433 timeout:4297304625
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927906] [tcp_v4_rcv] seq:48639,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927911] [tcp_rcv_established]sk_forward_alloc:1792,seq:48639,end_seq:48659,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927914] [sk_mem_charge]sk_forward_alloc:1792,size:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.927917] [tcp_send_delayed_ack]ato:40000, rcv_nxt:48659, snd_nxt:1013632433 timeout:4297304625
+Sep  4 12:08:58 Inspiron kernel: [ 9649.928010] [tcp_v4_rcv] seq:48659,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.928015] [tcp_rcv_established]sk_forward_alloc:1792,seq:48659,end_seq:48679,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.928018] [sk_mem_charge]sk_forward_alloc:1792,size:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.928022] [tcp_send_delayed_ack]ato:40000, rcv_nxt:48679, snd_nxt:1013632433 timeout:4297304625
+Sep  4 12:08:58 Inspiron kernel: [ 9649.928167] [tcp_v4_rcv] seq:48679,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.928175] [tcp_rcv_established]sk_forward_alloc:1792,seq:48679,end_seq:48699,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.928187] [sk_mem_charge]sk_forward_alloc:1792,size:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.928193] [tcp_send_delayed_ack]ato:40000, rcv_nxt:48699, snd_nxt:1013632433 timeout:4297304626
+Sep  4 12:08:58 Inspiron kernel: [ 9649.928244] [tcp_v4_rcv] seq:48699,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.928248] [tcp_rcv_established]sk_forward_alloc:1792,seq:48699,end_seq:48719,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.928250] [sk_mem_charge]sk_forward_alloc:1024,size:768
+Sep  4 12:08:58 Inspiron kernel: [ 9649.928253] [tcp_send_delayed_ack]ato:40000, rcv_nxt:48719, snd_nxt:1013632433 timeout:4297304626
+Sep  4 12:08:58 Inspiron kernel: [ 9649.928299] [tcp_v4_rcv] seq:48719,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.928302] [tcp_rcv_established]sk_forward_alloc:1024,seq:48719,end_seq:48739,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.928306] [sk_mem_charge]sk_forward_alloc:256,size:768
+Sep  4 12:08:58 Inspiron kernel: [ 9649.928308] [tcp_send_delayed_ack]ato:40000, rcv_nxt:48739, snd_nxt:1013632433 timeout:4297304626
+Sep  4 12:08:58 Inspiron kernel: [ 9649.928354] [tcp_v4_rcv] seq:48739,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.928357] [tcp_rcv_established]sk_forward_alloc:256,seq:48739,end_seq:48759,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.928364] [tcp_transmit_skb] seq:1013632433, end_seq:1013632433, pcount:1,pid:20457,uid:0 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.928420] [tcp_v4_rcv] seq:48759,len:20,pid:20457,uid:0
+Sep  4 12:08:58 Inspiron kernel: [ 9649.928424] [tcp_rcv_established]sk_forward_alloc:256,seq:48759,end_seq:48779,len:52,data_len:0,truesize:768 
+Sep  4 12:08:58 Inspiron kernel: [ 9649.928429] [tcp_transmit_skb] seq:1013632433, end_seq:1013632433, pcount:1,pid:20457,uid:0 

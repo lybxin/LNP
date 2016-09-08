@@ -113,6 +113,29 @@ struct tcp_info_user
 	u_int32_t   tlp_high_seq;
 	
 	
+	//user define 3
+    int32_t   sk_rcvbuf;
+	int32_t   sk_rmem_alloc_i;
+	int32_t   sk_sndbuf;
+	int32_t   sk_wmem_alloc;
+	int32_t   sk_omem_alloc;
+	int32_t   sk_wmem_queued;
+
+	u_int32_t   window_clamp;
+
+	int32_t   space;
+	u_int32_t   seq;
+	u_int16_t   skblen;
+	u_int16_t   sslen;
+	
+	//user define 4
+    u_int8_t   quick;
+    u_int8_t   pingpong;
+	u_int8_t   pending;
+	u_int8_t   rsv;
+	
+	u_int32_t  lrcvtime;
+	int32_t  sk_forward_alloc;
 	
 };
 

@@ -26,7 +26,6 @@ int main()
     int len,val;
     int last_in = 0,last_out = 0,i = 0;
     struct tcp_info_user info;
-    struct timespec;
     socklen_t clilen;
     struct sockaddr_in cliaddr, servaddr;
     char writebuf[TRANSSIZE];

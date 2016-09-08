@@ -51,7 +51,23 @@ void printftcpinfo(struct tcp_info_user *info)
             info->probe_size,info->nonagle,info->thin_lto,info->thin_dupack,
             info->repair,info->frto,info->rack_advanced,info->rack_reord);        
    
-    printf("retrans_stamp:%u,undo_marker:%u,undo_retrans:%u,tlp_high_seq:%u\n",
-            info->retrans_stamp,info->undo_marker,info->undo_retrans,info->tlp_high_seq);         
-   
+    printf("retrans_stamp:%u,undo_marker:%u,undo_retrans:%u,tlp_high_seq:%u,window_clamp:%u,seq:%u,skblen:%u,sslen:%u\n",
+            info->retrans_stamp,info->undo_marker,info->undo_retrans,
+            info->tlp_high_seq,info->window_clamp,info->seq,info->skblen,info->sslen); 
+            
+    printf("sk_rcvbuf:%d,sk_rmem_alloc:%d,sk_sndbuf:%d,sk_wmem_alloc:%d,sk_omem_alloc:%d,sk_wmem_queued:%d,space:%d\n",
+            info->sk_rcvbuf,info->sk_rmem_alloc_i,info->sk_sndbuf,info->sk_wmem_alloc,info->sk_omem_alloc,
+            info->sk_wmem_queued,info->space);                 
+    printf("quick:%u,pingpong:%u,pending:%u,lrcvtime:%u,sk_forward_alloc:%d\n",
+            info->quick,info->pingpong,info->pending,info->lrcvtime,info->sk_forward_alloc);
 }
+
+
+
+
+
+
+
+
+
+

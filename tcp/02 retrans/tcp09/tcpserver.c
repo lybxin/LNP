@@ -3,22 +3,6 @@
 #include "../../common/rawops.h"
 #include "../../common/tcp_private.h"
 
-/*
-void printinfo(struct tcp_info_user *info)
-{
-    printf("--------------------------------------------------------------------------\n");
-    printf("tcpi_segs_in:%u,tcpi_segs_out:%u\n",info->tcpi_segs_in,info->tcpi_segs_out);
-    printf("tcpi_unacked(packets_out):%u,tcpi_sacked:%u,tcpi_lost:%u,tcpi_fackets:%u,tcpi_retrans:%u\n",
-            info->tcpi_unacked,info->tcpi_sacked,info->tcpi_lost,info->tcpi_fackets,info->tcpi_retrans);
-    printf("tcpi_ca_state:%u,tcpi_rto:%u,tcpi_reordering:%u,rcv_nxt:%u,rcv_wup:%u,snd_nxt:%u,rcv_wnd:%u\n",
-            info->tcpi_ca_state,info->tcpi_rto,info->tcpi_reordering,
-            info->rcv_nxt,info->rcv_wup,info->snd_nxt,info->rcv_wnd);
-    printf("gso_segs:%u,tcp_header_len:%u,pred_flags:%u,snd_una:%u,snd_wl1:%u,snd_wnd:%u,tcpi_snd_cwnd:%u\n",
-            info->gso_segs,info->tcp_header_len,info->pred_flags,
-            info->snd_una,info->snd_wl1,info->snd_wnd,info->tcpi_snd_cwnd);
-    
-}
-*/
 
 int main()
 {
@@ -26,7 +10,6 @@ int main()
     int len,val;
     int last_in = 0,last_out = 0,i = 0;
     struct tcp_info_user info;
-    struct timespec;
     socklen_t clilen;
     struct sockaddr_in cliaddr, servaddr;
     char writebuf[TRANSSIZE];

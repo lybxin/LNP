@@ -7,10 +7,12 @@ typedef unsigned short u16;
 typedef unsigned int u32;
 
 extern u32 recvacknumber;
-extern u16 tcpseq;
+extern u32 recvseqnumber;
+extern u32 tcpseq;
 extern u32 senddelay;
 extern u32 sackblknum;
 extern u16 mssval;
+extern u16 tcpwz;
 extern char srcip[];
 extern char dstip[];
 

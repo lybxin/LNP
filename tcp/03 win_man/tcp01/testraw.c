@@ -12,24 +12,28 @@ void *send_function(void *arg);
 void *send_function(void *arg)
 {
     int sockfd, tot_len;
-    //u16 lostseq1;//,lostseq2,lostseq3,lostseq4;
-    unsigned char buffer[MAX_PKT_SIZE] = {"hello\n\0"};
+    int i=0;
+    unsigned char buffer[MAX_PKT_SIZE] = {"welcome to linux hello\0"};
     
     sockfd = *( (int*)arg );
     
+    
+    senddelay = 0;
+    
+    /*
     //处理数据发送和业务逻辑
     tot_len = builddatapkt(buffer, recvacknumber,  strlen((const char *)buffer));
     rawsend(sockfd, buffer, tot_len);
     sleep_ms(10);
     
-    snprintf((char *)buffer,TRANSSIZE,"world01");
-    tot_len = builddatapkt(buffer, recvacknumber,  strlen((const char *)buffer));
+    snprintf((char *)buffer,MAX_PKT_SIZE,"welcome to linux hello");
+    tot_len = builddatapkt(buffer, recvacknumber,  strlen((const char *)buffer)+5);
     rawsend(sockfd, buffer, tot_len);
     sleep_ms(10);
     
     
     snprintf((char *)buffer,TRANSSIZE,"world02");
-    tot_len = builddatapkt(buffer, recvacknumber,  strlen((const char *)buffer)*2);
+    tot_len = builddatapkt(buffer, recvacknumber,  strlen((const char *)buffer));
     rawsend(sockfd, buffer, tot_len);
     sleep_ms(10);
     
@@ -49,7 +53,61 @@ void *send_function(void *arg)
     tot_len = builddatapkt(buffer, recvacknumber,  strlen((const char *)buffer));
     rawsend(sockfd, buffer, tot_len);
     sleep_ms(10);
+    */
     
+    for(i=0;i<24;i++)
+    {
+        snprintf((char *)buffer,MAX_PKT_SIZE,"welcome to linux hello");
+        tot_len = builddatapkt(buffer, recvacknumber,  40);
+        rawsend(sockfd, buffer, tot_len);
+        sleep_ms(10);
+    }
+    
+    for(i=0;i<10;i++)
+    {
+        snprintf((char *)buffer,MAX_PKT_SIZE,"hello world");
+        tot_len = builddatapkt(buffer, recvacknumber,  20);
+        rawsend(sockfd, buffer, tot_len);
+        sleep_ms(3);
+    }
+    
+    snprintf((char *)buffer,MAX_PKT_SIZE,"welcome to linux hello");
+    tot_len = builddatapkt(buffer, recvacknumber,  150);
+    rawsend(sockfd, buffer, tot_len);
+    for(i=0;i<10;i++)
+    {
+        snprintf((char *)buffer,MAX_PKT_SIZE,"welcome to linux hello");
+        tot_len = builddatapkt(buffer, recvacknumber,  40);
+        rawsend(sockfd, buffer, tot_len);
+        sleep_ms(3);
+    }
+    
+    
+    for(i=0;i<6;i++)
+    {
+        snprintf((char *)buffer,MAX_PKT_SIZE,"welcome to linux hello");
+        tot_len = builddatapkt(buffer, recvacknumber,  30);
+        rawsend(sockfd, buffer, tot_len);
+        sleep_ms(16);
+    }
+    
+    for(i=0;i<6;i++)
+    {
+        snprintf((char *)buffer,MAX_PKT_SIZE,"welcome to linux hello");
+        tot_len = builddatapkt(buffer, recvacknumber,  29);
+        rawsend(sockfd, buffer, tot_len);
+        sleep_ms(14);
+    }
+
+    sleep_ms(5*1000);
+    
+    for(i=0;i<30;i++)
+    {
+        snprintf((char *)buffer,MAX_PKT_SIZE,"world02");
+        tot_len = builddatapkt(buffer, recvacknumber,  40);
+        rawsend(sockfd, buffer, tot_len);
+        sleep_ms(10);
+    }
 
     
     sleep(300);
@@ -106,13 +164,15 @@ int main(int argc, char **argv)
     senddelay = 500;
     
     //connect前设置mss为200
-    mssval = (150+12);
+    mssval = (50+12);
 
     sockfd = Socket(AF_INET, SOCK_RAW, IPPROTO_TCP);
   
     
     initrawops(sockfd);
+    printf("---------before conn setup-------------\n");
     rawconnect(sockfd);
+    printf("---------conn setup-------------\n");
     //sleep(50);
     
 

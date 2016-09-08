@@ -1,0 +1,10 @@
+TCP滑窗外数据与慢速路径、快速路径交互   《13 win&slowpath》《14 win&fastpath》  
+1、slowpath 改变tcpwz大小后进入慢速路径 立即触发零窗ACK回复
+2、fastpath 注释掉if条件 一直在快速路径  直到预分配的内存用光或者延迟ACK超时才会触发零窗ACK
+
+
+
+
+
+
+

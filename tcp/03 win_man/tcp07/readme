@@ -1,0 +1,8 @@
+linux client和server 零窗和persist定时器
+
+设置tcp_retries2=6,tcp_invalid_ratelimit=1200
+
+
+
+
+

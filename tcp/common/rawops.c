@@ -3,7 +3,7 @@
 
 
 u16 ipid = 3289;
-u16 tcpseq = 8156;
+u32 tcpseq = 8156;
 //u32 inittsval = 4581;
 u16 mssval = 1460;
 u16 tcpwz = 4096;
@@ -11,6 +11,7 @@ u16 tcpwz = 4096;
 
 u32 recvtsval = 0;
 u32 recvacknumber = 0;
+u32 recvseqnumber = 0;
 
 //SACK相关信息
 #define MAX_SACK_BLK 4
@@ -183,7 +184,7 @@ void filliphdr(struct iphdr *iph, u16 tot_len)
     iph->saddr = inet_addr(srcip); 
     iph->daddr = inet_addr(dstip);;
     
-    iph->check = htons(csum ((unsigned short *) iph, ntohs(iph->tot_len)*4));
+    iph->check = htons(csum ((unsigned short *) iph, ntohs(iph->tot_len)));
 }
 
 //头长doff check  确保optlen四字节对齐
@@ -493,6 +494,8 @@ void updaterecvstate(u8 *buffer, u16 recvlen,u32 flag)
     
     datalen = recvlen - iph->ihl*4 - th->doff*4;
     recvacknumber = ntohl(th->seq) + th->syn + th->fin + datalen;
+
+	recvseqnumber = ntohl(th->ack_seq);
 
 
 	if( (flag & TCP_SACKOPT) && (recvacknumber > ntohl(th->seq)) &&(recvacknumber > sackblock[startidx][1]) )
