@@ -58,8 +58,9 @@ void printftcpinfo(struct tcp_info_user *info)
     printf("sk_rcvbuf:%d,sk_rmem_alloc:%d,sk_sndbuf:%d,sk_wmem_alloc:%d,sk_omem_alloc:%d,sk_wmem_queued:%d,space:%d\n",
             info->sk_rcvbuf,info->sk_rmem_alloc_i,info->sk_sndbuf,info->sk_wmem_alloc,info->sk_omem_alloc,
             info->sk_wmem_queued,info->space);                 
-    printf("quick:%u,pingpong:%u,pending:%u,lrcvtime:%u,sk_forward_alloc:%d\n",
-            info->quick,info->pingpong,info->pending,info->lrcvtime,info->sk_forward_alloc);
+    printf("quick:%u,pingpong:%u,pending:%u,lrcvtime:%u,sk_forward_alloc:%d,memory_allocated:%ld,caname:%s\n",
+            info->quick,info->pingpong,info->pending,info->lrcvtime,info->sk_forward_alloc,
+            info->memory_allocated,(char*)info->caname);
 }
 
 

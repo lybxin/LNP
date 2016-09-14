@@ -7,7 +7,8 @@ typedef unsigned short u16;
 typedef unsigned int u32;
 
 extern u32 recvacknumber;
-extern u32 recvseqnumber;
+extern u32 recvackseq;
+extern u32 recvseq;
 extern u32 tcpseq;
 extern u32 senddelay;
 extern u32 sackblknum;
@@ -39,6 +40,12 @@ u16 buildackpkt(u8 *buffer, u32 acknumber, u32 flag);
 void sleep_ms(int timeval);
 void resetsackblk();
 void appendsackblk(u32 blkbegin, u32 blkend);
+int adddelaylinktail(int remaintime, u32 acknumber);
+int popdelaylinkhead(struct timespec *timeout, u32 *acknumber);
+int peekacknumber();
+void sleep_abs_ms(struct timespec *req);
+u16 rawsendnodelay(int sockfd, u8 *buffer, u16 buflen);
+
 
 
 

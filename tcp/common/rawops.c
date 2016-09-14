@@ -1,5 +1,6 @@
 #include "common.h"
 #include "rawops.h"
+#include <pthread.h>   
 
 
 u16 ipid = 3289;
@@ -11,7 +12,8 @@ u16 tcpwz = 4096;
 
 u32 recvtsval = 0;
 u32 recvacknumber = 0;
-u32 recvseqnumber = 0;
+u32 recvseq = 0;
+u32 recvackseq = 0;
 
 //SACK相关信息
 #define MAX_SACK_BLK 4
@@ -27,6 +29,128 @@ u32 senddelay = 0;   //延迟发送报文 单位ms
 
 char srcip[32] = {"127.0.0.1"};
 char dstip[32] = {"127.0.0.1"};
+
+
+struct delay_node
+{
+    struct delay_node* next;
+	//int remaintime;
+	int acknumber;
+	struct timespec timeout;
+};
+
+
+struct delay_node headnode = {NULL,0};
+
+struct delay_node *delay_link_head = &headnode;
+struct delay_node *delay_link_tail = &headnode;
+pthread_mutex_t delaylinkmutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t  delaylinkcond = PTHREAD_COND_INITIALIZER;
+
+
+//remain's resolution is ms
+int adddelaylinktail(int remaintime, u32 acknumber)
+{
+    struct delay_node *p;
+	struct timespec req;
+    
+	p = malloc(sizeof(struct delay_node));
+
+	if(p==NULL)
+	{
+        return 0;
+	}
+
+	clock_gettime(CLOCK_MONOTONIC, &req);
+
+	if( (remaintime*1000*1000 + req.tv_nsec) < (1000*1000*1000) )
+	{
+        p->timeout.tv_nsec = remaintime*1000*1000 + req.tv_nsec;
+		p->timeout.tv_sec = req.tv_sec;
+	}else
+	{
+        p->timeout.tv_nsec = remaintime*1000*1000 + req.tv_nsec - (1000*1000*1000);
+		p->timeout.tv_sec = req.tv_sec + 1;
+	}
+	
+	p->next = NULL;
+	//p->remaintime = remaintime;
+	p->acknumber = acknumber;
+
+	pthread_mutex_lock(&delaylinkmutex);
+	delay_link_tail->next = p;
+	delay_link_tail = p;
+
+	if(delay_link_head->next == delay_link_tail)
+	{
+	    pthread_cond_signal(&delaylinkcond); 
+	}
+	pthread_mutex_unlock(&delaylinkmutex);
+
+	printf("[adddelaylinktail] acknumber:%u \n",acknumber);
+
+	return 1;
+
+}
+
+int popdelaylinkhead(struct timespec *timeout, u32 *acknumber)
+{
+    struct delay_node *p;
+
+	printf("[popdelaylinkhead] acknumber01:%u \n",*acknumber);
+
+	pthread_mutex_lock(&delaylinkmutex);
+
+	printf("[popdelaylinkhead] acknumber02:%u,next:%p\n",*acknumber,delay_link_head->next);
+	while(delay_link_head->next == NULL)
+	{
+         pthread_cond_wait(&delaylinkcond, &delaylinkmutex);
+	}
+	printf("[popdelaylinkhead] acknumber03:%u \n",*acknumber);
+	if(delay_link_head->next != NULL)
+	{
+	    p = delay_link_head->next;
+		delay_link_head->next = p->next;
+		timeout->tv_sec = p->timeout.tv_sec;
+		timeout->tv_nsec = p->timeout.tv_nsec;
+		*acknumber = p->acknumber;
+		if(delay_link_tail == p)
+		{
+		    delay_link_tail = delay_link_head;
+		}
+		free(p);
+		pthread_mutex_unlock(&delaylinkmutex);
+
+		printf("[popdelaylinkhead] acknumber:%u \n",*acknumber);
+		
+		return 1;
+	}
+	pthread_mutex_unlock(&delaylinkmutex);
+	return 0;
+
+}
+
+
+int peekacknumber()
+{
+    struct delay_node *p;
+	u32 acknumber = -1;
+
+	pthread_mutex_lock(&delaylinkmutex);
+	if(delay_link_head->next != NULL)
+	{
+	    p = delay_link_head->next;
+		delay_link_head->next = p->next;
+		acknumber = p->acknumber;
+		free(p);
+		pthread_mutex_unlock(&delaylinkmutex);
+		return acknumber;
+	}
+	pthread_mutex_unlock(&delaylinkmutex);
+	return recvacknumber;
+
+}
+
 
 
 struct pseudo_header
@@ -495,7 +619,8 @@ void updaterecvstate(u8 *buffer, u16 recvlen,u32 flag)
     datalen = recvlen - iph->ihl*4 - th->doff*4;
     recvacknumber = ntohl(th->seq) + th->syn + th->fin + datalen;
 
-	recvseqnumber = ntohl(th->ack_seq);
+	recvackseq = ntohl(th->ack_seq);
+	recvseq = ntohl(th->seq);
 
 
 	if( (flag & TCP_SACKOPT) && (recvacknumber > ntohl(th->seq)) &&(recvacknumber > sackblock[startidx][1]) )
@@ -655,15 +780,15 @@ void sleep_ms(int timeval)
 
 }
 
-u16 rawsend(int sockfd, u8 *buffer, u16 buflen)
+void sleep_abs_ms(struct timespec *req)
+{
+    clock_nanosleep(CLOCK_MONOTONIC,TIMER_ABSTIME,req,NULL);
+}
+
+u16 rawsendnodelay(int sockfd, u8 *buffer, u16 buflen)
 {
     u16 sendlen;
     
-    
-    if(senddelay > 0)
-    {
-        sleep_ms(senddelay);
-    }
     
     sendlen = Send(sockfd, buffer, buflen, 0);
     
@@ -674,6 +799,19 @@ u16 rawsend(int sockfd, u8 *buffer, u16 buflen)
                         
     return sendlen;
 }
+
+
+u16 rawsend(int sockfd, u8 *buffer, u16 buflen)
+{    
+    
+    if(senddelay > 0)
+    {
+        sleep_ms(senddelay);
+    }
+                    
+    return rawsendnodelay(sockfd, buffer, buflen);
+}
+
 
 
 //返回错误需要处理

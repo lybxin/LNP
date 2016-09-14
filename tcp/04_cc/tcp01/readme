@@ -1,0 +1,9 @@
+TCP窗口自动调整示例   DRS auto-tunning
+
+root@Inspiron:/home/lybxin/MyRes/LNP/wireshark# ip route change local 127.0.0.1 dev lo src 127.0.0.2
+root@Inspiron:/home/lybxin/MyRes/LNP/wireshark# ip route add local 127.0.0.2 dev lo advmss 2100
+root@Inspiron:/home/lybxin/MyRes/LNP/wireshark# echo 4096 8000 400000 > /proc/sys/net/ipv4/tcp_rmem
+
+
+
+

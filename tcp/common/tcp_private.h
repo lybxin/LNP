@@ -136,6 +136,11 @@ struct tcp_info_user
 	
 	u_int32_t  lrcvtime;
 	int32_t  sk_forward_alloc;
+
+    u_int32_t  rsv1;
+	long   memory_allocated;
+
+	u_int8_t   caname[8];
 	
 };
 
