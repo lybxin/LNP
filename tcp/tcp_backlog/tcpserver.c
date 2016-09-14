@@ -7,8 +7,9 @@
 #include<arpa/inet.h>  //hton* ntoh*
 #include<time.h>
 #include<sys/types.h>
-#include<sys/Socket.h>
+#include<sys/socket.h>
 #include "common.h"
+#include "../common/common.h"
 
 //void str_echo(int sockfd);
 

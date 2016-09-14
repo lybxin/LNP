@@ -29,7 +29,7 @@ void *recv_function(void *arg)
 {
 
     u32 lastacknumber;
-    int sockfd, tot_len;
+    int sockfd;
     unsigned char buffer[MAX_PKT_SIZE];
     
     //接收线程detach自己
@@ -46,7 +46,7 @@ void *recv_function(void *arg)
         if(lastacknumber != recvacknumber)
         {
             //acknumber发生变化  接收到了data 发送ACK
-            tot_len = buildackpkt(buffer,recvacknumber,TCP_TSOPT);
+            buildackpkt(buffer,recvacknumber,TCP_TSOPT);
             
             //rawsend(sockfd,buffer,tot_len);
             lastacknumber = recvacknumber;

@@ -4,9 +4,9 @@
 int main()
 {
     int Listenfd,connfd;
-    int len,val,lastrto=0,i=0;
+    int len,val;
     struct tcp_info info;
-    struct timespec req,remain;
+    struct timespec;
     socklen_t clilen;
     struct sockaddr_in cliaddr, servaddr;
     char writebuf[TRANSSIZE];

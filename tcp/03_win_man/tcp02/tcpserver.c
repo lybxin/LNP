@@ -10,7 +10,7 @@ int main()
     int Listenfd,connfd;
     socklen_t clilen;
     struct sockaddr_in cliaddr, servaddr;
-    int val,len,i=0,last_in = 0,last_out = 0;;
+    int len,i=0,last_in = 0,last_out = 0;;
     struct tcp_info_user info;
     char writebuf[TRANSSIZE];
     

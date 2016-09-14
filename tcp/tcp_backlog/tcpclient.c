@@ -1,11 +1,12 @@
 #include<stdio.h>
 #include<string.h>
-#include<sys/Socket.h>
+#include<sys/socket.h>
 #include<stdlib.h>
 #include<unistd.h>
 #include<arpa/inet.h>
 #include<time.h>
 #include "common.h"
+#include "../common/common.h"
 
 //void str_cli(FILE *fp,int sockfd);
 
