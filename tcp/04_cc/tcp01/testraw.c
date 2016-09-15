@@ -38,7 +38,7 @@ void *recv_function(void *arg)
 
     int sockfd;
     u16 recvlen,i = 0;
-    u32 rtoseq = 0;
+    u32 rtoseq = 0, rtocnt = 0, rto_i = 0;
     unsigned char buffer[MAX_PKT_SIZE];
     
     //接收线程detach自己
@@ -65,15 +65,31 @@ void *recv_function(void *arg)
             if(i==8)
             {
                 rtoseq = recvseq;
+                rtocnt = 3;
                 continue;
             }
             
-            //rto超时重新收到对应rtoseq系列号的数据包
-            if( i>8 && rtoseq == recvseq)
+            if( i==(rto_i+3) && rto_i>0 )
+            {
+                rtoseq = recvseq;
+                rtocnt = 2;
+                continue;
+            }
+            
+            if(rtoseq == recvseq)
+            {
+                rtocnt = rtocnt>0?rtocnt-1:0;
+                rto_i = i;
+            }
+            
+            if(rtocnt == 0)
             {
                 adddelaylinktail(50, recvacknumber);
                 continue;
             }
+            
+            
+
             
 
         } 

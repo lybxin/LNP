@@ -31,6 +31,32 @@ char srcip[32] = {"127.0.0.1"};
 char dstip[32] = {"127.0.0.1"};
 
 
+
+
+struct ofo_node
+{
+    struct ofo_node* next;
+	u32 startseq;
+	u32 endseq;
+};
+
+struct ofo_node ofohead = {0}
+struct ofo_node *ofo_link_head = &ofohead;
+struct ofo_node *ofo_link_tail = &ofohead;
+
+
+void insertofo(u32 startseq, u32 endseq)
+{
+    if
+
+
+}
+
+
+
+
+
+
 struct delay_node
 {
     struct delay_node* next;
@@ -40,7 +66,8 @@ struct delay_node
 };
 
 
-struct delay_node headnode = {NULL,0};
+
+struct delay_node headnode = {0};
 
 struct delay_node *delay_link_head = &headnode;
 struct delay_node *delay_link_tail = &headnode;
@@ -87,7 +114,6 @@ int adddelaylinktail(int remaintime, u32 acknumber)
 	}
 	pthread_mutex_unlock(&delaylinkmutex);
 
-	printf("[adddelaylinktail] acknumber:%u \n",acknumber);
 
 	return 1;
 
@@ -97,16 +123,13 @@ int popdelaylinkhead(struct timespec *timeout, u32 *acknumber)
 {
     struct delay_node *p;
 
-	printf("[popdelaylinkhead] acknumber01:%u \n",*acknumber);
-
 	pthread_mutex_lock(&delaylinkmutex);
 
-	printf("[popdelaylinkhead] acknumber02:%u,next:%p\n",*acknumber,delay_link_head->next);
 	while(delay_link_head->next == NULL)
 	{
          pthread_cond_wait(&delaylinkcond, &delaylinkmutex);
 	}
-	printf("[popdelaylinkhead] acknumber03:%u \n",*acknumber);
+
 	if(delay_link_head->next != NULL)
 	{
 	    p = delay_link_head->next;
@@ -120,8 +143,6 @@ int popdelaylinkhead(struct timespec *timeout, u32 *acknumber)
 		}
 		free(p);
 		pthread_mutex_unlock(&delaylinkmutex);
-
-		printf("[popdelaylinkhead] acknumber:%u \n",*acknumber);
 		
 		return 1;
 	}
