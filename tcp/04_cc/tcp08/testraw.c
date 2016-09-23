@@ -38,7 +38,7 @@ void *recv_function(void *arg)
 
     int sockfd;
     u16 recvlen,i = 0;
-    u32 rtoseq = 0, rtocnt = 0, ackflag =TCP_TSOPT;
+    u32 ackflag =TCP_TSOPT|TCP_TSADV;
     unsigned char buffer[MAX_PKT_SIZE];
     
     //接收线程detach自己
@@ -49,52 +49,27 @@ void *recv_function(void *arg)
     while(1)
     {       
         //等待接收ACK
+
         recvlen = rawadvrecv(sockfd, buffer, MAX_PKT_SIZE,TCP_SACKOPT);
-        
+
         //判断是否收到了需要回复ACK的报文
         if(containdata(buffer, recvlen))
         {   
             i++;
-
-            if(i < 8 )
+            if(i==3 || i==4 || i==5)
             {
-                adddelaylinktail(50, recvacknumber, ackflag);
                 continue;
             }
-            
-            if(i==8)
+            if(i==2)
             {
-                rtoseq = recvseq;
-                rtocnt = 3;
+                adddelaylinktail(55, recvacknumber-50,ackflag);
+                adddelaylinktail(60, recvacknumber-50,ackflag);
+                adddelaylinktail(65, recvacknumber-50,ackflag);
+                adddelaylinktail(67, recvacknumber+50*3,ackflag);
                 continue;
             }
-            /*原计划模拟第二次RTO超时
-            if( i==(rto_i+7) && rto_i>0 )
-            {
-                rtoseq = recvseq;
-                rtocnt = 2;
-                continue;
-            }
-            */
-            
-            if(rtoseq == recvseq)
-            {
-                rtocnt = rtocnt>0?rtocnt-1:0;
-                //rto_i = i;
-                resetsackblk();
-                del_ofo_link();
-                ackflag |= TCP_SACKOPT;
-                recvacknumber =recvendseq;
-            }
-            
-            if(rtocnt == 0)
-            {
-                adddelaylinktail(50, recvacknumber,ackflag);
-                continue;
-            }
-            
-            
-
+            //adddelaylinktail(50, recvacknumber,ackflag|TCP_SACKOPT);
+            adddelaylinktail(50, recvacknumber,ackflag);
             
 
         } 
@@ -123,9 +98,10 @@ void *ack_function(void *arg)
         
         //tot_len = buildackpkt(buffer,acknumber,flag|TCP_TSOPT);
         
-        //printf("-------tot_len:%u-----\n",tot_len);
+        printf("[ack_function]-------tot_len:%u,acknumber:%u-----\n",tot_len,acknumber);
         //回复一个ACK报文 
         rawsendnodelay(sockfd,buffer,tot_len);
+        fflush(stdout);
     
     }
     
@@ -145,11 +121,11 @@ int main(int argc, char **argv)
     senddelay = 50;
     
     //connect前设置mss为200
-    mssval = (50+12);
+    mssval = (50);
 
     sockfd = Socket(AF_INET, SOCK_RAW, IPPROTO_TCP);
   
-    
+    tcptsopt = 0;
     initrawops(sockfd);
     printf("---------before conn setup-------------\n");
     rawconnect(sockfd);

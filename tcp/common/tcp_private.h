@@ -132,15 +132,24 @@ struct tcp_info_user
     u_int8_t   quick;
     u_int8_t   pingpong;
 	u_int8_t   pending;
-	u_int8_t   rsv;
+	u_int8_t   is_cwnd_limited:1;
+	u_int8_t   rsv0:7;
+	
 	
 	u_int32_t  lrcvtime;
 	int32_t  sk_forward_alloc;
 
-    u_int32_t  rsv1;
+    u_int32_t  max_packets_out;
 	long   memory_allocated;
 
 	u_int8_t   caname[8];
+
+	u_int32_t  max_packets_seq;
+
+	u_int32_t retransmit_high;
+    u_int32_t highest_sack_seq;
+	u_int32_t prr_delivered;
+	u_int32_t prr_out;
 	
 };
 

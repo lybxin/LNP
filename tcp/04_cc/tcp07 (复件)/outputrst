@@ -1,0 +1,8 @@
+#!/bin/sh
+
+basepath=$(cd `dirname $0`; pwd)
+
+/bin/touch ${testkernlog}""
+
+/bin/cp -f /var/log/kern.log ${testkernlog}""
+/bin/chown lybxin *

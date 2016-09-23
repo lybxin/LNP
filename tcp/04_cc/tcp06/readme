@@ -1,0 +1,8 @@
+CWV  application-limited场景
+
+******@Inspiron:~$ sudo ip route add local 127.0.0.2 dev lo congctl reno initcwnd 2 ssthresh lock 8
+******@Inspiron:~$ sudo ethtool -K lo tso off gso off  #关闭tso gso以方便观察cwnd变化  
+
+
+
+

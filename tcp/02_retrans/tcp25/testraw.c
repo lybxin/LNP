@@ -45,7 +45,7 @@ void *recv_function(void *arg)
     while(1)
     {       
         //等待接收ACK
-        recvlen = rawadvrecv(sockfd, buffer, MAX_PKT_SIZE,TCP_SACKOPT);
+        recvlen = rawadvrecv(sockfd, buffer, MAX_PKT_SIZE,0);
         
         //判断是否收到了需要回复ACK的报文
         if(containdata(buffer, recvlen))

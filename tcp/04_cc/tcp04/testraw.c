@@ -38,7 +38,7 @@ void *recv_function(void *arg)
 
     int sockfd;
     u16 recvlen,i = 0;
-    u32 rtoseq = 0, rtocnt = 0, ackflag =TCP_TSOPT;
+    u32 rtoseq = 0, rtocnt = 0, ackflag =TCP_TSOPT,rtopkt=0;
     unsigned char buffer[MAX_PKT_SIZE];
     
     //接收线程detach自己
@@ -62,20 +62,22 @@ void *recv_function(void *arg)
                 continue;
             }
             
-            if(i==8)
+            if(i==10)
             {
                 rtoseq = recvseq;
                 rtocnt = 3;
+                rtopkt = 1;
                 continue;
             }
-            /*原计划模拟第二次RTO超时
-            if( i==(rto_i+7) && rto_i>0 )
+            /*模拟第二个数据包的RTO超时*/
+            if( recvseq==(rtoseq+150) && rtopkt==1 && rtocnt==0)
             {
                 rtoseq = recvseq;
                 rtocnt = 2;
+                rtopkt = 2;
                 continue;
             }
-            */
+            
             
             if(rtoseq == recvseq)
             {

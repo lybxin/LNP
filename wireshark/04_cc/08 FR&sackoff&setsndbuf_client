@@ -1,0 +1,521 @@
+[initrawops] ipid:19867,tcpseq:44741
+---------before conn setup-------------
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 3c 00 00 40 00 	40 06 3c b9 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 19 74 00 00 ae c6 
+a0 12 aa aa fe 31 00 00 	02 04 ff d7 01 01 08 0a 
+00 85 9c a6 0a 79 1c d3 	01 03 03 07 
+-----------------------showpkt end-----------------------
+[updaterecvstate]seq:3816036724,syn:1,fin:0,acknumber:3816036725,recvtsval:8756390,recvackseq:44742,recvseq:3816036724,recvendseq:3816036725
+[buildackpkt] optlen:12,tot_len:52,Ack:3816036725,sacknum:0,sackblknum:0
+---------conn setup-------------
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 34 85 c7 40 00 	40 06 b6 f9 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 19 75 00 00 ae dc 
+80 10 01 56 fe 29 00 00 	01 01 08 0a 00 85 9c b2 
+0a 79 1d 38 00 00 00 00 	00 00 00 00 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:3816036725,recvtsval:8756390,recvackseq:44764,recvseq:3816036725,recvendseq:3816036725
+[updaterecvstate]seq:3816036725,syn:0,fin:0,acknumber:3816036725,recvtsval:8756402,recvackseq:44764,recvseq:3816036725,recvendseq:3816036725
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 c8 40 00 	40 06 b6 c6 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 19 75 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d ac 
+0a 79 1d 38 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:3816036775,recvtsval:8756402,recvackseq:44764,recvseq:3816036725,recvendseq:3816036775
+[updaterecvstate]seq:3816036725,syn:0,fin:0,acknumber:3816036775,recvtsval:8756652,recvackseq:44764,recvseq:3816036725,recvendseq:3816036775
+[buildackpkt] optlen:12,tot_len:52,Ack:3816036775,sacknum:0,sackblknum:0
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 c9 40 00 	40 06 b6 c5 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 19 a7 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d ad 
+0a 79 1d 38 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:3816036825,recvtsval:8756652,recvackseq:44764,recvseq:3816036775,recvendseq:3816036825
+[updaterecvstate]seq:3816036775,syn:0,fin:0,acknumber:3816036825,recvtsval:8756653,recvackseq:44764,recvseq:3816036775,recvendseq:3816036825
+[buildackpkt] optlen:12,tot_len:52,Ack:3816036825,sacknum:0,sackblknum:0
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 ca 40 00 	40 06 b6 c4 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 19 d9 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d ae 
+0a 79 1d 38 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:3816036875,recvtsval:8756653,recvackseq:44764,recvseq:3816036825,recvendseq:3816036875
+[updaterecvstate]seq:3816036825,syn:0,fin:0,acknumber:3816036875,recvtsval:8756654,recvackseq:44764,recvseq:3816036825,recvendseq:3816036875
+[buildackpkt] optlen:12,tot_len:52,Ack:3816036875,sacknum:0,sackblknum:0
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 cb 40 00 	40 06 b6 c3 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1a 0b 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d af 
+0a 79 1d 38 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 cc 40 00 	40 06 b6 c2 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1a 3d 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d af 
+0a 79 1d 38 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 cd 40 00 	40 06 b6 c1 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1a 6f 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d b0 
+0a 79 1d 38 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+----------[find_ofo_link]error startseq:3816036975,endseq:3816037025,pstartseq:3816036975,pendseq:3816037025---------------------
+sack block info begin:3816036975,end:3816037025
+[updaterecvstate]seq:3816036975,syn:0,fin:0,acknumber:3816036875,recvtsval:8756656,recvackseq:44764,recvseq:3816036975,recvendseq:3816037025
+[buildackpkt] optlen:12,tot_len:52,Ack:3816036875,sacknum:1,sackblknum:1
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 ce 40 00 	40 06 b6 c0 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1a a1 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d b1 
+0a 79 1d 38 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[insert_ofo_link]startseq:3816037025,endseq:3816037075,nstartseq:3816036975,nnextseq:3816037025,min:3816036975,max:3816037075
+----------[find_ofo_link]error startseq:3816037025,endseq:3816037075,pstartseq:3816036975,pendseq:3816037075---------------------
+sack block info begin:3816036975,end:3816037075
+[updaterecvstate]seq:3816037025,syn:0,fin:0,acknumber:3816036875,recvtsval:8756657,recvackseq:44764,recvseq:3816037025,recvendseq:3816037075
+[buildackpkt] optlen:12,tot_len:52,Ack:3816036875,sacknum:1,sackblknum:1
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 cf 40 00 	40 06 b6 bf 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1a d3 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d b2 
+0a 79 1d 38 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[insert_ofo_link]startseq:3816037075,endseq:3816037125,nstartseq:3816036975,nnextseq:3816037075,min:3816036975,max:3816037125
+----------[find_ofo_link]error startseq:3816037075,endseq:3816037125,pstartseq:3816036975,pendseq:3816037125---------------------
+sack block info begin:3816036975,end:3816037125
+[updaterecvstate]seq:3816037075,syn:0,fin:0,acknumber:3816036875,recvtsval:8756658,recvackseq:44764,recvseq:3816037075,recvendseq:3816037125
+[buildackpkt] optlen:12,tot_len:52,Ack:3816036875,sacknum:1,sackblknum:1
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 d0 40 00 	40 06 b6 be 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1b 05 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d b2 
+0a 79 1d 38 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[insert_ofo_link]startseq:3816037125,endseq:3816037175,nstartseq:3816036975,nnextseq:3816037125,min:3816036975,max:3816037175
+----------[find_ofo_link]error startseq:3816037125,endseq:3816037175,pstartseq:3816036975,pendseq:3816037175---------------------
+sack block info begin:3816036975,end:3816037175
+[updaterecvstate]seq:3816037125,syn:0,fin:0,acknumber:3816036875,recvtsval:8756658,recvackseq:44764,recvseq:3816037125,recvendseq:3816037175
+[buildackpkt] optlen:12,tot_len:52,Ack:3816036875,sacknum:1,sackblknum:1
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 d1 40 00 	40 06 b6 bd 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1b 37 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d b3 
+0a 79 1d 38 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[insert_ofo_link]startseq:3816037175,endseq:3816037225,nstartseq:3816036975,nnextseq:3816037175,min:3816036975,max:3816037225
+----------[find_ofo_link]error startseq:3816037175,endseq:3816037225,pstartseq:3816036975,pendseq:3816037225---------------------
+sack block info begin:3816036975,end:3816037225
+[updaterecvstate]seq:3816037175,syn:0,fin:0,acknumber:3816036875,recvtsval:8756659,recvackseq:44764,recvseq:3816037175,recvendseq:3816037225
+[buildackpkt] optlen:12,tot_len:52,Ack:3816036875,sacknum:1,sackblknum:1
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 d2 40 00 	40 06 b6 bc 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1b 69 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d b4 
+0a 79 1d 38 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 d3 40 00 	40 06 b6 bb 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1b 9b 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d b5 
+0a 79 1d 38 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[insert_ofo_link]startseq:3816037275,endseq:3816037325,nstartseq:3816036975,nnextseq:3816037225,min:3816036975,max:3816037325
+----------[find_ofo_link]error startseq:3816037275,endseq:3816037325,pstartseq:3816036975,pendseq:3816037225---------------------
+----------[find_ofo_link]error startseq:3816037275,endseq:3816037325,pstartseq:3816037275,pendseq:3816037325---------------------
+sack block info begin:3816036975,end:3816037225
+sack block info begin:3816037275,end:3816037325
+[updaterecvstate]seq:3816037275,syn:0,fin:0,acknumber:3816036875,recvtsval:8756661,recvackseq:44764,recvseq:3816037275,recvendseq:3816037325
+[buildackpkt] optlen:12,tot_len:52,Ack:3816036875,sacknum:2,sackblknum:2
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 d4 40 00 	40 06 b6 ba 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1b cd 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d b9 
+0a 79 21 20 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[insert_ofo_link]startseq:3816037325,endseq:3816037375,nstartseq:3816036975,nnextseq:3816037225,min:3816036975,max:3816037375
+[insert_ofo_link]startseq:3816037325,endseq:3816037375,nstartseq:3816037275,nnextseq:3816037325,min:3816037275,max:3816037375
+----------[find_ofo_link]error startseq:3816037325,endseq:3816037375,pstartseq:3816036975,pendseq:3816037225---------------------
+----------[find_ofo_link]error startseq:3816037325,endseq:3816037375,pstartseq:3816037275,pendseq:3816037375---------------------
+sack block info begin:3816036975,end:3816037225
+sack block info begin:3816037275,end:3816037375
+[updaterecvstate]seq:3816037325,syn:0,fin:0,acknumber:3816036875,recvtsval:8756665,recvackseq:44764,recvseq:3816037325,recvendseq:3816037375
+[buildackpkt] optlen:12,tot_len:52,Ack:3816036875,sacknum:2,sackblknum:2
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 d5 40 00 	40 06 b6 b9 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1b ff 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d ba 
+0a 79 21 23 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[insert_ofo_link]startseq:3816037375,endseq:3816037425,nstartseq:3816036975,nnextseq:3816037225,min:3816036975,max:3816037425
+[insert_ofo_link]startseq:3816037375,endseq:3816037425,nstartseq:3816037275,nnextseq:3816037375,min:3816037275,max:3816037425
+----------[find_ofo_link]error startseq:3816037375,endseq:3816037425,pstartseq:3816036975,pendseq:3816037225---------------------
+----------[find_ofo_link]error startseq:3816037375,endseq:3816037425,pstartseq:3816037275,pendseq:3816037425---------------------
+sack block info begin:3816036975,end:3816037225
+sack block info begin:3816037275,end:3816037425
+[updaterecvstate]seq:3816037375,syn:0,fin:0,acknumber:3816036875,recvtsval:8756666,recvackseq:44764,recvseq:3816037375,recvendseq:3816037425
+[buildackpkt] optlen:12,tot_len:52,Ack:3816036875,sacknum:2,sackblknum:2
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 d6 40 00 	40 06 b6 b8 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1c 31 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d ba 
+0a 79 21 26 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[insert_ofo_link]startseq:3816037425,endseq:3816037475,nstartseq:3816036975,nnextseq:3816037225,min:3816036975,max:3816037475
+[insert_ofo_link]startseq:3816037425,endseq:3816037475,nstartseq:3816037275,nnextseq:3816037425,min:3816037275,max:3816037475
+----------[find_ofo_link]error startseq:3816037425,endseq:3816037475,pstartseq:3816036975,pendseq:3816037225---------------------
+----------[find_ofo_link]error startseq:3816037425,endseq:3816037475,pstartseq:3816037275,pendseq:3816037475---------------------
+sack block info begin:3816036975,end:3816037225
+sack block info begin:3816037275,end:3816037475
+[updaterecvstate]seq:3816037425,syn:0,fin:0,acknumber:3816036875,recvtsval:8756666,recvackseq:44764,recvseq:3816037425,recvendseq:3816037475
+[buildackpkt] optlen:12,tot_len:52,Ack:3816036875,sacknum:2,sackblknum:2
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 d7 40 00 	40 06 b6 b7 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1c 63 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d bd 
+0a 79 21 30 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[insert_ofo_link]startseq:3816037475,endseq:3816037525,nstartseq:3816036975,nnextseq:3816037225,min:3816036975,max:3816037525
+[insert_ofo_link]startseq:3816037475,endseq:3816037525,nstartseq:3816037275,nnextseq:3816037475,min:3816037275,max:3816037525
+----------[find_ofo_link]error startseq:3816037475,endseq:3816037525,pstartseq:3816036975,pendseq:3816037225---------------------
+----------[find_ofo_link]error startseq:3816037475,endseq:3816037525,pstartseq:3816037275,pendseq:3816037525---------------------
+sack block info begin:3816036975,end:3816037225
+sack block info begin:3816037275,end:3816037525
+[updaterecvstate]seq:3816037475,syn:0,fin:0,acknumber:3816036875,recvtsval:8756669,recvackseq:44764,recvseq:3816037475,recvendseq:3816037525
+[buildackpkt] optlen:12,tot_len:52,Ack:3816036875,sacknum:2,sackblknum:2
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 d8 40 00 	40 06 b6 b6 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1c 95 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d bd 
+0a 79 21 33 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[insert_ofo_link]startseq:3816037525,endseq:3816037575,nstartseq:3816036975,nnextseq:3816037225,min:3816036975,max:3816037575
+[insert_ofo_link]startseq:3816037525,endseq:3816037575,nstartseq:3816037275,nnextseq:3816037525,min:3816037275,max:3816037575
+----------[find_ofo_link]error startseq:3816037525,endseq:3816037575,pstartseq:3816036975,pendseq:3816037225---------------------
+----------[find_ofo_link]error startseq:3816037525,endseq:3816037575,pstartseq:3816037275,pendseq:3816037575---------------------
+sack block info begin:3816036975,end:3816037225
+sack block info begin:3816037275,end:3816037575
+[updaterecvstate]seq:3816037525,syn:0,fin:0,acknumber:3816036875,recvtsval:8756669,recvackseq:44764,recvseq:3816037525,recvendseq:3816037575
+[buildackpkt] optlen:12,tot_len:52,Ack:3816036875,sacknum:2,sackblknum:2
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 d9 40 00 	40 06 b6 b5 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1a 0b 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d be 
+0a 79 21 36 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:3816036925,recvtsval:8756669,recvackseq:44764,recvseq:3816036875,recvendseq:3816036925
+sack block info begin:3816036975,end:3816037225
+sack block info begin:3816037275,end:3816037575
+[updaterecvstate]seq:3816036875,syn:0,fin:0,acknumber:3816036925,recvtsval:8756670,recvackseq:44764,recvseq:3816036875,recvendseq:3816036925
+[buildackpkt] optlen:12,tot_len:52,Ack:3816036925,sacknum:2,sackblknum:2
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 da 40 00 	40 06 b6 b4 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1c c7 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d c0 
+0a 79 21 3c 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[insert_ofo_link]startseq:3816037575,endseq:3816037625,nstartseq:3816036975,nnextseq:3816037225,min:3816036975,max:3816037625
+[insert_ofo_link]startseq:3816037575,endseq:3816037625,nstartseq:3816037275,nnextseq:3816037575,min:3816037275,max:3816037625
+----------[find_ofo_link]error startseq:3816037575,endseq:3816037625,pstartseq:3816036975,pendseq:3816037225---------------------
+----------[find_ofo_link]error startseq:3816037575,endseq:3816037625,pstartseq:3816037275,pendseq:3816037625---------------------
+sack block info begin:3816036975,end:3816037225
+sack block info begin:3816037275,end:3816037625
+[updaterecvstate]seq:3816037575,syn:0,fin:0,acknumber:3816036925,recvtsval:8756672,recvackseq:44764,recvseq:3816037575,recvendseq:3816037625
+[buildackpkt] optlen:12,tot_len:52,Ack:3816036925,sacknum:2,sackblknum:2
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 db 40 00 	40 06 b6 b3 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1c f9 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d c5 
+0a 79 21 53 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[insert_ofo_link]startseq:3816037625,endseq:3816037675,nstartseq:3816036975,nnextseq:3816037225,min:3816036975,max:3816037675
+[insert_ofo_link]startseq:3816037625,endseq:3816037675,nstartseq:3816037275,nnextseq:3816037625,min:3816037275,max:3816037675
+----------[find_ofo_link]error startseq:3816037625,endseq:3816037675,pstartseq:3816036975,pendseq:3816037225---------------------
+----------[find_ofo_link]error startseq:3816037625,endseq:3816037675,pstartseq:3816037275,pendseq:3816037675---------------------
+sack block info begin:3816036975,end:3816037225
+sack block info begin:3816037275,end:3816037675
+[updaterecvstate]seq:3816037625,syn:0,fin:0,acknumber:3816036925,recvtsval:8756677,recvackseq:44764,recvseq:3816037625,recvendseq:3816037675
+[buildackpkt] optlen:12,tot_len:52,Ack:3816036925,sacknum:2,sackblknum:2
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 dc 40 00 	40 06 b6 b2 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1d 2b 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d c7 
+0a 79 21 59 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[insert_ofo_link]startseq:3816037675,endseq:3816037725,nstartseq:3816036975,nnextseq:3816037225,min:3816036975,max:3816037725
+[insert_ofo_link]startseq:3816037675,endseq:3816037725,nstartseq:3816037275,nnextseq:3816037675,min:3816037275,max:3816037725
+----------[find_ofo_link]error startseq:3816037675,endseq:3816037725,pstartseq:3816036975,pendseq:3816037225---------------------
+----------[find_ofo_link]error startseq:3816037675,endseq:3816037725,pstartseq:3816037275,pendseq:3816037725---------------------
+sack block info begin:3816036975,end:3816037225
+sack block info begin:3816037275,end:3816037725
+[updaterecvstate]seq:3816037675,syn:0,fin:0,acknumber:3816036925,recvtsval:8756679,recvackseq:44764,recvseq:3816037675,recvendseq:3816037725
+[buildackpkt] optlen:12,tot_len:52,Ack:3816036925,sacknum:2,sackblknum:2
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 dd 40 00 	40 06 b6 b1 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1a 3d 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d cb 
+0a 79 21 68 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:3816036975,recvtsval:8756679,recvackseq:44764,recvseq:3816036925,recvendseq:3816036975
+sack block info begin:3816037275,end:3816037725
+[updaterecvstate]seq:3816036925,syn:0,fin:0,acknumber:3816037225,recvtsval:8756683,recvackseq:44764,recvseq:3816036925,recvendseq:3816036975
+[buildackpkt] optlen:12,tot_len:52,Ack:3816037225,sacknum:1,sackblknum:1
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 de 40 00 	40 06 b6 b0 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1d 5d 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d cb 
+0a 79 21 68 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[insert_ofo_link]startseq:3816037725,endseq:3816037775,nstartseq:3816037275,nnextseq:3816037725,min:3816037275,max:3816037775
+----------[find_ofo_link]error startseq:3816037725,endseq:3816037775,pstartseq:3816037275,pendseq:3816037775---------------------
+sack block info begin:3816037275,end:3816037775
+[updaterecvstate]seq:3816037725,syn:0,fin:0,acknumber:3816037225,recvtsval:8756683,recvackseq:44764,recvseq:3816037725,recvendseq:3816037775
+[buildackpkt] optlen:12,tot_len:52,Ack:3816037225,sacknum:1,sackblknum:1
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 df 40 00 	40 06 b6 af 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1d 8f 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d cc 
+0a 79 21 6f 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[insert_ofo_link]startseq:3816037775,endseq:3816037825,nstartseq:3816037275,nnextseq:3816037775,min:3816037275,max:3816037825
+----------[find_ofo_link]error startseq:3816037775,endseq:3816037825,pstartseq:3816037275,pendseq:3816037825---------------------
+sack block info begin:3816037275,end:3816037825
+[updaterecvstate]seq:3816037775,syn:0,fin:0,acknumber:3816037225,recvtsval:8756684,recvackseq:44764,recvseq:3816037775,recvendseq:3816037825
+[buildackpkt] optlen:12,tot_len:52,Ack:3816037225,sacknum:1,sackblknum:1
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 e0 40 00 	40 06 b6 ae 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1d c1 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d d2 
+0a 79 21 85 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[insert_ofo_link]startseq:3816037825,endseq:3816037875,nstartseq:3816037275,nnextseq:3816037825,min:3816037275,max:3816037875
+----------[find_ofo_link]error startseq:3816037825,endseq:3816037875,pstartseq:3816037275,pendseq:3816037875---------------------
+sack block info begin:3816037275,end:3816037875
+[updaterecvstate]seq:3816037825,syn:0,fin:0,acknumber:3816037225,recvtsval:8756690,recvackseq:44764,recvseq:3816037825,recvendseq:3816037875
+[buildackpkt] optlen:12,tot_len:52,Ack:3816037225,sacknum:1,sackblknum:1
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 e1 40 00 	40 06 b6 ad 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1d f3 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d d3 
+0a 79 21 8b 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[insert_ofo_link]startseq:3816037875,endseq:3816037925,nstartseq:3816037275,nnextseq:3816037875,min:3816037275,max:3816037925
+----------[find_ofo_link]error startseq:3816037875,endseq:3816037925,pstartseq:3816037275,pendseq:3816037925---------------------
+sack block info begin:3816037275,end:3816037925
+[updaterecvstate]seq:3816037875,syn:0,fin:0,acknumber:3816037225,recvtsval:8756691,recvackseq:44764,recvseq:3816037875,recvendseq:3816037925
+[buildackpkt] optlen:12,tot_len:52,Ack:3816037225,sacknum:1,sackblknum:1
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 e2 40 00 	40 06 b6 ac 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1b 69 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d d7 
+0a 79 21 9b 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:3816037275,recvtsval:8756691,recvackseq:44764,recvseq:3816037225,recvendseq:3816037275
+[updaterecvstate]seq:3816037225,syn:0,fin:0,acknumber:3816037925,recvtsval:8756695,recvackseq:44764,recvseq:3816037225,recvendseq:3816037275
+[buildackpkt] optlen:12,tot_len:52,Ack:3816037925,sacknum:0,sackblknum:0
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 e3 40 00 	40 06 b6 ab 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1e 25 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d d7 
+0a 79 21 9b 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:3816037975,recvtsval:8756695,recvackseq:44764,recvseq:3816037925,recvendseq:3816037975
+[updaterecvstate]seq:3816037925,syn:0,fin:0,acknumber:3816037975,recvtsval:8756695,recvackseq:44764,recvseq:3816037925,recvendseq:3816037975
+[buildackpkt] optlen:12,tot_len:52,Ack:3816037975,sacknum:0,sackblknum:0
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 e4 40 00 	40 06 b6 aa 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1e 57 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d d7 
+0a 79 21 9b 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:3816038025,recvtsval:8756695,recvackseq:44764,recvseq:3816037975,recvendseq:3816038025
+[updaterecvstate]seq:3816037975,syn:0,fin:0,acknumber:3816038025,recvtsval:8756695,recvackseq:44764,recvseq:3816037975,recvendseq:3816038025
+[buildackpkt] optlen:12,tot_len:52,Ack:3816038025,sacknum:0,sackblknum:0
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 e5 40 00 	40 06 b6 a9 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1e 89 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d d9 
+0a 79 21 a1 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:3816038075,recvtsval:8756695,recvackseq:44764,recvseq:3816038025,recvendseq:3816038075
+[updaterecvstate]seq:3816038025,syn:0,fin:0,acknumber:3816038075,recvtsval:8756697,recvackseq:44764,recvseq:3816038025,recvendseq:3816038075
+[buildackpkt] optlen:12,tot_len:52,Ack:3816038075,sacknum:0,sackblknum:0
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 e6 40 00 	40 06 b6 a8 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1e bb 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d df 
+0a 79 21 b7 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:3816038125,recvtsval:8756697,recvackseq:44764,recvseq:3816038075,recvendseq:3816038125
+[updaterecvstate]seq:3816038075,syn:0,fin:0,acknumber:3816038125,recvtsval:8756703,recvackseq:44764,recvseq:3816038075,recvendseq:3816038125
+[buildackpkt] optlen:12,tot_len:52,Ack:3816038125,sacknum:0,sackblknum:0
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 e7 40 00 	40 06 b6 a7 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1e ed 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d e0 
+0a 79 21 bd 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:3816038175,recvtsval:8756703,recvackseq:44764,recvseq:3816038125,recvendseq:3816038175
+[updaterecvstate]seq:3816038125,syn:0,fin:0,acknumber:3816038175,recvtsval:8756704,recvackseq:44764,recvseq:3816038125,recvendseq:3816038175
+[buildackpkt] optlen:12,tot_len:52,Ack:3816038175,sacknum:0,sackblknum:0
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 85 e8 40 00 	40 06 b6 a6 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1f 1f 00 00 ae dc 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 85 9d e4 
+0a 79 21 cd 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:3816038225,recvtsval:8756704,recvackseq:44764,recvseq:3816038175,recvendseq:3816038225
+[updaterecvstate]seq:3816038175,syn:0,fin:0,acknumber:3816038225,recvtsval:8756708,recvackseq:44764,recvseq:3816038175,recvendseq:3816038225
+[buildackpkt] optlen:12,tot_len:52,Ack:3816038225,sacknum:0,sackblknum:0
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 34 85 e9 40 00 	40 06 b6 d7 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	e3 74 1f 51 00 00 ae dc 
+80 14 01 56 fe 29 00 00 	01 01 08 0a 00 85 ea 16 
+0a 79 21 ff 77 65 6c 63 	6f 6d 65 20 
+-----------------------

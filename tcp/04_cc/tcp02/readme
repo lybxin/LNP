@@ -1,11 +1,10 @@
-慢启动与RTO超时
+慢启动与延迟ACK
 
 tcp_retrans_collapse = 0
 ******@Inspiron:~$ sudo ip route add local 127.0.0.2 dev lo congctl reno initcwnd 3
 ******@Inspiron:~$ ip route show table all | grep 127.0.0.2
 local 127.0.0.2 dev lo  table local  scope host  initcwnd 3 congctl reno
 ******@Inspiron:~$ sudo ethtool -K lo tso off gso off  #关闭tso gso以方便观察cwnd变化  
-
 
 
 

@@ -38,7 +38,7 @@ void *recv_function(void *arg)
 
     int sockfd;
     u16 recvlen,i = 0;
-    u32 rtoseq = 0, rtocnt = 0, ackflag =TCP_TSOPT;
+    u32 ackflag =TCP_TSOPT;
     unsigned char buffer[MAX_PKT_SIZE];
     
     //接收线程detach自己
@@ -55,48 +55,13 @@ void *recv_function(void *arg)
         if(containdata(buffer, recvlen))
         {   
             i++;
-
-            if(i < 8 )
+            //模拟延迟ACK  每两个报文回复一个ACK确认包
+            if( i%2 == 0 )
             {
                 adddelaylinktail(50, recvacknumber, ackflag);
                 continue;
             }
             
-            if(i==8)
-            {
-                rtoseq = recvseq;
-                rtocnt = 3;
-                continue;
-            }
-            /*原计划模拟第二次RTO超时
-            if( i==(rto_i+7) && rto_i>0 )
-            {
-                rtoseq = recvseq;
-                rtocnt = 2;
-                continue;
-            }
-            */
-            
-            if(rtoseq == recvseq)
-            {
-                rtocnt = rtocnt>0?rtocnt-1:0;
-                //rto_i = i;
-                resetsackblk();
-                del_ofo_link();
-                ackflag |= TCP_SACKOPT;
-                recvacknumber =recvendseq;
-            }
-            
-            if(rtocnt == 0)
-            {
-                adddelaylinktail(50, recvacknumber,ackflag);
-                continue;
-            }
-            
-            
-
-            
-
         } 
     
     }

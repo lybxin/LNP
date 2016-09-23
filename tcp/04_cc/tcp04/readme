@@ -1,4 +1,4 @@
-慢启动与RTO超时
+慢启动与多次RTO超时  多个数据包触发的RTO超时同样会降低ssthresh  但是同一个数据包的连续多次RTO超时不会降低ssthrsh
 
 tcp_retrans_collapse = 0
 ******@Inspiron:~$ sudo ip route add local 127.0.0.2 dev lo congctl reno initcwnd 3

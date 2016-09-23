@@ -1,0 +1,166 @@
+[initrawops] ipid:64556,tcpseq:59347
+---------before conn setup-------------
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 3c 00 00 40 00 	40 06 3c b9 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	cf 12 35 ae 00 00 e7 d4 
+a0 12 aa aa fe 31 00 00 	02 04 ff d7 04 02 08 0a 
+00 10 06 7d 32 c2 ff bb 	01 03 03 07 
+-----------------------showpkt end-----------------------
+[updaterecvstate]seq:3474077102,syn:1,fin:0,acknumber:3474077103,recvtsval:1050237,recvackseq:59348,recvseq:3474077102,recvendseq:3474077103
+[buildackpkt] optlen:12,tot_len:52,Ack:3474077103,sacknum:0,sackblknum:0
+---------conn setup-------------
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 34 33 26 40 00 	40 06 09 9b 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	cf 12 35 af 00 00 e7 ea 
+80 10 01 56 fe 29 00 00 	01 01 08 0a 00 10 06 89 
+32 c3 00 1f 00 00 00 00 	00 00 00 00 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:3474077103,recvtsval:1050237,recvackseq:59370,recvseq:3474077103,recvendseq:3474077103
+[updaterecvstate]seq:3474077103,syn:0,fin:0,acknumber:3474077103,recvtsval:1050249,recvackseq:59370,recvseq:3474077103,recvendseq:3474077103
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 33 27 40 00 	40 06 09 68 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	cf 12 35 af 00 00 e7 ea 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 10 07 84 
+32 c3 00 1f 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:3474077153,recvtsval:1050249,recvackseq:59370,recvseq:3474077103,recvendseq:3474077153
+[updaterecvstate]seq:3474077103,syn:0,fin:0,acknumber:3474077153,recvtsval:1050500,recvackseq:59370,recvseq:3474077103,recvendseq:3474077153
+[buildackpkt] optlen:12,tot_len:52,Ack:3474077153,sacknum:0,sackblknum:0
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 33 28 40 00 	40 06 09 67 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	cf 12 35 e1 00 00 e7 ea 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 10 07 85 
+32 c3 00 1f 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:3474077203,recvtsval:1050500,recvackseq:59370,recvseq:3474077153,recvendseq:3474077203
+[updaterecvstate]seq:3474077153,syn:0,fin:0,acknumber:3474077203,recvtsval:1050501,recvackseq:59370,recvseq:3474077153,recvendseq:3474077203
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 33 29 40 00 	40 06 09 66 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	cf 12 36 13 00 00 e7 ea 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 10 07 86 
+32 c3 00 1f 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:3474077253,recvtsval:1050501,recvackseq:59370,recvseq:3474077203,recvendseq:3474077253
+[updaterecvstate]seq:3474077203,syn:0,fin:0,acknumber:3474077253,recvtsval:1050502,recvackseq:59370,recvseq:3474077203,recvendseq:3474077253
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 33 2a 40 00 	40 06 09 65 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	cf 12 36 45 00 00 e7 ea 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 10 07 90 
+32 c3 04 09 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:3474077303,recvtsval:1050502,recvackseq:59370,recvseq:3474077253,recvendseq:3474077303
+[updaterecvstate]seq:3474077253,syn:0,fin:0,acknumber:3474077303,recvtsval:1050512,recvackseq:59370,recvseq:3474077253,recvendseq:3474077303
+[buildackpkt] optlen:12,tot_len:52,Ack:3474077303,sacknum:0,sackblknum:0
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 33 2b 40 00 	40 06 09 64 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	cf 12 36 77 00 00 e7 ea 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 10 07 90 
+32 c3 04 09 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:3474077353,recvtsval:1050512,recvackseq:59370,recvseq:3474077303,recvendseq:3474077353
+[updaterecvstate]seq:3474077303,syn:0,fin:0,acknumber:3474077353,recvtsval:1050512,recvackseq:59370,recvseq:3474077303,recvendseq:3474077353
+[buildackpkt] optlen:12,tot_len:52,Ack:3474077333,sacknum:0,sackblknum:0
+[buildackpkt] optlen:12,tot_len:52,Ack:3474077343,sacknum:0,sackblknum:0
+[buildackpkt] optlen:12,tot_len:52,Ack:3474077353,sacknum:0,sackblknum:0
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 33 2c 40 00 	40 06 09 63 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	cf 12 36 a9 00 00 e7 ea 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 10 07 9d 
+32 c3 04 3b 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:3474077403,recvtsval:1050512,recvackseq:59370,recvseq:3474077353,recvendseq:3474077403
+[updaterecvstate]seq:3474077353,syn:0,fin:0,acknumber:3474077403,recvtsval:1050525,recvackseq:59370,recvseq:3474077353,recvendseq:3474077403
+[buildackpkt] optlen:12,tot_len:52,Ack:3474077403,sacknum:0,sackblknum:0
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 33 2d 40 00 	40 06 09 62 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	cf 12 36 db 00 00 e7 ea 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 10 07 9d 
+32 c3 04 3b 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:3474077453,recvtsval:1050525,recvackseq:59370,recvseq:3474077403,recvendseq:3474077453
+[updaterecvstate]seq:3474077403,syn:0,fin:0,acknumber:3474077453,recvtsval:1050525,recvackseq:59370,recvseq:3474077403,recvendseq:3474077453
+[buildackpkt] optlen:12,tot_len:52,Ack:3474077453,sacknum:0,sackblknum:0
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 33 2e 40 00 	40 06 09 61 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	cf 12 37 0d 00 00 e7 ea 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 10 07 9d 
+32 c3 04 3b 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:3474077503,recvtsval:1050525,recvackseq:59370,recvseq:3474077453,recvendseq:3474077503
+[updaterecvstate]seq:3474077453,syn:0,fin:0,acknumber:3474077503,recvtsval:1050525,recvackseq:59370,recvseq:3474077453,recvendseq:3474077503
+[buildackpkt] optlen:12,tot_len:52,Ack:3474077503,sacknum:0,sackblknum:0
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 33 2f 40 00 	40 06 09 60 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	cf 12 37 3f 00 00 e7 ea 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 10 07 9d 
+32 c3 04 3b 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:3474077553,recvtsval:1050525,recvackseq:59370,recvseq:3474077503,recvendseq:3474077553
+[updaterecvstate]seq:3474077503,syn:0,fin:0,acknumber:3474077553,recvtsval:1050525,recvackseq:59370,recvseq:3474077503,recvendseq:3474077553
+[buildackpkt] optlen:12,tot_len:52,Ack:3474077553,sacknum:0,sackblknum:0
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 33 30 40 00 	40 06 09 5f 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	cf 12 37 71 00 00 e7 ea 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 10 07 9d 
+32 c3 04 3b 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:3474077603,recvtsval:1050525,recvackseq:59370,recvseq:3474077553,recvendseq:3474077603
+[updaterecvstate]seq:3474077553,syn:0,fin:0,acknumber:3474077603,recvtsval:1050525,recvackseq:59370,recvseq:3474077553,recvendseq:3474077603
+[buildackpkt] optlen:12,tot_len:52,Ack:3474077603,sacknum:0,sackblknum:0
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 33 31 40 00 	40 06 09 5e 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	cf 12 37 a3 00 00 e7 ea 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 10 07 9d 
+32 c3 04 

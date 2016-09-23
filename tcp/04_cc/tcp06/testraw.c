@@ -12,16 +12,20 @@ void *send_function(void *arg);
 void *send_function(void *arg)
 {
     int sockfd, tot_len;
-    //u16 lostseq1;//,lostseq2,lostseq3,lostseq4;
-    unsigned char buffer[MAX_PKT_SIZE] = {"hello\n\0"};
+    //int i=0;
+    unsigned char buffer[MAX_PKT_SIZE] = {"welcome to linux hello\0"};
     
     sockfd = *( (int*)arg );
+    
+    
+    senddelay = 0;
     
     //处理数据发送和业务逻辑
     tot_len = builddatapkt(buffer, recvacknumber,  strlen((const char *)buffer));
     rawsend(sockfd, buffer, tot_len);
-    sleep(1);
+    sleep_ms(10);
     
+
     
     sleep(300);
     
@@ -32,9 +36,9 @@ void *send_function(void *arg)
 void *recv_function(void *arg)
 {
 
-    int sockfd, tot_len, i=0;
+    int sockfd,i=0;
     u16 recvlen;
-    //u32 flag;
+    u32 ackflag =TCP_TSOPT;
     unsigned char buffer[MAX_PKT_SIZE];
     
     //接收线程detach自己
@@ -45,53 +49,20 @@ void *recv_function(void *arg)
     while(1)
     {       
         //等待接收ACK
-        recvlen = rawadvrecv(sockfd, buffer, MAX_PKT_SIZE,0);
+        recvlen = rawadvrecv(sockfd, buffer, MAX_PKT_SIZE,TCP_SACKOPT);
         
         //判断是否收到了需要回复ACK的报文
         if(containdata(buffer, recvlen))
-        {
-             
-            //构造dup ack 第2个数据包的ACK不回复 因此判断i>1
-            if( /*(i == 0) || */(i > 1 && i < 5) )
+        {   
+            if(i==10)
             {
-                recvacknumber = recvacknumber - (i) * 8;
-                
-                
-                
-                if(i <= 1)
-                {
-                    senddelay = 500;
-                    sackblknum = 0;
-                }else
-                {
-                    senddelay = 20;
-                    //sackblknum = 1;
-                    resetsackblk();
-                    appendsackblk((recvacknumber+8),(recvacknumber+(i)*8));
-                }  
-                
-                if(i==0)
-                {
-                    recvacknumber = recvacknumber-8;
-                }        
-                
-                //acknumber发生变化  接收到了data 发送ACK
-                tot_len = buildackpkt(buffer,recvacknumber,TCP_TSOPT|TCP_SACKOPT);
-                //回复一个ACK报文 
-                rawsend(sockfd,buffer,tot_len);
-                
+                adddelaylinktail(5, recvacknumber,ackflag);
+                printf("[recv_function]recvacknumber:%u \n",recvacknumber);
+                i++;
+                continue;
             }
-
-            if(i > 7)
-            {
-                senddelay = 500;
-                tot_len = buildackpkt(buffer,recvacknumber,TCP_TSOPT);
-                //回复一个ACK报文 
-                rawsend(sockfd,buffer,tot_len);
-            }
-            //lastacknumber = recvacknumber;
-            i++;
-
+            adddelaylinktail(50, recvacknumber,ackflag);
+            i++;        
         } 
     
     }
@@ -99,29 +70,67 @@ void *recv_function(void *arg)
 }
 
 
+void *ack_function(void *arg)
+{
+
+    int sockfd;
+    struct timespec timeout;
+    u32 acknumber, flag, tot_len;
+    unsigned char buffer[MAX_PKT_SIZE];
+    
+    //接收线程detach自己
+    pthread_detach(pthread_self());
+    
+    sockfd = *( (int*)arg );
+
+    while(popdelaylinkhead(&timeout, &acknumber, &flag, buffer, &tot_len))
+    {       
+        sleep_abs_ms(&timeout);
+        
+        //tot_len = buildackpkt(buffer,acknumber,flag|TCP_TSOPT);
+        
+        //printf("-------tot_len:%u-----\n",tot_len);
+        //回复一个ACK报文 
+        rawsendnodelay(sockfd,buffer,tot_len);
+    
+    }
+    
+    return 0;
+}
+
 int main(int argc, char **argv)
 {
-    //int tot_len, recvlen, sockfd;
-    int sockfd;
-    //u32 lastacknumber;
 
-    
+    int sockfd;
     int res;  
-    pthread_t recv_thread, send_thread;  
+    pthread_t recv_thread, send_thread, ack_thread;  
     void *thread_result;  
     
+    strncpy(srcip, "127.0.0.2", 32);
     //延迟500ms发包 模拟500ms的rtt
-    senddelay = 500;
+    senddelay = 50;
+    
+    //connect前设置mss为200
+    mssval = (50+12);
 
     sockfd = Socket(AF_INET, SOCK_RAW, IPPROTO_TCP);
   
     
     initrawops(sockfd);
+    printf("---------before conn setup-------------\n");
     rawconnect(sockfd);
-    //sleep(5);
+    printf("---------conn setup-------------\n");
+    //sleep(50);
     
 
     res = pthread_create(&recv_thread, NULL, recv_function, (void *)(&sockfd));  
+    if (res != 0)  
+    {  
+        perror("Thread creation failed!");  
+        exit(EXIT_FAILURE);  
+    }  
+    
+    res = pthread_create(&ack_thread, NULL, ack_function, (void *)(&sockfd));  
     if (res != 0)  
     {  
         perror("Thread creation failed!");  

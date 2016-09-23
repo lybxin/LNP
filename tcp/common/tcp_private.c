@@ -61,6 +61,9 @@ void printftcpinfo(struct tcp_info_user *info)
     printf("quick:%u,pingpong:%u,pending:%u,lrcvtime:%u,sk_forward_alloc:%d,memory_allocated:%ld,caname:%s\n",
             info->quick,info->pingpong,info->pending,info->lrcvtime,info->sk_forward_alloc,
             info->memory_allocated,(char*)info->caname);
+	printf("is_cwnd_limited:%u,max_packets_out:%u,max_packets_seq:%u,retransmit_high:%u,highest_sack_seq:%u,prr_delivered:%u,prr_out:%u\n",
+            info->is_cwnd_limited,info->max_packets_out,info->max_packets_seq,
+            info->retransmit_high,info->highest_sack_seq,info->prr_delivered,info->prr_out);
 }
 
 

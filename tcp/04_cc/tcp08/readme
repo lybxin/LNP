@@ -1,0 +1,9 @@
+reno下的拥塞撤销 <09 FR&sackoff&uncwnd>
+
+
+注意需要关闭SACK和时间戳  tcp_sack=0 tcp_timestamps=0 
+root@Inspiron:/home/lybxin/MyRes/LNP/tcp/04_cc/tcp08# ip route show table all | grep 127.0.0.2
+local 127.0.0.2 dev lo  table local  scope host  ssthresh 5 initcwnd 6 congctl reno
+ 
+
+

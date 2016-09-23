@@ -38,7 +38,7 @@ void *recv_function(void *arg)
 
     int sockfd;
     u16 recvlen,i = 0;
-    u32 rtoseq = 0, rtocnt = 0, ackflag =TCP_TSOPT;
+    u32 ackflag =TCP_TSOPT;
     unsigned char buffer[MAX_PKT_SIZE];
     
     //接收线程detach自己
@@ -55,48 +55,33 @@ void *recv_function(void *arg)
         if(containdata(buffer, recvlen))
         {   
             i++;
-
-            if(i < 8 )
+            
+            if(i==2 || i==3)
             {
+                continue;
+            }
+            //模拟延迟ABC  一个报文回复多个个ACK确认包
+            if( i == 5  )
+            {
+                adddelaylinktail(50, recvacknumber-20, ackflag);
+                sleep_ms(2);
+                adddelaylinktail(50, recvacknumber-10, ackflag);
+                sleep_ms(2);
                 adddelaylinktail(50, recvacknumber, ackflag);
+                sleep_ms(2);
                 continue;
             }
             
-            if(i==8)
+            /* ack 压缩演示失败
+            if(i==6 || i==7)
             {
-                rtoseq = recvseq;
-                rtocnt = 3;
-                continue;
-            }
-            /*原计划模拟第二次RTO超时
-            if( i==(rto_i+7) && rto_i>0 )
-            {
-                rtoseq = recvseq;
-                rtocnt = 2;
-                continue;
+                adddelaylinktail(50, recvacknumber, ackflag|TCP_USER1);
+                continue;            
             }
             */
             
-            if(rtoseq == recvseq)
-            {
-                rtocnt = rtocnt>0?rtocnt-1:0;
-                //rto_i = i;
-                resetsackblk();
-                del_ofo_link();
-                ackflag |= TCP_SACKOPT;
-                recvacknumber =recvendseq;
-            }
+            adddelaylinktail(50, recvacknumber, ackflag);
             
-            if(rtocnt == 0)
-            {
-                adddelaylinktail(50, recvacknumber,ackflag);
-                continue;
-            }
-            
-            
-
-            
-
         } 
     
     }
@@ -107,9 +92,10 @@ void *recv_function(void *arg)
 void *ack_function(void *arg)
 {
 
-    int sockfd;
+    int sockfd;//i=0;
     struct timespec timeout;
-    u32 acknumber, flag, tot_len;
+    u32 acknumber, flag, tot_len;//ackcomplen[2];
+    //unsigned char ackcompbuffer[2][MAX_PUREACK];
     unsigned char buffer[MAX_PKT_SIZE];
     
     //接收线程detach自己
@@ -119,9 +105,25 @@ void *ack_function(void *arg)
 
     while(popdelaylinkhead(&timeout, &acknumber, &flag, buffer, &tot_len))
     {       
+
         sleep_abs_ms(&timeout);
         
-        //tot_len = buildackpkt(buffer,acknumber,flag|TCP_TSOPT);
+        /* ack 压缩
+        if(flag & TCP_USER1)
+        {
+            memcpy(ackcompbuffer[i],buffer,100);
+            ackcomplen[i]=tot_len;
+            i++;
+            printf("[ack_function] ack compress acknumber:%u \n",acknumber);
+            continue;        
+        }
+        while(i>0)
+        {
+            rawsendnodelay(sockfd,ackcompbuffer[2-i],ackcomplen[2-i]);
+            printf("[ack_function] ack compress ackcomplen:%u \n",ackcomplen[2-i]);
+            --i;        
+        }
+        */
         
         //printf("-------tot_len:%u-----\n",tot_len);
         //回复一个ACK报文 
