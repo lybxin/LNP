@@ -26,15 +26,16 @@ void *send_function(void *arg)
     len = sizeof(int);
     Setsockopt(sockfd, SOL_SOCKET, SO_SNDBUF,(void *)&val, len);
     
-    sleep_ms(1000);
-    while(i<30)
+    sleep_ms(1000-3);
+    while(i<12)
     {
-        Write(sockfd,buffer,50);
         sleep_ms(3);
+        Write(sockfd,buffer,50);
+        
         i++;
     }
      
-    //Write(sockfd,buffer,50*15);   
+    Write(sockfd,buffer,50*(30-12));   
     
     return 0;
 }

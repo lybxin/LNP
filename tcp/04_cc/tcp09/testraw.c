@@ -37,9 +37,10 @@ void *recv_function(void *arg)
 {
 
     int sockfd;
-    u16 recvlen,i = 0;
+    u16 recvlen,tmplen,i = 0;
     u32 ackflag =TCP_TSOPT;
     unsigned char buffer[MAX_PKT_SIZE];
+    unsigned char tmpbuf[MAX_PKT_SIZE];
     
     //接收线程detach自己
     pthread_detach(pthread_self());
@@ -48,8 +49,14 @@ void *recv_function(void *arg)
 
     while(1)
     {       
+        printf("-----[recv_function] i:%d,recvacknumber:%u\n",i,recvacknumber);
         //等待接收ACK
-        if(i==3||i==4||i==10)
+        if(i==3)
+        {
+            tmplen = rawadvrecv(sockfd, tmpbuf, MAX_PKT_SIZE,TCP_SACKOPT|TCP_DISCARD);
+            ++i;
+            continue;
+        }else if(i==4||i==5||i==7||i==12)
         {
             recvlen = rawadvrecv(sockfd, buffer, MAX_PKT_SIZE,TCP_SACKOPT|TCP_DISCARD);
             ++i;
@@ -63,9 +70,19 @@ void *recv_function(void *arg)
         //判断是否收到了需要回复ACK的报文
         if(containdata(buffer, recvlen))
         {   
-            i++;
+            //i++;
             //adddelaylinktail(50, recvacknumber,ackflag|TCP_SACKOPT);
-            adddelaylinktail(50, recvacknumber,ackflag);
+            
+            if(i==6)
+            {
+                adddelaylinktail(48, recvacknumber,ackflag|TCP_SACKOPT);
+                updaterecvstate(tmpbuf, tmplen,TCP_SACKOPT);
+                adddelaylinktail(52, recvacknumber,ackflag|TCP_SACKOPT);
+                i++;
+                continue;
+            }
+            adddelaylinktail(50, recvacknumber,ackflag|TCP_SACKOPT);
+            i++;
 
         } 
     

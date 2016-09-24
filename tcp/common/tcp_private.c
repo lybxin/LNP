@@ -64,6 +64,7 @@ void printftcpinfo(struct tcp_info_user *info)
 	printf("is_cwnd_limited:%u,max_packets_out:%u,max_packets_seq:%u,retransmit_high:%u,highest_sack_seq:%u,prr_delivered:%u,prr_out:%u\n",
             info->is_cwnd_limited,info->max_packets_out,info->max_packets_seq,
             info->retransmit_high,info->highest_sack_seq,info->prr_delivered,info->prr_out);
+	fflush(stdout);
 }
 
 

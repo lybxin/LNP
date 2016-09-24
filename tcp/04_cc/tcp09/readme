@@ -1,0 +1,12 @@
+ SACK下的快速恢复
+ 
+
+******@Inspiron:~$ sudo ethtool -K lo tso off gso off  #关闭tso gso以方便观察cwnd变化  
+******@Inspiron:/proc/sys/net/ipv4# ip route show table all | grep 127.0.0.2
+local 127.0.0.2 dev lo  table local  scope host  ssthresh lock 30 initcwnd 12 congctl reno
+******@Inspiron:/proc/sys/net/ipv4# echo 0 >tcp_fack
+
+1、sack打开 fack关闭 client回复的信息带有sack
+2、sack打开 fack打开 client回复的信息带有sack
+
+

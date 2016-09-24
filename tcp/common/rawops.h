@@ -45,6 +45,7 @@ int rawconnrst(int sockfd);
 void showpkt(const unsigned char* const buffer, int buflen);
 u16 builddatapkt(u8 *buffer, u32 acknumber,u16 buflen);
 u16 containdata(u8 *buffer, u16 recvlen);
+void updaterecvstate(u8 *buffer, u16 recvlen,u32 flag);
 u16 rawrecv(int sockfd, u8 *buffer, u16 buflen);
 u16 rawadvrecv(int sockfd, u8 *buffer, u16 buflen, u32 flag);
 u16 rawsend(int sockfd, u8 *buffer, u16 buflen);
