@@ -1,0 +1,10 @@
+Eifel探测下的拥塞撤销  SACK关闭
+ 
+
+******@Inspiron:~$ sudo ethtool -K lo tso off gso off  #关闭tso gso以方便观察cwnd变化  
+root@Inspiron:/proc/sys/net/ipv4# ip route show table all | grep 127.0.0.2
+local 127.0.0.2 dev lo  table local  scope host  initcwnd 5 congctl reno
+
+ 
+1、关闭SACK  echo 0 > tcp_sack  对比Eifel探测与之前SACK关闭情况下的拥塞撤销的可靠性
+

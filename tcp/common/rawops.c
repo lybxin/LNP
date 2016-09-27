@@ -33,6 +33,11 @@ u32 validblknum = 0;
 u32 sackcollapse=1;
 u32 curhighseq = 0;
 
+//only support dsack blks before ack number
+u32 dsackenable=0;
+u32 dsackblk[2]={0};
+
+
 #define MAX(a, b) (((s32)((a)-(b))>0)?(a):(b))
 #define MIN(a, b) (((s32)((a)-(b))<0)?(a):(b))
 
@@ -279,12 +284,14 @@ int adddelaylinktail(int remaintime, u32 acknumber, u32 flag)
         p->timeout.tv_nsec = remaintime*1000*1000 + req.tv_nsec - (1000*1000*1000);
 		p->timeout.tv_sec = req.tv_sec + 1;
 	}
-	printf("[adddelaylinktail]:acknumber:%u,remaintime:%u",acknumber,remaintime);
+	printf("[adddelaylinktail]:acknumber:%u,remaintime:%u\n",acknumber,remaintime);
 	p->next = NULL;
 	//p->remaintime = remaintime;
 	p->acknumber = acknumber;
 	p->flag = flag;
 	p->tot_len = buildackpkt(p->buffer,acknumber,flag);
+	//add delay === already send
+	LastAck = acknumber;
 
 	pthread_mutex_lock(&delaylinkmutex);
 	delay_link_tail->next = p;
@@ -708,27 +715,23 @@ void collapseacknum(u32 *acknumber, u32 check)
     }  
 }
 
-u8 getsackblknum(u32 acknumber)
+u8 getsackblknum(u32 flag)
 {
-    u8 idx,num = 0,blknum = sackblknum;
-
-    
-	idx = (startidx + MAX_SACK_BLK - 1)%MAX_SACK_BLK;			               
-	while(blknum>0)
+    u8 blknum = sackblknum;
+	if(dsackenable&&dsackblk[0])
 	{
-		if( acknumber < sackblock[idx][0] )
-		{
-		    
-		    num++;
-		}
-	  
-	   idx = (idx + MAX_SACK_BLK - 1)%MAX_SACK_BLK ;
-	   --blknum;		
-
+        blknum++;
 	}
 
-	validblknum = num;
-    return num;
+	if(flag&TCP_TSOPT)
+	{
+		blknum = MIN(blknum,3);
+	}else
+	{
+	    blknum = MIN(blknum,4);
+	}
+	
+    return blknum;
 }
 
 //填充ACK报文和普通数据报文的TCP选项 tsecr 需要recv更新
@@ -737,7 +740,7 @@ void fillnormalopts(struct tcphdr* th, u32 flag, u32 acknumber)
 {
     struct thtsopt *tsopt;
     u32 *ptr,idx;
-	u8 blknum = sackblknum;
+	u8 blknum = getsackblknum(flag);
 
 	if(flag&TCP_TSOPT)
 	{
@@ -758,12 +761,14 @@ void fillnormalopts(struct tcphdr* th, u32 flag, u32 acknumber)
 	    }
 	    
 	    ptr = (u32*) ((u8*)th + 20 + sizeof(struct thtsopt));
+		
 	}else
 	{
 	    ptr = (u32*) ((u8*)th + 20);
+		
 	}
-	//暂时不考虑被collapse的sack数量
-    blknum = (blknum>3)?3:sackblknum;
+    
+	printf("[fillnormalopts]d sackenable:%u,d sack:%u,%u,blknum:%u,flag:%u\n",dsackenable,dsackblk[0],dsackblk[1],blknum,flag);
     if((flag&TCP_SACKOPT) && (blknum > 0))
     {
 
@@ -771,7 +776,13 @@ void fillnormalopts(struct tcphdr* th, u32 flag, u32 acknumber)
 		               (1  << 16) |
 			           (5 <<  8)  |
 			           (2 + blknum *8) );
-		idx = (startidx + MAX_SACK_BLK - 1)%MAX_SACK_BLK;	           
+		idx = (startidx + MAX_SACK_BLK - 1)%MAX_SACK_BLK;	
+		if(dsackenable&&dsackblk[0])
+	    {
+	        *ptr++ = htonl(dsackblk[0]);
+		    *ptr++ = htonl(dsackblk[1]);
+			blknum--;
+		}
 			               
 		while(blknum>0)
 		{
@@ -787,8 +798,9 @@ void fillnormalopts(struct tcphdr* th, u32 flag, u32 acknumber)
 		}	                     
         
     }
-		
-	
+	//dsack only valid for one time	
+	dsackblk[0]=0;
+	dsackblk[1]=0;
 
 }
 
@@ -810,9 +822,9 @@ u16 buildackpkt(u8 *buffer, u32 acknumber, u32 flag)
     }
 
 	collapseacknum(&acknumber,0);
-    if(flag&TCP_SACKOPT && sackblknum > 0)
+    if(flag&TCP_SACKOPT && getsackblknum(flag) > 0)
     {
-        optlen += sackblknum * 8 + 4;
+        optlen += getsackblknum(flag) * 8 + 4;
     }
     
     iph = (struct iphdr*)buffer;
@@ -827,31 +839,25 @@ u16 buildackpkt(u8 *buffer, u32 acknumber, u32 flag)
     
     fillnormalopts(th, flag, acknumber);
     
-    printf("[buildackpkt] optlen:%u,tot_len:%u,Ack:%u,sacknum:%u,sackblknum:%u\n",optlen,tot_len,acknumber,getsackblknum(acknumber),sackblknum);
+    printf("[buildackpkt] optlen:%u,tot_len:%u,Ack:%u,sacknum:%u,sackblknum:%u\n",optlen,tot_len,acknumber,getsackblknum(flag),sackblknum);
     
     updatetcphdr(th, optlen);
         
     return tot_len;
 }
 
-//外层确保buffer len足够长  返回添加hdr后的tot_len 
-//should refactor flag to arguments
-u16 builddatapkt(u8 *buffer, u32 acknumber,u16 buflen)
+u16 buildadvdatapkt(u8 *buffer, u32 acknumber,u16 buflen, u32 flag)
 {
     struct iphdr *iph;
     struct tcphdr *th;
-    u16 tot_len,hdrlen,optlen;
-	u32 flag = 0;
+    u16 tot_len,hdrlen,optlen;;
 
-	if(!tcptsopt)
+	if(flag|TCP_TSOPT)
 	{
-        flag&=~TCP_TSOPT;
 		optlen=0;
 	}else
 	{
-	    flag |= TCP_TSOPT;
 	    optlen = sizeof(struct thtsopt);
-
 	}
     
     hdrlen = sizeof(struct iphdr)+sizeof(struct tcphdr)+optlen;
@@ -871,6 +877,29 @@ u16 builddatapkt(u8 *buffer, u32 acknumber,u16 buflen)
     fillnormalopts(th,flag,acknumber);
     
     updatetcphdr(th, ( optlen + buflen ) );
+    
+    return tot_len;
+}
+
+
+//外层确保buffer len足够长  返回添加hdr后的tot_len 
+//should refactor flag to arguments
+u16 builddatapkt(u8 *buffer, u32 acknumber,u16 buflen)
+{
+
+    u16 tot_len;
+	u32 flag = 0;
+
+	if(!tcptsopt)
+	{
+        flag&=~TCP_TSOPT;
+	}else
+	{
+	    flag |= TCP_TSOPT;
+	}
+
+	tot_len = buildadvdatapkt(buffer, acknumber,buflen, flag);
+    
     
     return tot_len;
 }
@@ -931,6 +960,13 @@ void updaterecvstate(u8 *buffer, u16 recvlen,u32 flag)
 
 	recvackseq = ntohl(th->ack_seq);
 	recvseq = ntohl(th->seq);
+	//mark dsack info
+	if(recvseq<recvacknumber)
+	{
+	    dsackblk[0]=recvseq;
+		dsackblk[1]=MIN(recvendseq,recvacknumber);
+		printf("[updaterecvstate]dsack:%u,%u\n",dsackblk[0],dsackblk[1]);
+	}
 
     if(marksack || (flag & TCP_OFO)  || (flag & TCP_SACKOPT))
     {
@@ -987,7 +1023,11 @@ void updaterecvstate(u8 *buffer, u16 recvlen,u32 flag)
        if(*options == 8)
        {           
            recvtsval = ntohl(*((u32*)(options + 2)));
-		   if(recvackseq == LastAck)
+		   if(LastAck==0)
+		   {
+               TsRecent = recvtsval;
+		   }
+		   if(recvseq == LastAck)
 		   {
 		       TsRecent = recvtsval;
 		   }
@@ -999,8 +1039,9 @@ void updaterecvstate(u8 *buffer, u16 recvlen,u32 flag)
        options = options + (*options) - 1;
     }
     
-    printf("[updaterecvstate]seq:%u,syn:%u,fin:%u,acknumber:%u,recvtsval:%u,recvackseq:%u,recvseq:%u,recvendseq:%u\n",
-             ntohl(th->seq),th->syn,th->fin,recvacknumber,recvtsval,recvackseq,recvseq,recvendseq);
+    printf("[updaterecvstate]seq:%u,syn:%u,fin:%u,acknumber:%u,recvtsval:%u,\n\
+		--------recvackseq:%u,recvseq:%u,recvendseq:%u,LastAck:%u,TsRecent:%u\n",
+             ntohl(th->seq),th->syn,th->fin,recvacknumber,recvtsval,recvackseq,recvseq,recvendseq,LastAck,TsRecent);
     
 }
 
@@ -1102,7 +1143,7 @@ void updatesendstate(u8 *buffer, u16 sendlen)
     
     //更新下一个pkt的seq
     tcpseq = ntohl(th->seq) + th->syn + th->fin + datalen;
-	LastAck = ntohl(th->ack_seq);
+	
     //更新ipid
     ipid++;
 }
@@ -1163,7 +1204,8 @@ int rawconnect(int sockfd)
     //等待接收SYN-ACK
     rawrecv(sockfd, buffer, MAX_PKT_SIZE);
     
-    //发送ACK
+    //发送ACK  init LastAck
+    LastAck = recvacknumber;
     tot_len = buildackpkt(buffer,recvacknumber,TCP_TSOPT);
     rawsend(sockfd,buffer,tot_len);
     

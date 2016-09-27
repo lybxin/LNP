@@ -20,6 +20,7 @@ extern u16 tcpwz;
 extern u32 tcptsopt;
 extern char srcip[];
 extern char dstip[];
+extern u32 dsackenable;
 
 #define TCP_TSOPT    (1<<0)
 #define TCP_SACKOPT  (1<<1)
@@ -61,6 +62,7 @@ void sleep_abs_ms(struct timespec *req);
 u16 rawsendnodelay(int sockfd, u8 *buffer, u16 buflen);
 int del_ofo_link();
 void get_adv_time(struct timespec *timeout, u32 time_ms);
+u16 buildadvdatapkt(u8 *buffer, u32 acknumber,u16 buflen, u32 flag);
 
 
 

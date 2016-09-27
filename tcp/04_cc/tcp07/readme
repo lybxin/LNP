@@ -1,11 +1,11 @@
- 快速恢复
+ 快速恢复 nosack TLP
  
 ******@Inspiron:~$ sudo ip route add local 127.0.0.2 dev lo congctl reno initcwnd 12  ssthresh lock 10
 ******@Inspiron:~$ sudo ethtool -K lo tso off gso off  #关闭tso gso以方便观察cwnd变化  
 
 1、sack关闭  client回复的信息不带有sack，不设置sndbuf 应用层write受sndbuf限制休眠
 2、sack关闭  client回复的信息不带有sack，设置sndbuf
-3、sack打开 fack关闭  client回复的信息不带有sack
+3、sack打开 fack关闭  client回复的信息不带有sack  TLP与拥塞控制的交互
 
 
 

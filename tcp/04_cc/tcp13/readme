@@ -1,0 +1,12 @@
+DSACK下的拥塞撤销 & No TSopt选项
+ 
+
+******@Inspiron:~$ sudo ethtool -K lo tso off gso off  #关闭tso gso以方便观察cwnd变化  
+root@Inspiron:/proc/sys/net/ipv4# ip route show table all | grep 127.0.0.2
+local 127.0.0.2 dev lo  table local  scope host  initcwnd 4 congctl reno
+
+
+
+ 
+1、观察没有timestamp选项时候 server端正常接收数据 同时观察Open态下DSACK的拥塞撤销
+
