@@ -1,0 +1,86 @@
+[initrawops] ipid:42505,tcpseq:34415
+---------before conn setup-------------
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 3c 00 00 40 00 	40 06 3c b9 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	c9 f8 7c 17 00 00 86 70 
+a0 12 aa aa fe 31 00 00 	02 04 ff d7 04 02 08 0a 
+00 4e 46 08 2d 75 ba c5 	01 03 03 07 
+-----------------------showpkt end-----------------------
+[updaterecvstate]seq:3388505111,syn:1,fin:0,acknumber:3388505112,recvtsval:5129736,
+		--------recvackseq:34416,recvseq:3388505111,recvendseq:3388505112,LastAck:0,TsRecent:5129736
+[fillnormalopts]d sackenable:0,d sack:0,0,blknum:0,flag:1
+[buildackpkt] optlen:12,tot_len:52,Ack:3388505112,sacknum:0,sackblknum:0
+---------conn setup-------------
+[fillnormalopts]d sackenable:0,d sack:0,0,blknum:0,flag:1
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 34 3a 0c 40 00 	40 06 02 b5 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	c9 f8 7c 18 00 00 86 86 
+80 10 01 56 fe 29 00 00 	01 01 08 0a 00 4e 46 14 
+2d 75 ba f7 00 00 00 00 	00 00 00 00 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:3388505112,recvtsval:5129736,recvackseq:34438,recvseq:3388505112,recvendseq:3388505112
+[updaterecvstate]seq:3388505112,syn:0,fin:0,acknumber:3388505112,recvtsval:5129748,
+		--------recvackseq:34438,recvseq:3388505112,recvendseq:3388505112,LastAck:3388505112,TsRecent:5129748
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 3a 0d 40 00 	40 06 02 82 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	c9 f8 7c 18 00 00 86 86 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 4e 47 0e 
+2d 75 ba f7 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:3388505162,recvtsval:5129748,recvackseq:34438,recvseq:3388505112,recvendseq:3388505162
+[updaterecvstate]seq:3388505112,syn:0,fin:0,acknumber:3388505162,recvtsval:5129998,
+		--------recvackseq:34438,recvseq:3388505112,recvendseq:3388505162,LastAck:3388505112,TsRecent:5129998
+[adddelaylinktail]:acknumber:3388505162,remaintime:50
+[fillnormalopts]d sackenable:0,d sack:0,0,blknum:0,flag:3
+[buildackpkt] optlen:12,tot_len:52,Ack:3388505162,sacknum:0,sackblknum:0
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 3a 0e 40 00 	40 06 02 81 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	c9 f8 7c 4a 00 00 86 86 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 4e 47 0f 
+2d 75 ba f7 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:3388505212,recvtsval:5129998,recvackseq:34438,recvseq:3388505162,recvendseq:3388505212
+[updaterecvstate]seq:3388505162,syn:0,fin:0,acknumber:3388505212,recvtsval:5129999,
+		--------recvackseq:34438,recvseq:3388505162,recvendseq:3388505212,LastAck:3388505162,TsRecent:5129999
+[adddelaylinktail]:acknumber:3388505212,remaintime:50
+[fillnormalopts]d sackenable:0,d sack:0,0,blknum:0,flag:3
+[buildackpkt] optlen:12,tot_len:52,Ack:3388505212,sacknum:0,sackblknum:0
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 3a 0f 40 00 	40 06 02 80 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	c9 f8 7c 7c 00 00 86 86 
+80 18 01 56 fe 5b 00 00 	01 01 08 0a 00 4e 47 10 
+2d 75 ba f7 77 65 6c 63 	6f 6d 65 20 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:3388505262,recvtsval:5129999,recvackseq:34438,recvseq:3388505212,recvendseq:3388505262
+[updaterecvstate]seq:3388505212,syn:0,fin:0,acknumber:3388505262,recvtsval:5130000,
+		--------recvackseq:34438,recvseq:3388505212,recvendseq:3388505262,LastAck:3388505212,TsRecent:5130000
+[adddelaylinktail]:acknumber:3388505262,remaintime:50
+[fillnormalopts]d sackenable:0,d sack:0,0,blknum:0,flag:3
+[buildackpkt] optlen:12,tot_len:52,Ack:3388505262,sacknum:0,sackblknum:0
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 66 3a 10 40 00 	40 06 02 7f 7f 00 00 01 
+7f 00 00 02

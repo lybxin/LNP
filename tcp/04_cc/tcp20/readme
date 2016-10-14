@@ -1,0 +1,10 @@
+ECN下CWR与Open状态的相互切换
+
+
+如下设置路由表
+root@Inspiron:/proc/sys/net/ipv4# ip route show table all 127.0.0.2
+local 127.0.0.2 dev lo  table local  scope host  ssthresh lock 50 initcwnd 3 features ecn congctl reno
+
+1、Open->CWR->Open
+2、设置dropno=7，Open->CWR->Recovery->Open
+

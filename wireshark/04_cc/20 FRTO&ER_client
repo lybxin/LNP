@@ -1,0 +1,212 @@
+[initrawops] ipid:19082,tcpseq:62012
+---------before conn setup-------------
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 30 00 00 40 00 	40 06 3c c5 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	2f bb 29 b5 00 00 f2 3d 
+70 12 aa aa fe 25 00 00 	02 04 ff d7 01 03 03 07 
+2f f6 54 12 00 00 00 00 	01 03 03 00 
+-----------------------showpkt end-----------------------
+[updaterecvstate]seq:800795061,syn:1,fin:0,acknumber:800795062,recvtsval:0,
+		--------recvackseq:62013,recvseq:800795061,recvendseq:800795062,LastAck:0,TsRecent:0
+[fillnormalopts]d sackenable:0,d sack:0,0,blknum:0,flag:0
+[buildackpkt] optlen:0,tot_len:40,Ack:800795062,sacknum:0,sackblknum:0
+---------conn setup-------------
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 5a ec 60 40 00 	40 06 50 3a 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	2f bb 29 b6 00 00 f2 3d 
+50 18 01 56 fe 4f 00 00 	77 65 6c 63 6f 6d 65 20 
+74 6f 20 6c 69 6e 75 78 	20 68 65 6c 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:800795112,recvtsval:0,recvackseq:62013,recvseq:800795062,recvendseq:800795112
+[updaterecvstate]seq:800795062,syn:0,fin:0,acknumber:800795112,recvtsval:0,
+		--------recvackseq:62013,recvseq:800795062,recvendseq:800795112,LastAck:800795062,TsRecent:0
+[adddelaylinktail]:acknumber:800795112,remaintime:50,flag:0
+[fillnormalopts]d sackenable:0,d sack:0,0,blknum:0,flag:0
+[buildackpkt] optlen:0,tot_len:40,Ack:800795112,sacknum:0,sackblknum:0
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 5a ec 61 40 00 	40 06 50 39 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	2f bb 29 e8 00 00 f2 3d 
+50 18 01 56 fe 4f 00 00 	77 65 6c 63 6f 6d 65 20 
+74 6f 20 6c 69 6e 75 78 	20 68 65 6c 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:800795162,recvtsval:0,recvackseq:62013,recvseq:800795112,recvendseq:800795162
+[updaterecvstate]seq:800795112,syn:0,fin:0,acknumber:800795162,recvtsval:0,
+		--------recvackseq:62013,recvseq:800795112,recvendseq:800795162,LastAck:800795112,TsRecent:0
+[adddelaylinktail]:acknumber:800795162,remaintime:300,flag:0
+[fillnormalopts]d sackenable:0,d sack:0,0,blknum:0,flag:0
+[buildackpkt] optlen:0,tot_len:40,Ack:800795162,sacknum:0,sackblknum:0
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 5a ec 62 40 00 	40 06 50 38 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	2f bb 2a 1a 00 00 f2 3d 
+50 18 01 56 fe 4f 00 00 	77 65 6c 63 6f 6d 65 20 
+74 6f 20 6c 69 6e 75 78 	20 68 65 6c 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:800795212,recvtsval:0,recvackseq:62013,recvseq:800795162,recvendseq:800795212
+[updaterecvstate]seq:800795162,syn:0,fin:0,acknumber:800795212,recvtsval:0,
+		--------recvackseq:62013,recvseq:800795162,recvendseq:800795212,LastAck:800795162,TsRecent:0
+[adddelaylinktail]:acknumber:800795212,remaintime:300,flag:0
+[fillnormalopts]d sackenable:0,d sack:0,0,blknum:0,flag:0
+[buildackpkt] optlen:0,tot_len:40,Ack:800795212,sacknum:0,sackblknum:0
+[ack_function]-------acknumber:800795112,flag:0-----
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 5a ec 63 40 00 	40 06 50 37 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	2f bb 2a 4c 00 00 f2 3d 
+50 18 01 56 fe 4f 00 00 	77 65 6c 63 6f 6d 65 20 
+74 6f 20 6c 69 6e 75 78 	20 68 65 6c 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:800795262,recvtsval:0,recvackseq:62013,recvseq:800795212,recvendseq:800795262
+[updaterecvstate]seq:800795212,syn:0,fin:0,acknumber:800795262,recvtsval:0,
+		--------recvackseq:62013,recvseq:800795212,recvendseq:800795262,LastAck:800795212,TsRecent:0
+[adddelaylinktail]:acknumber:800795262,remaintime:300,flag:0
+[fillnormalopts]d sackenable:0,d sack:0,0,blknum:0,flag:0
+[buildackpkt] optlen:0,tot_len:40,Ack:800795262,sacknum:0,sackblknum:0
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 5a ec 64 40 00 	40 06 50 36 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	2f bb 2a 7e 00 00 f2 3d 
+50 18 01 56 fe 4f 00 00 	77 65 6c 63 6f 6d 65 20 
+74 6f 20 6c 69 6e 75 78 	20 68 65 6c 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:800795312,recvtsval:0,recvackseq:62013,recvseq:800795262,recvendseq:800795312
+[updaterecvstate]seq:800795262,syn:0,fin:0,acknumber:800795312,recvtsval:0,
+		--------recvackseq:62013,recvseq:800795262,recvendseq:800795312,LastAck:800795262,TsRecent:0
+[adddelaylinktail]:acknumber:800795312,remaintime:300,flag:0
+[fillnormalopts]d sackenable:0,d sack:0,0,blknum:0,flag:0
+[buildackpkt] optlen:0,tot_len:40,Ack:800795312,sacknum:0,sackblknum:0
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 5a ec 65 40 00 	40 06 50 35 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	2f bb 29 e8 00 00 f2 3d 
+50 18 01 56 fe 4f 00 00 	77 65 6c 63 6f 6d 65 20 
+74 6f 20 6c 69 6e 75 78 	20 68 65 6c 
+-----------------------showpkt end-----------------------
+[updaterecvstate]dsack:800795112,800795162
+[update_ofo_link]acknumber:800795312,recvtsval:0,recvackseq:62013,recvseq:800795112,recvendseq:800795162
+[updaterecvstate]seq:800795112,syn:0,fin:0,acknumber:800795312,recvtsval:0,
+		--------recvackseq:62013,recvseq:800795112,recvendseq:800795162,LastAck:800795312,TsRecent:0
+[adddelaylinktail]:acknumber:800795312,remaintime:300,flag:0
+[fillnormalopts]d sackenable:0,d sack:800795112,800795162,blknum:0,flag:0
+[buildackpkt] optlen:0,tot_len:40,Ack:800795312,sacknum:0,sackblknum:0
+[ack_function]-------acknumber:800795162,flag:0-----
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 5a ec 66 40 00 	40 06 50 34 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	2f bb 2a b0 00 00 f2 3d 
+50 18 01 56 fe 4f 00 00 	77 65 6c 63 6f 6d 65 20 
+74 6f 20 6c 69 6e 75 78 	20 68 65 6c 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:800795362,recvtsval:0,recvackseq:62013,recvseq:800795312,recvendseq:800795362
+[updaterecvstate]seq:800795312,syn:0,fin:0,acknumber:800795362,recvtsval:0,
+		--------recvackseq:62013,recvseq:800795312,recvendseq:800795362,LastAck:800795312,TsRecent:0
+[adddelaylinktail]:acknumber:800795362,remaintime:300,flag:0
+[fillnormalopts]d sackenable:0,d sack:0,0,blknum:0,flag:0
+[buildackpkt] optlen:0,tot_len:40,Ack:800795362,sacknum:0,sackblknum:0
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 5a ec 67 40 00 	40 06 50 33 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	2f bb 2a e2 00 00 f2 3d 
+50 18 01 56 fe 4f 00 00 	77 65 6c 63 6f 6d 65 20 
+74 6f 20 6c 69 6e 75 78 	20 68 65 6c 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:800795412,recvtsval:0,recvackseq:62013,recvseq:800795362,recvendseq:800795412
+[updaterecvstate]seq:800795362,syn:0,fin:0,acknumber:800795412,recvtsval:0,
+		--------recvackseq:62013,recvseq:800795362,recvendseq:800795412,LastAck:800795362,TsRecent:0
+[adddelaylinktail]:acknumber:800795412,remaintime:300,flag:0
+[fillnormalopts]d sackenable:0,d sack:0,0,blknum:0,flag:0
+[buildackpkt] optlen:0,tot_len:40,Ack:800795412,sacknum:0,sackblknum:0
+[ack_function]-------acknumber:800795212,flag:0-----
+[ack_function]-------acknumber:800795262,flag:0-----
+[ack_function]-------acknumber:800795312,flag:0-----
+[ack_function]-------acknumber:800795312,flag:0-----
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 5a ec 68 40 00 	40 06 50 32 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	2f bb 2a b0 00 00 f2 3d 
+50 18 01 56 fe 4f 00 00 	77 65 6c 63 6f 6d 65 20 
+74 6f 20 6c 69 6e 75 78 	20 68 65 6c 
+-----------------------showpkt end-----------------------
+[updaterecvstate]dsack:800795312,800795362
+[update_ofo_link]acknumber:800795412,recvtsval:0,recvackseq:62013,recvseq:800795312,recvendseq:800795362
+[updaterecvstate]seq:800795312,syn:0,fin:0,acknumber:800795412,recvtsval:0,
+		--------recvackseq:62013,recvseq:800795312,recvendseq:800795362,LastAck:800795412,TsRecent:0
+[adddelaylinktail]:acknumber:800795412,remaintime:300,flag:0
+[fillnormalopts]d sackenable:0,d sack:800795312,800795362,blknum:0,flag:0
+[buildackpkt] optlen:0,tot_len:40,Ack:800795412,sacknum:0,sackblknum:0
+[ack_function]-------acknumber:800795362,flag:0-----
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 5a ec 69 40 00 	40 06 50 31 7f [ack_function]-------acknumber:800795412,flag:0-----
+00 00 01 
+7f 00 00 02 26 95 27 10 	2f bb 2a e2 00 00 f2 3d 
+50 18 01 56 fe 4f 00 00 	77 65 6c 63 6f 6d 65 20 
+74 6f 20 6c 69 6e 75 78 	20 68 65 6c 
+-----------------------showpkt end-----------------------
+[updaterecvstate]dsack:800795362,800795412
+[update_ofo_link]acknumber:800795412,recvtsval:0,recvackseq:62013,recvseq:800795362,recvendseq:800795412
+[updaterecvstate]seq:800795362,syn:0,fin:0,acknumber:800795412,recvtsval:0,
+		--------recvackseq:62013,recvseq:800795362,recvendseq:800795412,LastAck:800795412,TsRecent:0
+[adddelaylinktail]:acknumber:800795412,remaintime:300,flag:0
+[fillnormalopts]d sackenable:0,d sack:800795362,800795412,blknum:0,flag:0
+[buildackpkt] optlen:0,tot_len:40,Ack:800795412,sacknum:0,sackblknum:0
+[ack_function]-------acknumber:800795412,flag:0-----
+[ack_function]-------acknumber:800795412,flag:0-----
+
+[rawrecv]before update rcv state
+
+----------------------showpkt start----------------------
+
+45 00 00 28 ec 6a 40 00 	40 06 50 62 7f 00 00 01 
+7f 00 00 02 26 95 27 10 	2f bb 2b 14 00 00 f2 3d 
+50 11 01 56 fe 1d 00 00 	77 65 6c 63 6f 6d 65 20 
+74 6f 20 6c 69 6e 75 78 	20 68 65 6c 
+-----------------------showpkt end-----------------------
+[update_ofo_link]acknumber:800795413,recvtsval:0,recvackseq:62013,recvseq:800795412,recvendseq:800795413
+[updaterecvstate]seq:800795412,syn:0,fin:1,acknumber:800795413,recvtsval:0,
+		--------recvackseq:62013,recvseq:800795412,recvendseq:800795413,LastAck:800795412,TsRecent:0
+[adddelaylinktail]:acknumber:800795413,remaintime:300,flag:0
+[fillnormalopts]d sackenable:0,d sack:0,0,blknum:0,flag:0
+[buildackpkt] optlen:0,tot_len:40,Ack:800795413,sacknum:0,sackblknum:0
+[adddelaylinktail]:acknumber:800795413,remaintime:300,flag:66
+[fillnormalopts]d sackenable:0,d sack:0,0,blknum:0,flag:66
+[buildackpkt] optlen:0,tot_len:40,Ack:800795413,sacknum:0,sackblknum:0
+[ack_function]-------acknumber:800795413,flag:0-----
+[ack_function]-------acknumber:800795413,flag:66-----
+[ack_function]end-------acknumber:800795413,flag:66-----

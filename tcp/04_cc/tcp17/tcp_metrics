@@ -1,0 +1,176 @@
+#通过ip route add命令可以添加路由，然后针对这条路由的目标地址设置destination metrics
+****@Inspiron:****/04_cc/tcp17# ip route add local 127.0.0.2 dev lo congctl reno initcwnd 5  ssthresh lock 4  
+#设置后查看一下相关信息
+****@Inspiron:****/04_cc/tcp17# ip route show table all | grep 127.0.0.2; ss -i sport = 9877;ip tcp_metrics show 127.0.0.2
+#下面一行对应  ip route show table all | grep 127.0.0.2  该命令可以查看destination metrics设置
+local 127.0.0.2 dev lo  table local  scope host  ssthresh lock 50 cwnd lock 9 initcwnd 5 congctl reno
+#下面一行对应命令 ss -i sport = 9877 查看源端口为9877 的tcp连接信息
+Netid State      Recv-Q Send-Q                Local Address:Port                                 Peer Address:Port                
+#下面一行对应 ip tcp_metrics show 127.0.0.2 该命令可以查看tcp metrics设置，此时我们虽然设置了destination metric，但是因为
+#还没有建立到127.0.0.2的tcp连接，因而还没有tcp metric信息
+RTNETLINK answers: No such process
+#启动server server端在与client建立连接后会休眠30ms  然后连续发送15个数据包 每个数据包的大小为50bytes，发送间隔为3ms
+#数据包发送完后休眠30s，然后关闭与client的连接
+****@Inspiron:****/04_cc/tcp17# ./server.out &
+[1] 24091
+#client建立与server端的tcp连接，client对于每个收到的数据包都会回复一个ACK确认包
+****@Inspiron:****/04_cc/tcp17# ./client.out > rst_client &
+[2] 24093
+****@Inspiron:****/04_cc/tcp17# 
+conn setup sleep 30s
+#上面一行是server端打印，提示已经与client建立连接，开始休眠30s，此时我们再次查看信息
+****@Inspiron:****/04_cc/tcp17#  ip route show table all | grep 127.0.0.2; ss -i sport = 9877;ip tcp_metrics show 127.0.0.2
+#可以看到路由表中的destination metric的设置值是静态不变的
+local 127.0.0.2 dev lo  table local  scope host  ssthresh lock 50 cwnd lock 9 initcwnd 5 congctl reno
+#现在可以查看到server端与client端的连接了  注意路由表中设置了ssthresh lock 50，但是下面的连接信息告诉我们server端ssthresh=9，原因就是路由表中设置了cwnd lock 9，cwnd这个metric生效的时候，TCP连接会设置ssthresh=min(ssthresh,cwnd)=9
+Netid State      Recv-Q Send-Q                Local Address:Port                                 Peer Address:Port                
+tcp   ESTAB      0      0                         127.0.0.1:9877                                    127.0.0.2:webmin               
+	 reno wscale:0,7 rto:252 rtt:50.258/25.129 mss:50 cwnd:5 ssthresh:9 segs_in:2 send 39.8Kbps lastsnd:6064456 lastack:6064456 pacing_rate 47.8Kbps rcv_space:43690
+#可以看到在新建立TCP连接后，就会初始化一个tcp metric，初始值来自路由表中静态的destination metric	 
+127.0.0.2 age 4.760sec ssthresh 50 cwnd 9 source 127.0.0.1
+****@Inspiron:****/04_cc/tcp17# 
+****@Inspiron:****/04_cc/tcp17# 
+server send start
+
+server send end   sleep 30s
+#server端发送数据后再次查看相关信息
+****@Inspiron:****/04_cc/tcp17#  ip route show table all | grep 127.0.0.2; ss -i sport = 9877;ip tcp_metrics show 127.0.0.2
+local 127.0.0.2 dev lo  table local  scope host  ssthresh lock 50 cwnd lock 9 initcwnd 5 congctl reno
+#由于路由表中设置cwnd lock 9，限制了拥塞窗口最大值只能到9，注意路由表中的cwnd限制的是拥塞窗口的最大值，从下面连接信息可以看到cwnd=9
+Netid State      Recv-Q Send-Q                Local Address:Port                                 Peer Address:Port                
+tcp   ESTAB      0      0                         127.0.0.1:9877                                    127.0.0.2:webmin               
+	 reno wscale:0,7 rto:252 rtt:50.271/0.392 mss:50 cwnd:9 ssthresh:9 bytes_acked:750 segs_out:15 segs_in:17 send 71.6Kbps lastsnd:6094556 lastack:6094604 pacing_rate 85.9Kbps rcv_space:43690
+#从下面的age可以看到server端并没有更新tcp metrics
+127.0.0.2 age 39.528sec ssthresh 50 cwnd 9 source 127.0.0.1
+****@Inspiron:****/04_cc/tcp17# 
+server sockfd close
+
+[2]+  已完成               ./client.out > rst_client
+#server端连接关闭，再次查看相关信息
+****@Inspiron:****/04_cc/tcp17# ip route show table all | grep 127.0.0.2; ss -i sport = 9877;ip tcp_metrics show 127.0.0.2
+local 127.0.0.2 dev lo  table local  scope host  ssthresh lock 50 cwnd lock 9 initcwnd 5 congctl reno
+#已经查不到源端口为9877的tcp连接
+Netid State      Recv-Q Send-Q                Local Address:Port                                 Peer Address:Port                
+#可以从age信息里面看到tcp 连接关闭的时候更新了tcp metric，但是可以看到ssthresh和cwnd的值并没有更新这个就是lock的作用，
+#被lock的tcp metric是不会被tcp连接更新的 另外可以看到rtt和rttvar这两个metric发生了更新，但是reordering并没有更新，也就是说TCP
+#连接关闭的时候还要检测当前状态的有效性来决定是否更新相关的metric。
+127.0.0.2 age 6.116sec ssthresh 50 cwnd 9 rtt 50281us rttvar 50281us source 127.0.0.1
+#接下来我们更新路由表destination metric的cwnd和ssthresh两个metrics
+****@Inspiron:****/04_cc/tcp17# ip route change local 127.0.0.2 dev lo initcwnd 5 cwnd lock 8 ssthresh lock 40 congctl reno
+****@Inspiron:****/04_cc/tcp17# ./client.out > rst_client &
+[2] 24190
+****@Inspiron:****/04_cc/tcp17# 
+conn setup sleep 30s
+#重新进行测试 连接建立
+****@Inspiron:****/04_cc/tcp17# ip route show table all | grep 127.0.0.2; ss -i sport = 9877;ip tcp_metrics show 127.0.0.2
+local 127.0.0.2 dev lo  table local  scope host  ssthresh lock 40 cwnd lock 8 initcwnd 5 congctl reno
+#从下面的连接信息中的ssthresh值可以看到，路由表中的设置并没有生效，连接建立的时候是从tcp metrics中读取的连接缓存信息
+Netid State      Recv-Q Send-Q                Local Address:Port                                 Peer Address:Port                
+tcp   ESTAB      0      0                         127.0.0.1:9877                                    127.0.0.2:webmin               
+	 reno wscale:0,7 rto:248 rtt:50.225/25.112 mss:50 cwnd:5 ssthresh:9 segs_in:2 send 39.8Kbps lastsnd:6393360 lastack:6393360 pacing_rate 47.8Kbps rcv_space:43690
+#可以看到此时的tcp metric中cwnd和ssthresh并没有从destination中更新，原因就是上面说的
+#只有TCP metrics过期后或者初始建立时候才会从destination metric更新 
+127.0.0.2 age 273.460sec ssthresh 50 cwnd 9 rtt 50281us rttvar 50281us source 127.0.0.1
+****@Inspiron:****/04_cc/tcp17# 
+server send start
+
+server send end   sleep 30s
+
+****@Inspiron:****/04_cc/tcp17# ip route show table all | grep 127.0.0.2; ss -i sport = 9877;ip tcp_metrics show 127.0.0.2
+local 127.0.0.2 dev lo  table local  scope host  ssthresh lock 40 cwnd lock 8 initcwnd 5 congctl reno
+Netid State      Recv-Q Send-Q                Local Address:Port                                 Peer Address:Port                
+tcp   ESTAB      0      0                         127.0.0.1:9877                                    127.0.0.2:webmin               
+	 reno wscale:0,7 rto:252 rtt:50.306/0.377 mss:50 cwnd:9 ssthresh:9 bytes_acked:750 segs_out:15 segs_in:17 send 71.6Kbps lastsnd:6423460 lastack:6423508 pacing_rate 85.9Kbps rcv_space:43690
+127.0.0.2 age 303.164sec ssthresh 50 cwnd 9 rtt 50281us rttvar 50281us source 127.0.0.1
+****@Inspiron:****/04_cc/tcp17# 
+server sockfd close
+
+[2]+  已完成               ./client.out > rst_client
+****@Inspiron:****/04_cc/tcp17# ip route show table all | grep 127.0.0.2; ss -i sport = 9877;ip tcp_metrics show 127.0.0.2
+local 127.0.0.2 dev lo  table local  scope host  ssthresh lock 40 cwnd lock 8 initcwnd 5 congctl reno
+Netid State      Recv-Q Send-Q                Local Address:Port                                 Peer Address:Port   
+#连接关闭后 再次更新了tcp metrics  这一点可以从age看到 也可以从rtt、rttvar中看到             
+127.0.0.2 age 4.800sec ssthresh 50 cwnd 9 rtt 50312us rttvar 37785us source 127.0.0.1
+#接下来我们看一下不填加lock关键字的效果
+****@Inspiron:****/04_cc/tcp17# ip route change local 127.0.0.2 dev lo initcwnd 5 cwnd 8 ssthresh 40  congctl reno
+****@Inspiron:****/04_cc/tcp17# ip route show table all | grep 127.0.0.2; ss -i sport = 9877;ip tcp_metrics show 127.0.0.2
+local 127.0.0.2 dev lo  table local  scope host  ssthresh 40 cwnd 8 initcwnd 5 congctl reno
+Netid State      Recv-Q Send-Q                Local Address:Port                                 Peer Address:Port                
+127.0.0.2 age 91.740sec ssthresh 50 cwnd 9 rtt 50312us rttvar 37785us source 127.0.0.1
+#为了让路由表中的destination metric生效，需要使用下面的命令从tcp metrics中删除127.0.0.2对应的缓存信息
+****@Inspiron:****/04_cc/tcp17# ip tcp_metrics flush 127.0.0.2
+****@Inspiron:****/04_cc/tcp17# ip route show table all | grep 127.0.0.2; ss -i sport = 9877;ip tcp_metrics show 127.0.0.2
+local 127.0.0.2 dev lo  table local  scope host  ssthresh 40 cwnd 8 initcwnd 5 congctl reno
+Netid State      Recv-Q Send-Q                Local Address:Port                                 Peer Address:Port                
+#可以看到TCP metrics中已经没有对应127.0.0.2的缓存了
+RTNETLINK answers: No such process
+****@Inspiron:****/04_cc/tcp17# ./client.out > rst_client &[2] 24265
+****@Inspiron:****/04_cc/tcp17# 
+conn setup sleep 30s
+#client再次建立连接  进行新的测试
+****@Inspiron:****/04_cc/tcp17# ip route show table all | grep 127.0.0.2; ss -i sport = 9877;ip tcp_metrics show 127.0.0.2
+local 127.0.0.2 dev lo  table local  scope host  ssthresh 40 cwnd 8 initcwnd 5 congctl reno
+#从下面的连接信息中可以看到，cwnd虽然设置了  但是并没有限制到server端的拥塞窗口，因为如果cwnd这个metric设置生效的话，那么ssthresh应为8
+Netid State      Recv-Q Send-Q                Local Address:Port                                 Peer Address:Port                
+tcp   ESTAB      0      0                         127.0.0.1:9877                                    127.0.0.2:webmin               
+	 reno wscale:0,7 rto:252 rtt:50.243/25.121 mss:50 cwnd:5 ssthresh:40 segs_in:2 send 39.8Kbps lastsnd:6574128 lastack:6574128 pacing_rate 79.6Kbps rcv_space:43690
+#连接建立后创建新的tcp metric，可以看到其中的初始值来自与路由表中destination metrics设置
+127.0.0.2 age 2.980sec ssthresh 40 cwnd 8 source 127.0.0.1
+****@Inspiron:****/04_cc/tcp17# 
+server send start
+
+server send end   sleep 30s
+
+****@Inspiron:****/04_cc/tcp17# ip route show table all | grep 127.0.0.2; ss -i sport = 9877;ip tcp_metrics show 127.0.0.2
+local 127.0.0.2 dev lo  table local  scope host  ssthresh 40 cwnd 8 initcwnd 5 congctl reno
+#server端发送数据后，可以看到cwnd已经增长到了20，超越了路由表中cwnd的设置。说明没有添加lock关键字的cwnd metric并没有生效
+Netid State      Recv-Q Send-Q                Local Address:Port                                 Peer Address:Port                
+tcp   ESTAB      0      0                         127.0.0.1:9877                                    127.0.0.2:webmin               
+	 reno wscale:0,7 rto:252 rtt:50.273/0.372 mss:50 cwnd:20 ssthresh:40 bytes_acked:750 segs_out:15 segs_in:17 send 159.1Kbps lastsnd:6604192 lastack:6604244 pacing_rate 191.0Kbps rcv_space:43690
+127.0.0.2 age 34.248sec ssthresh 40 cwnd 8 source 127.0.0.1
+****@Inspiron:****/04_cc/tcp17# 
+server sockfd close
+
+[2]+  已完成               ./client.out > rst_client
+****@Inspiron:****/04_cc/tcp17# ip route show table all | grep 127.0.0.2; ss -i sport = 9877;ip tcp_metrics show 127.0.0.2
+local 127.0.0.2 dev lo  table local  scope host  ssthresh 40 cwnd 8 initcwnd 5 congctl reno
+Netid State      Recv-Q Send-Q                Local Address:Port                                 Peer Address:Port                
+#因为路由表中的cwnd metric没有lock，因此连接关闭的时候会更新cwnd，实际上更新了也没用，因为新的tcp连接并不会使用
+127.0.0.2 age 3.064sec ssthresh 40 cwnd 24 rtt 50275us rttvar 50275us source 127.0.0.1
+#接着进行新的测试，下面命令指示client丢掉第8个数据包 造成server端快速重传，从而更新ssthresh
+****@Inspiron:****/04_cc/tcp17# ./client.out 8 >rst_client &
+[2] 24606
+****@Inspiron:****/04_cc/tcp17# 
+conn setup sleep 30s
+
+****@Inspiron:****/04_cc/tcp17# ip route show table all | grep 127.0.0.2; ss -i sport = 9877;ip tcp_metrics show 127.0.0.2
+local 127.0.0.2 dev lo  table local  scope host  ssthresh 40 cwnd 8 initcwnd 5 congctl reno
+#新建立连接的拥塞窗口cwnd始终从路由表中的initcwnd初始化  而不是从tcp metric或者destination metric中的cwnd metric更新，
+#再说一次  cwnd这个metric限制的是拥塞窗口的最大值，而且只有在加lock关键字设置后才会生效
+Netid State      Recv-Q Send-Q                Local Address:Port                                 Peer Address:Port                
+tcp   ESTAB      0      0                         127.0.0.1:9877                                    127.0.0.2:webmin               
+	 reno wscale:0,7 rto:252 rtt:50.287/25.143 mss:50 cwnd:5 ssthresh:40 segs_in:2 send 39.8Kbps lastsnd:7230928 lastack:7230928 pacing_rate 79.5Kbps rcv_space:43690
+127.0.0.2 age 601.280sec ssthresh 40 cwnd 24 rtt 50275us rttvar 50275us source 127.0.0.1
+****@Inspiron:****/04_cc/tcp17# 
+server send start
+
+server send end   sleep 30s
+
+****@Inspiron:****/04_cc/tcp17# ip route show table all | grep 127.0.0.2; ss -i sport = 9877;ip tcp_metrics show 127.0.0.2
+local 127.0.0.2 dev lo  table local  scope host  ssthresh 40 cwnd 8 initcwnd 5 congctl reno
+#快速重传及快速恢复后，cwnd=7，ssthresh=6
+Netid State      Recv-Q Send-Q                Local Address:Port                                 Peer Address:Port                
+tcp   ESTAB      0      0                         127.0.0.1:9877                                    127.0.0.2:webmin               
+	 reno wscale:0,7 rto:252 rtt:49.999/0.534 mss:50 cwnd:7 ssthresh:6 bytes_acked:750 segs_out:16 segs_in:17 send 56.0Kbps lastsnd:7261040 lastack:7261088 pacing_rate 67.2Kbps retrans:0/1 rcv_space:43690
+127.0.0.2 age 630.636sec ssthresh 40 cwnd 24 rtt 50275us rttvar 50275us source 127.0.0.1
+****@Inspiron:****/04_cc/tcp17# 
+server sockfd close
+
+[2]+  已完成               ./client.out 8 > rst_client
+****@Inspiron:****/04_cc/tcp17# ip route show table all | grep 127.0.0.2; ss -i sport = 9877;ip tcp_metrics show 127.0.0.2
+local 127.0.0.2 dev lo  table local  scope host  ssthresh 40 cwnd 8 initcwnd 5 congctl reno
+Netid State      Recv-Q Send-Q                Local Address:Port                                 Peer Address:Port   
+#连接关闭后 可以看到cwnd和ssthresh都已经更新了             
+127.0.0.2 age 4.996sec ssthresh 6 cwnd 15 rtt 50244us rttvar 37823us source 127.0.0.1
+****@Inspiron:****/04_cc/tcp17# 
+

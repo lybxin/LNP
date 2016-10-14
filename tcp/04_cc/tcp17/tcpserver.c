@@ -3,7 +3,8 @@
 #include "../../common/rawops.h"
 #include "../../common/tcp_private.h"
 #include <pthread.h> 
-
+//该flag有多线程竞争关系 需要同步  此处影响不大 忽略
+int openflag = 1;
 void *send_function(void *arg)
 {
     int sockfd,val,len,i=0;
@@ -14,7 +15,7 @@ void *send_function(void *arg)
     pthread_detach(pthread_self());
     
     sockfd = *( (int*)arg );
-    printf("[send_function]sockfd:%d \n",sockfd);
+    //printf("[send_function]sockfd:%d \n",sockfd);
     
     val = 1;
     len = sizeof(int);
@@ -25,40 +26,49 @@ void *send_function(void *arg)
     val = 40000;
     len = sizeof(int);
     Setsockopt(sockfd, SOL_SOCKET, SO_SNDBUF,(void *)&val, len);
-    
-    sleep_ms(1000-3);
-    
-    while(i<17)
+    printf("\nconn setup sleep 30s\n");
+    sleep_ms(30*1000);
+    printf("\nserver send start\n");
+    while(i<15)
     {
-        //注意修改上面的1000-3
-        sleep_ms(5);
         Write(sockfd,buffer,50);
-        
+        sleep_ms(3);
         i++;
     }
-    //sleep_ms(50);
-    //Write(sockfd,buffer,100);
-
+    
+    printf("\nserver send end   sleep 30s\n");
+    sleep_ms(30*1000-2);
+    
+    openflag=0;
+    sleep_ms(2);
+    printf("\nserver sockfd close\n");
+    
+    Close(sockfd);  
+    
     return 0;
 }
 
 void *recv_function(void *arg)
 {
-    int sockfd;
-    //int num;
-    //char buffer[MAX_PKT_SIZE] = {"welcome to linux hello\0"};  //MAX_PKT_SIZE
-    
     //接收线程detach自己
     pthread_detach(pthread_self());
+    
+/*
+    int sockfd;
+    int num;
+    char buffer[MAX_PKT_SIZE] = {"welcome to linux hello\0"};  //MAX_PKT_SIZE
+    
+    
         
     sockfd = *( (int*)arg );
-    printf("[recv_function]sockfd:%d \n",sockfd);
+    //printf("[recv_function]sockfd:%d \n",sockfd);
     
-    //num = Read(sockfd,buffer,MAX_PKT_SIZE);
-    //printf("\n----------read %d bytes--------------\n",num);
+    num = Read(sockfd,buffer,MAX_PKT_SIZE);
+    printf("\n----------read %d bytes--------------\n",num);
     
-    
+    */
     return 0;
+    
 }
 
 void *get_info(void *arg)
@@ -66,6 +76,7 @@ void *get_info(void *arg)
     int sockfd;
     int len,i=0,last_in = 0,last_out = 0;;
     struct tcp_info_user info;
+    FILE *stream = fopen("rst_server","w+"); 
     
     //接收线程detach自己
     pthread_detach(pthread_self());  
@@ -75,30 +86,38 @@ void *get_info(void *arg)
     
             
     i = 0;
-    while(i < 100*200000)
+    while(i < 100*200000 && openflag>0)
     {
         len = sizeof(info);
+        errno = 0;
         Getsockopt(sockfd, SOL_TCP, TCP_INFO,(void *)&info, (socklen_t *)&len);
+        if(errno != 0)
+        {
+            //perror("get sock error\n");
+            break;
+        }
         if( (last_in != info.tcpi_segs_in) || (last_out != info.tcpi_segs_out) )
         {
             sleep_ms(1);
             len = sizeof(info);
             Getsockopt(sockfd, SOL_TCP, TCP_INFO,(void *)&info, (socklen_t *)&len);
             
-            printftcpinfo(&info);
+            fprintftcpinfo(stream,&info);
 
-            printf("i=%d\n",i);
+            //printf("i=%d\n",i);
             
             
             last_in = info.tcpi_segs_in;
             last_out = info.tcpi_segs_out;
+            i++;
+            continue;
         }
      
         
-        //sleep_ms(1);
+        sleep_ms(1);
         i++;
     }  
-    
+    fclose(stream);
     return 0;
 }
 
@@ -112,6 +131,10 @@ int main()
     int res;
     
     Listenfd = Socket(AF_INET,SOCK_STREAM,0);
+    
+    val = 1;
+    len = sizeof(int);
+    Setsockopt(Listenfd, SOL_SOCKET, SO_REUSEPORT,(void *)&val, len);
 
     memset(&servaddr,0,sizeof(servaddr));
     servaddr.sin_family = AF_INET;
@@ -132,7 +155,7 @@ int main()
         clilen = sizeof(cliaddr);
         connfd = Accept(Listenfd,(SA*)&cliaddr,&clilen);
         
-        
+        openflag=1;
         res = pthread_create(&getinfo_thread, NULL, get_info, (void *)(&connfd));  
         if (res != 0)  
         {  
@@ -158,7 +181,7 @@ int main()
         
         //sleep(200);
         
-        printf("close\n");
+        //printf("close\n");
         //交由系统回收关闭文件描述符
         //Close(connfd);
     }

@@ -1,0 +1,9 @@
+FRTO与ER
+
+关闭SACK和TSopt  注意关闭SACK的同时实际上也关闭了TLP
+
+echo 0 > tcp_timestamps 
+echo 0 > tcp_sack 
+
+
+

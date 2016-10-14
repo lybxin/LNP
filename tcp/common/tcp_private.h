@@ -1,6 +1,8 @@
 #ifndef	_TCP_PRIVATE_H
 #define	_TCP_PRIVATE_H
 #include <netinet/tcp.h>
+#include <stdio.h>
+
 
 //自定义TCP_INFO响应数据结构
 struct tcp_info_user
@@ -153,6 +155,7 @@ struct tcp_info_user
 	
 };
 
+void fprintftcpinfo(FILE *stream, struct tcp_info_user *info);
 
 void printftcpinfo(struct tcp_info_user *info);
 

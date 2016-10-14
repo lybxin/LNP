@@ -284,7 +284,7 @@ int adddelaylinktail(int remaintime, u32 acknumber, u32 flag)
         p->timeout.tv_nsec = remaintime*1000*1000 + req.tv_nsec - (1000*1000*1000);
 		p->timeout.tv_sec = req.tv_sec + 1;
 	}
-	printf("[adddelaylinktail]:acknumber:%u,remaintime:%u\n",acknumber,remaintime);
+	printf("[adddelaylinktail]:acknumber:%u,remaintime:%u,flag:%u\n",acknumber,remaintime,flag);
 	p->next = NULL;
 	//p->remaintime = remaintime;
 	p->acknumber = acknumber;
@@ -313,12 +313,13 @@ int popdelaylinkhead(struct timespec *timeout, u32 *acknumber, u32 *flag, unsign
     struct delay_node *p;
 
 	pthread_mutex_lock(&delaylinkmutex);
-
+    
 	while(delay_link_head->next == NULL)
 	{
-         pthread_cond_wait(&delaylinkcond, &delaylinkmutex);
+         
+		 pthread_cond_wait(&delaylinkcond, &delaylinkmutex);
 	}
-
+    
 	if(delay_link_head->next != NULL)
 	{
 	    p = delay_link_head->next;
@@ -520,12 +521,12 @@ void filliphdr(struct iphdr *iph, u16 tot_len)
     iph->check = htons(0);      //Set to 0 before calculating checksum
     iph->saddr = inet_addr(srcip); 
     iph->daddr = inet_addr(dstip);;
-    
-    iph->check = htons(csum ((unsigned short *) iph, ntohs(iph->tot_len)));
+    //calc err  have not update tcp header   IP_HDRINCL auto fill
+    //iph->check = htons(csum ((unsigned short *) iph, ntohs(iph->tot_len)));
 }
 
 //头长doff check  确保optlen四字节对齐
-void filltcphdr(struct tcphdr *th, int syn, int ack, u32 seq, u32 acknumber, u16 optlen)
+void filltcphdr(struct tcphdr *th, u32 seq, u32 acknumber, u16 optlen, u32 flag)
 {
 	
     //TCP Header
@@ -534,11 +535,19 @@ void filltcphdr(struct tcphdr *th, int syn, int ack, u32 seq, u32 acknumber, u16
     th->seq = htonl(seq);
     th->ack_seq = htonl(acknumber);
     th->doff = optlen/4+5;        //tcp header size
-    th->fin=0;
-    th->syn=syn;
-    th->rst=0;
+    th->fin=(flag&TCP_FIN)?1:0;
+    th->syn=(flag&TCP_SYN)?1:0;
+    th->rst=(flag&TCP_RST)?1:0;
     th->psh=0;
-    th->ack=ack;
+    th->ack=(flag&TCP_ACK)?1:0;
+
+	th->res2 = 0;
+	if(flag&TCP_ECE)
+		th->res2 = th->res2|1;
+
+	if(flag&TCP_CWR)
+		th->res2 = th->res2|2;
+	
     th->urg=0;
     //th->ece=0;
     //th->cwr=0;
@@ -600,7 +609,7 @@ void fillsynopts(struct tcphdr* th)
 }
 
 //建立SYN报文 外层确保buffer len足够长
-u16 buildsynpkt(u8 *buffer)
+u16 buildsynpkt(u8 *buffer, u32 flag)
 {
     struct iphdr *iph;
     struct tcphdr *th;
@@ -614,7 +623,7 @@ u16 buildsynpkt(u8 *buffer)
     
     th = (struct tcphdr*)(buffer + iph->ihl * 4);
     
-    filltcphdr(th, 1, 0, tcpseq, 0, sizeof(struct thsynopts));
+    filltcphdr(th, tcpseq, 0, sizeof(struct thsynopts),TCP_SYN|flag);
     
     fillsynopts(th);
     
@@ -835,8 +844,8 @@ u16 buildackpkt(u8 *buffer, u32 acknumber, u32 flag)
     
     th = (struct tcphdr*)(buffer + iph->ihl * 4);
     
-    filltcphdr(th, 0, 1, tcpseq, acknumber, optlen);
-    
+    filltcphdr(th, tcpseq, acknumber, optlen, TCP_ACK|flag);
+ 
     fillnormalopts(th, flag, acknumber);
     
     printf("[buildackpkt] optlen:%u,tot_len:%u,Ack:%u,sacknum:%u,sackblknum:%u\n",optlen,tot_len,acknumber,getsackblknum(flag),sackblknum);
@@ -872,7 +881,7 @@ u16 buildadvdatapkt(u8 *buffer, u32 acknumber,u16 buflen, u32 flag)
     
     th = (struct tcphdr*)(buffer + iph->ihl * 4);
     
-    filltcphdr(th, 0, 1, tcpseq, acknumber, optlen);
+    filltcphdr(th, tcpseq, acknumber, optlen, TCP_ACK|flag);
     
     fillnormalopts(th,flag,acknumber);
     
@@ -931,9 +940,8 @@ u16 buildrstpkt(u8 *buffer)
     
     th = (struct tcphdr*)(buffer + iph->ihl * 4);
     
-    filltcphdr(th, 0, 1, tcpseq, recvacknumber, optlen);
+    filltcphdr(th, tcpseq, recvacknumber, optlen, TCP_ACK|TCP_RST|flag);
     
-    th->rst = 1;
     
     fillnormalopts(th,flag,0);
     
@@ -1071,6 +1079,27 @@ u16 containdata(u8 *buffer, u16 recvlen)
 
 	return datalen;
 }
+u16 containfin(u8 *buffer, u16 recvlen)
+{
+    struct iphdr *iph;
+    struct tcphdr *th;
+
+    iph = (struct iphdr*)buffer;
+    th = (struct tcphdr*)(buffer + iph->ihl * 4);
+
+	return th->fin;
+}
+
+u8 getthflag(u8 *buffer)
+{
+    struct iphdr *iph;
+    struct tcphdr *th;
+
+    iph = (struct iphdr*)buffer;
+    th = (struct tcphdr*)(buffer + iph->ihl * 4);
+
+	return th->th_flags;
+}
 
 u16 rawadvrecv(int sockfd, u8 *buffer, u16 buflen, u32 flag)
 {
@@ -1189,16 +1218,14 @@ u16 rawsend(int sockfd, u8 *buffer, u16 buflen)
     return rawsendnodelay(sockfd, buffer, buflen);
 }
 
-
-
-//返回错误需要处理
-int rawconnect(int sockfd)
+//返回错误需要处理  TSopt
+int rawadvconnect(int sockfd, u32 synflag, u32 synackflag)
 {
     u8 buffer[MAX_PKT_SIZE];
     u16 tot_len;
     
     //发送SYN
-    tot_len = buildsynpkt(buffer);
+    tot_len = buildsynpkt(buffer,synflag);
     rawsend(sockfd,buffer,tot_len);
     
     //等待接收SYN-ACK
@@ -1206,9 +1233,19 @@ int rawconnect(int sockfd)
     
     //发送ACK  init LastAck
     LastAck = recvacknumber;
-    tot_len = buildackpkt(buffer,recvacknumber,TCP_TSOPT);
+    tot_len = buildackpkt(buffer,recvacknumber,synackflag);
     rawsend(sockfd,buffer,tot_len);
-    
+
+	return 0;
+
+}
+
+
+//返回错误需要处理
+int rawconnect(int sockfd)
+{
+
+    rawadvconnect(sockfd, TCP_TSOPT, TCP_TSOPT);
     return 0;
 
 }
