@@ -1,0 +1,31 @@
+
+Oct 21 16:17:43 Inspiron kernel: [10538.954890] [tcp_v4_rcv] seq:41995,len:1,pid:18370,uid:0,sk_state:10,sk_addr:ffff88011eecbc00,ack_seq:0,cwnd:10,ssthresh:2147483647,cwnd_cnt:0
+Oct 21 16:17:43 Inspiron kernel: [10538.954903] [tcp_rcv_state_process] sk_state:10,seq:41995,end_seq:41996,len:40,data_len:0,truesize:768 
+Oct 21 16:17:43 Inspiron kernel: [10538.954907] [tcp_v4_conn_request]seq:41995,end_seq:41996
+Oct 21 16:17:43 Inspiron kernel: [10539.005302] [tcp_v4_rcv] seq:41996,len:0,pid:18370,uid:0,sk_state:12,sk_addr:ffff8800727f9d78,ack_seq:875533743,cwnd:0,ssthresh:0,cwnd_cnt:0
+Oct 21 16:17:43 Inspiron kernel: [10539.005335] [tcp_rcv_state_process] sk_state:3,seq:41996,end_seq:41996,len:32,data_len:0,truesize:768 
+Oct 21 16:17:43 Inspiron kernel: [10539.005345] [tcp_init_metrics]ssthreshlock:0,lock:0,cwndtcpm_lock:0,ssthresh:0
+Oct 21 16:17:43 Inspiron kernel: [10539.005347] [tcp_rcv_state_process]
+Oct 21 16:17:43 Inspiron kernel: [10539.005625] [tcp_v4_rcv] seq:41996,len:10,pid:18373,uid:0,sk_state:1,sk_addr:ffff88011edc5280,ack_seq:875533743,cwnd:10,ssthresh:2147483647,cwnd_cnt:0
+Oct 21 16:17:43 Inspiron kernel: [10539.005633] [tcp_rcv_established]sk_forward_alloc:0,seq:41996,end_seq:42006,len:42,data_len:0,truesize:768,pfmemalloc:0,tailroom:114
+Oct 21 16:17:43 Inspiron kernel: [10539.005639] [sk_forced_mem_schedule]sk_forward_alloc:0,size:768,amt:1,SK_MEM_QUANTUM:4096
+Oct 21 16:17:43 Inspiron kernel: [10539.005642] [sk_mem_charge]sk_forward_alloc:3328,size:768
+Oct 21 16:17:43 Inspiron kernel: [10539.005650] [tcp_transmit_skb] seq:875533743, end_seq:875533743, pcount:1,pid:18373,uid:0,data_len:0,cwnd:10,ssthresh:2147483647,skb:ffff880111ee5600
+Oct 21 16:17:43 Inspiron kernel: [10539.008825] [tcp_v4_rcv] seq:42046,len:10,pid:18373,uid:0,sk_state:1,sk_addr:ffff88011edc5280,ack_seq:875533743,cwnd:10,ssthresh:2147483647,cwnd_cnt:0
+Oct 21 16:17:43 Inspiron kernel: [10539.008839] [tcp_rcv_established]sk_forward_alloc:3328,seq:42046,end_seq:42056,len:42,data_len:0,truesize:768,pfmemalloc:0,tailroom:114
+Oct 21 16:17:43 Inspiron kernel: [10539.008858] [tcp_transmit_skb] seq:875533743, end_seq:875533743, pcount:1,pid:18373,uid:0,data_len:0,cwnd:10,ssthresh:2147483647,skb:ffff880121335900
+Oct 21 16:17:51 Inspiron kernel: [10547.011651] [sk_mem_uncharge]sk_forward_alloc:4096,size:768
+Oct 21 16:17:53 Inspiron kernel: [10548.838102] [__sk_mem_reclaim]sk_forward_alloc:0,amount:1,SK_MEM_QUANTUM_SHIFT:12
+Oct 21 16:17:53 Inspiron kernel: [10548.838113] [sk_forced_mem_schedule]sk_forward_alloc:0,size:1280,amt:1,SK_MEM_QUANTUM:4096
+Oct 21 16:17:53 Inspiron kernel: [10548.838117] [sk_mem_charge]sk_forward_alloc:2816,size:1280
+Oct 21 16:17:53 Inspiron kernel: [10548.838122] [__tcp_push_pending_frames]cur_mss:50,timeer:62
+Oct 21 16:17:53 Inspiron kernel: [10548.838127] [tcp_write_xmit] seq:875533743,tso_segs:1,push_one:0,qlen:1 
+Oct 21 16:17:53 Inspiron kernel: [10548.838134] [tcp_transmit_skb] seq:875533743, end_seq:875533744, pcount:1,pid:18374,uid:0,data_len:0,cwnd:10,ssthresh:2147483647,skb:ffff88001984aa00
+Oct 21 16:17:53 Inspiron kernel: [10548.838176] [tcp_cwnd_application_limited]init_win:10,cwnd_used:1,cwnd:10,ssthresh:2147483647
+Oct 21 16:17:53 Inspiron kernel: [10548.889028] [tcp_v4_rcv] seq:42006,len:0,pid:18372,uid:0,sk_state:4,sk_addr:ffff88011edc5280,ack_seq:875533744,cwnd:10,ssthresh:2147483647,cwnd_cnt:0
+Oct 21 16:17:53 Inspiron kernel: [10548.889049] [tcp_rcv_state_process] sk_state:4,seq:42006,end_seq:42006,len:32,data_len:0,truesize:768 
+Oct 21 16:17:53 Inspiron kernel: [10548.889056] [sk_mem_uncharge]sk_forward_alloc:4096,size:1280
+Oct 21 16:17:53 Inspiron kernel: [10548.889063] [tcp_ack]Ack 875533744 after 875533744:875533744,flag:17670,dupack:0
+Oct 21 16:17:53 Inspiron kernel: [10548.889070] [tcp_time_wait] update tcp metric state:5
+Oct 21 16:17:53 Inspiron kernel: [10548.889077] [__sk_mem_reclaim]sk_forward_alloc:0,amount:1,SK_MEM_QUANTUM_SHIFT:12
+Oct 21 16:17:53 Inspiron kernel: [10548.889148] [tcp_v4_rcv] seq:42006,len:1,pid:18372,uid:0,sk_state:6,sk_addr:ffff880086d4bc70,ack_seq:875533744,cwnd:0,ssthresh:0,cwnd_cnt:0

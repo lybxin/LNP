@@ -1,0 +1,32 @@
+
+Oct 21 16:27:34 Inspiron kernel: [11129.857929] [tcp_v4_rcv] seq:53414,len:1,pid:21447,uid:0,sk_state:10,sk_addr:ffff8800656a4b00,ack_seq:0,cwnd:10,ssthresh:2147483647,cwnd_cnt:0
+Oct 21 16:27:34 Inspiron kernel: [11129.857941] [tcp_rcv_state_process] sk_state:10,seq:53414,end_seq:53415,len:40,data_len:0,truesize:768 
+Oct 21 16:27:34 Inspiron kernel: [11129.857945] [tcp_v4_conn_request]seq:53414,end_seq:53415
+Oct 21 16:27:34 Inspiron kernel: [11129.908339] [tcp_rcv_state_process] sk_state:3,seq:53415,end_seq:53415,len:32,data_len:0,truesize:768 
+Oct 21 16:27:34 Inspiron kernel: [11129.908353] [tcp_init_metrics]ssthreshlock:0,lock:0,cwndtcpm_lock:0,ssthresh:0
+Oct 21 16:27:34 Inspiron kernel: [11129.908357] [tcp_rcv_state_process]
+Oct 21 16:27:34 Inspiron kernel: [11129.908782] [tcp_v4_rcv] seq:53415,len:10,pid:21450,uid:0,sk_state:1,sk_addr:ffff8800b9335280,ack_seq:1518254110,cwnd:10,ssthresh:2147483647,cwnd_cnt:0
+Oct 21 16:27:34 Inspiron kernel: [11129.908794] [tcp_rcv_established]sk_forward_alloc:0,seq:53415,end_seq:53425,len:42,data_len:0,truesize:768,pfmemalloc:0,tailroom:114
+Oct 21 16:27:34 Inspiron kernel: [11129.908804] [sk_forced_mem_schedule]sk_forward_alloc:0,size:768,amt:1,SK_MEM_QUANTUM:4096
+Oct 21 16:27:34 Inspiron kernel: [11129.908809] [sk_mem_charge]sk_forward_alloc:3328,size:768
+Oct 21 16:27:34 Inspiron kernel: [11129.908821] [tcp_transmit_skb] seq:1518254110, end_seq:1518254110, pcount:1,pid:21450,uid:0,data_len:0,cwnd:10,ssthresh:2147483647,skb:ffff88005cc30800
+Oct 21 16:27:34 Inspiron kernel: [11129.912034] [tcp_v4_rcv] seq:53460,len:10,pid:21450,uid:0,sk_state:1,sk_addr:ffff8800b9335280,ack_seq:1518254110,cwnd:10,ssthresh:2147483647,cwnd_cnt:0
+Oct 21 16:27:34 Inspiron kernel: [11129.912046] [tcp_rcv_established]sk_forward_alloc:3328,seq:53460,end_seq:53470,len:42,data_len:0,truesize:768,pfmemalloc:0,tailroom:114
+Oct 21 16:27:34 Inspiron kernel: [11129.912055] out of order segment: rcv_next D0B1 seq D0D4 - D0DE
+Oct 21 16:27:34 Inspiron kernel: [11129.912060] [sk_mem_charge]sk_forward_alloc:2560,size:768
+Oct 21 16:27:34 Inspiron kernel: [11129.912070] [tcp_transmit_skb] seq:1518254110, end_seq:1518254110, pcount:1,pid:21450,uid:0,data_len:0,cwnd:10,ssthresh:2147483647,skb:ffff88005cc30200
+Oct 21 16:27:42 Inspiron kernel: [11137.910208] [sk_mem_uncharge]sk_forward_alloc:3328,size:768
+Oct 21 16:27:43 Inspiron kernel: [11139.247963] [sk_forced_mem_schedule]sk_forward_alloc:3328,size:1280,amt:1,SK_MEM_QUANTUM:4096
+Oct 21 16:27:43 Inspiron kernel: [11139.247971] [sk_mem_charge]sk_forward_alloc:2048,size:1280
+Oct 21 16:27:43 Inspiron kernel: [11139.247977] [__tcp_push_pending_frames]cur_mss:38,timeer:62
+Oct 21 16:27:43 Inspiron kernel: [11139.247981] [tcp_write_xmit] seq:1518254110,tso_segs:1,push_one:0,qlen:1 
+Oct 21 16:27:43 Inspiron kernel: [11139.247989] [tcp_transmit_skb] seq:1518254110, end_seq:1518254111, pcount:1,pid:21451,uid:0,data_len:0,cwnd:10,ssthresh:2147483647,skb:ffff8800b9f6ea00
+Oct 21 16:27:43 Inspiron kernel: [11139.248044] [tcp_cwnd_application_limited]init_win:10,cwnd_used:1,cwnd:10,ssthresh:2147483647
+Oct 21 16:27:43 Inspiron kernel: [11139.298465] [tcp_v4_rcv] seq:53425,len:0,pid:21449,uid:0,sk_state:4,sk_addr:ffff8800b9335280,ack_seq:1518254111,cwnd:10,ssthresh:2147483647,cwnd_cnt:0
+Oct 21 16:27:43 Inspiron kernel: [11139.298480] [tcp_rcv_state_process] sk_state:4,seq:53425,end_seq:53425,len:32,data_len:0,truesize:768 
+Oct 21 16:27:43 Inspiron kernel: [11139.298492] [sk_mem_uncharge]sk_forward_alloc:3328,size:1280
+Oct 21 16:27:43 Inspiron kernel: [11139.298500] [tcp_ack]Ack 1518254111 after 1518254111:1518254111,flag:17670,dupack:0
+Oct 21 16:27:43 Inspiron kernel: [11139.298513] [tcp_time_wait] update tcp metric state:5
+Oct 21 16:27:43 Inspiron kernel: [11139.298523] [sk_mem_uncharge]sk_forward_alloc:4096,size:768
+Oct 21 16:27:43 Inspiron kernel: [11139.298527] [__sk_mem_reclaim]sk_forward_alloc:0,amount:1,SK_MEM_QUANTUM_SHIFT:12
+Oct 21 16:27:43 Inspiron kernel: [11139.298605] [tcp_v4_rcv] seq:53425,len:1,pid:21449,uid:0,sk_state:6,sk_addr:ffff880086d4bea0,ack_seq:1518254111,cwnd:0,ssthresh:0,cwnd_cnt:0
