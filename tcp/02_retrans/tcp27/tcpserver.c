@@ -5,9 +5,7 @@
 #include <pthread.h> 
 //该flag有多线程竞争关系 需要同步  此处影响不大 忽略
 int openflag = 1;
-//int pktnum=15;
-//int pktnum = 16;
-int pktnum = 10;
+int pktnum = 5;
 
 void *send_function(void *arg)
 {
@@ -42,7 +40,8 @@ void *send_function(void *arg)
         sleep_ms(3);
         i++;
     }
-    
+    sleep_ms(400);
+    Write(sockfd,buffer,100);
     
     sleep(300);
     

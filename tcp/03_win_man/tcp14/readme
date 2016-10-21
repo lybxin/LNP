@@ -1,0 +1,4 @@
+异常数据系列的接收 一个乱序包部分在接收窗口外
+
+root@Inspiron:/home/******/tcp12# ip route change local 127.0.0.2 dev lo  congctl reno window 40
+

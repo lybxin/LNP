@@ -614,20 +614,29 @@ u16 buildsynpkt(u8 *buffer, u32 flag)
     struct iphdr *iph;
     struct tcphdr *th;
     u16 tot_len;
+	u16 optlen=0;
+
+	if(flag&TCP_TSOPT)
+	{
+        optlen = sizeof(struct thsynopts);
+	}
     
     iph = (struct iphdr*)buffer;
     
-    tot_len = sizeof(struct iphdr)+sizeof(struct tcphdr)+sizeof(struct thsynopts);
+    tot_len = sizeof(struct iphdr)+sizeof(struct tcphdr)+optlen;
     
     filliphdr(iph, tot_len);
     
     th = (struct tcphdr*)(buffer + iph->ihl * 4);
     
-    filltcphdr(th, tcpseq, 0, sizeof(struct thsynopts),TCP_SYN|flag);
-    
-    fillsynopts(th);
-    
-    updatetcphdr(th, sizeof(struct thsynopts) );
+    filltcphdr(th, tcpseq, 0, optlen,TCP_SYN|flag);
+
+	if(flag&TCP_TSOPT)
+	{
+        fillsynopts(th);
+	}
+	
+    updatetcphdr(th, optlen );
     
     return tot_len;
 }
@@ -863,10 +872,11 @@ u16 buildadvdatapkt(u8 *buffer, u32 acknumber,u16 buflen, u32 flag)
 
 	if(flag|TCP_TSOPT)
 	{
-		optlen=0;
+		
+		optlen = sizeof(struct thtsopt);
 	}else
 	{
-	    optlen = sizeof(struct thtsopt);
+	    optlen=0;
 	}
     
     hdrlen = sizeof(struct iphdr)+sizeof(struct tcphdr)+optlen;
@@ -1224,7 +1234,7 @@ int rawadvconnect(int sockfd, u32 synflag, u32 synackflag)
     u8 buffer[MAX_PKT_SIZE];
     u16 tot_len;
     
-    //·¢ËÍSYN
+    //·¢ËÍSYN current:synflag must come with TCP_TSOPT 
     tot_len = buildsynpkt(buffer,synflag);
     rawsend(sockfd,buffer,tot_len);
     

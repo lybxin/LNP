@@ -7,33 +7,55 @@
 void *recv_function(void *arg); 
 void *send_function(void *arg); 
 
-//int dropno=-1;
-int dropno=1;
 
-//int eceno=5;
-int eceno = -1;
 
 void *send_function(void *arg)
 {
-/*
+
     int sockfd, tot_len;
     //int i=0;
-    unsigned char buffer[MAX_PKT_SIZE] = {"welcome to linux hello\0"};
+    unsigned char buffer[MAX_PKT_SIZE] = {"0123456789\0"};
     
     sockfd = *( (int*)arg );
     
     
     senddelay = 0;
     
-    //处理数据发送和业务逻辑
-    tot_len = builddatapkt(buffer, recvacknumber,  strlen((const char *)buffer));
+    
+    snprintf((char *)buffer,MAX_PKT_SIZE,"0123456789");
+    //处理数据发送和业务逻辑  strlen((const char *)buffer)
+    tot_len = builddatapkt(buffer, recvacknumber,  10);
     rawsend(sockfd, buffer, tot_len);
-    sleep_ms(10);
+    sleep_ms(3);
     
-
+    //while(i<10)
+    tcpseq=tcpseq+5;
+    snprintf((char *)buffer,MAX_PKT_SIZE,"0123456789");
+    tot_len = builddatapkt(buffer, recvacknumber, 10);
+    rawsend(sockfd, buffer, tot_len);
+    sleep_ms(3);
     
+    tcpseq=tcpseq+4;
+    snprintf((char *)buffer,MAX_PKT_SIZE,"0123456789");
+    tot_len = builddatapkt(buffer, recvacknumber, 10);
+    rawsend(sockfd, buffer, tot_len);
+    sleep_ms(3);
+    
+    tcpseq=tcpseq-17;
+    snprintf((char *)buffer,MAX_PKT_SIZE,"0123456789");
+    tot_len = builddatapkt(buffer, recvacknumber, 10);
+    rawsend(sockfd, buffer, tot_len);
+    sleep_ms(3);
+    
+    tcpseq=tcpseq-17-5;
+    snprintf((char *)buffer,MAX_PKT_SIZE,"0123456789");
+    tot_len = builddatapkt(buffer, recvacknumber, 10);
+    rawsend(sockfd, buffer, tot_len);
+    sleep_ms(3);
+    
+    //tcpseq 未复原   不能正确处理fin报文
     sleep(300);
-*/    
+    
     return 0;
 }
 
@@ -44,7 +66,7 @@ void *recv_function(void *arg)
     int sockfd;
     u16 recvlen,i = 0;
     u8 thflag=0;
-    u32 ackflag = TCP_TSOPT|TCP_SACKOPT;
+    u32 ackflag = TCP_TSOPT|TCP_SACKOPT|TCP_TSADV;
     unsigned char buffer[MAX_PKT_SIZE];
     
     //接收线程detach自己
@@ -54,27 +76,9 @@ void *recv_function(void *arg)
 
     while(1)
     {   
-    
-        if(i==dropno)
-        {
-            rawadvrecv(sockfd, buffer, MAX_PKT_SIZE,TCP_SACKOPT|TCP_DISCARD);
-            i++;
-            continue;
-        }    
+      
         //等待接收ACK
         recvlen = rawadvrecv(sockfd, buffer, MAX_PKT_SIZE,TCP_SACKOPT);
-        
-        if(i==eceno)
-        {
-            ackflag |= TCP_ECE;
-        }
-        
-        thflag = getthflag(buffer);
-        
-        if(thflag&TH_CWR)
-        {
-            ackflag &= ~TCP_ECE;
-        }
         
         
         //判断是否收到了需要回复ACK的报文
@@ -83,12 +87,11 @@ void *recv_function(void *arg)
             adddelaylinktail(50, recvacknumber,ackflag);
         } 
         
-        
+        thflag = getthflag(buffer);
         
         //判断是否收到了FIN
         if(thflag&TH_FIN)
         {   
-            
             adddelaylinktail(50, recvacknumber,ackflag|TCP_SACKOPT|TCP_FIN);
             break;
 
@@ -142,12 +145,8 @@ int main(int argc, char **argv)
     int res;  
     pthread_t recv_thread, send_thread, ack_thread;  
     void *thread_result;  
-    
-    if(argc==2)
-    {
-        dropno = atoi(argv[1]);
-    }
-        
+
+
     strncpy(srcip, "127.0.0.2", 32);
     //延迟500ms发包 模拟500ms的rtt
     senddelay = 50;
@@ -155,15 +154,15 @@ int main(int argc, char **argv)
     //connect前设置mss为200
     mssval = (50+12);
     
-    //关闭TSopt
-    //tcptsopt = 0;
+    //是否关闭TSopt
+    tcptsopt = 1;
 
     sockfd = Socket(AF_INET, SOCK_RAW, IPPROTO_TCP);
   
     initrawops(sockfd);
     printf("---------before conn setup-------------\n");
     //rawconnect(sockfd);
-    rawadvconnect(sockfd, TCP_TSOPT|TCP_ECE|TCP_CWR, TCP_TSOPT);
+    rawadvconnect(sockfd, TCP_TSOPT, TCP_TSOPT);
     printf("---------conn setup-------------\n");
     //sleep(50);
     

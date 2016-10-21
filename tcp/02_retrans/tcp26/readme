@@ -1,0 +1,10 @@
+前向传输(forward retransmit)与rack重传
+
+
+/proc/sys/net/ipv4/tcp_recovery
+/proc/sys/net/ipv4/tcp_timestamps
+
+1、设置tcp_timestamps=1，tcp_recovery=0，raw：mss=50+12  tcptsopt=1 丢包条件if((i>0 && i<7) || i==8 )  serv：pktnum=9 FACK重传后触发前向重传
+2、设置tcp_timestamps=0，tcp_recovery=1，raw：mss=50 tcptsopt=0 丢包条件if(i>0 && i<7) serv：pktnum=8 FACK重传后触发RACK重传
+
+

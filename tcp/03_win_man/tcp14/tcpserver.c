@@ -5,15 +5,13 @@
 #include <pthread.h> 
 //该flag有多线程竞争关系 需要同步  此处影响不大 忽略
 int openflag = 1;
-//int pktnum=15;
-//int pktnum = 16;
-int pktnum = 10;
+int pktnum = 5;
 
 void *send_function(void *arg)
 {
-    int sockfd,val,len,i=0;
+    int sockfd,val,len;
 
-    char buffer[MAX_PKT_SIZE] = {"welcome to linux hello\0"};  //MAX_PKT_SIZE
+    //char buffer[MAX_PKT_SIZE] = {"welcome to linux hello\0"};  //MAX_PKT_SIZE
     
     //接收线程detach自己
     pthread_detach(pthread_self());
@@ -26,23 +24,7 @@ void *send_function(void *arg)
     len = sizeof(int);
     Setsockopt(sockfd, SOL_TCP, TCP_NODELAY,(void *)&val, len);
     
-    
-    //根据不同测试场景需要选择是否设置sndbuf
-    val = 40000;
-    len = sizeof(int);
-    Setsockopt(sockfd, SOL_SOCKET, SO_SNDBUF,(void *)&val, len);
-    
-    sleep_ms(1000);
-
-
-    while(i<pktnum)
-    {
-        Write(sockfd,buffer,50);
-        
-        sleep_ms(3);
-        i++;
-    }
-    
+   
     
     sleep(300);
     
@@ -56,20 +38,21 @@ void *recv_function(void *arg)
     //接收线程detach自己
     pthread_detach(pthread_self());
     
-/*
+
     int sockfd;
     int num;
-    char buffer[MAX_PKT_SIZE] = {"welcome to linux hello\0"};  //MAX_PKT_SIZE
+    char buffer[MAX_PKT_SIZE] = {0};  //MAX_PKT_SIZE
     
     
+    sleep(8);
         
     sockfd = *( (int*)arg );
     //printf("[recv_function]sockfd:%d \n",sockfd);
     
     num = Read(sockfd,buffer,MAX_PKT_SIZE);
-    printf("\n----------read %d bytes--------------\n",num);
+    printf("\n----------read %d bytes:%s--------------\n",num,buffer);
     
-    */
+    
     return 0;
     
 }

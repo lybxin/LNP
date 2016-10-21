@@ -1,0 +1,4 @@
+异常数据系列的接收 一个包部分数据在rcv_nxt后
+
+root@Inspiron:/home/******/tcp12# ip route change local 127.0.0.2 dev lo  congctl reno window 40
+
