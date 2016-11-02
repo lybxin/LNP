@@ -19,9 +19,16 @@ int Bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen)
 {
     int ret;
     ret = bind(sockfd, addr, addrlen);
+	printf("[bind]addr:%s,port:%u\n",
+			inet_ntoa(((struct sockaddr_in*)addr)->sin_addr),
+			ntohs(((struct sockaddr_in*)addr)->sin_port)
+			);
     if(ret < 0)
     {
         perror("bind error");
+		fprintf(stderr,"errno:%u\n",
+			errno);
+
     }
     return ret;
 }
@@ -166,6 +173,14 @@ ssize_t Send(int sockfd, const void *buf, size_t len, int flags)
 
 
 
+void initskaddr(struct sockaddr_in *skaddr, char * addr, unsigned short port)
+{
+    memset(skaddr,0,sizeof(struct sockaddr_in));
+    skaddr->sin_family = AF_INET;
+    //bindaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    skaddr->sin_port =  htons(port);
+    inet_pton(AF_INET, addr,&(skaddr->sin_addr) );
+}
 
 
 

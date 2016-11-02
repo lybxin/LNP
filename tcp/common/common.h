@@ -14,6 +14,7 @@
 #include<errno.h>
 #include<netinet/tcp.h>
 #include<netinet/ip.h>
+//#include<netinet/in.h>
 
 
 #define SERV_PORT 9877
@@ -52,6 +53,9 @@ ssize_t Recvfrom(int sockfd, void *buf, size_t len, int flags,
                         struct sockaddr *src_addr, socklen_t *addrlen);
                                              
 ssize_t Send(int sockfd, const void *buf, size_t len, int flags);
+
+void initskaddr(struct sockaddr_in *skaddr, char * addr, unsigned short port);
+
 
                         
 #endif

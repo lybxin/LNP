@@ -107,6 +107,8 @@ void *get_info(void *arg)
     return 0;
 }
 
+
+
 int main()
 {
     int Listenfd,connfd;
@@ -115,6 +117,7 @@ int main()
     int val,len;
     pthread_t recv_thread, send_thread,getinfo_thread; 
     int res;
+
   
     Listenfd = Socket(AF_INET,SOCK_STREAM,0);
     

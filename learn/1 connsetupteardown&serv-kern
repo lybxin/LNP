@@ -1,0 +1,42 @@
+
+Oct 22 17:45:33 Inspiron kernel: [  176.015615] [tcp_v4_rcv] seq:10993,len:1,pid:3017,uid:0,sk_state:10,sk_addr:ffff88013204e900,ack_seq:0,cwnd:10,ssthresh:2147483647,cwnd_cnt:0,sk_flags:700,num:0
+Oct 22 17:45:33 Inspiron kernel: [  176.015624] [tcp_v4_do_rcv] seq:10993,len:1,pid:3017,uid:0,sk_state:10,sk_addr:ffff88013204e900,ack_seq:0,sk_flags:1792,tcp_v4_do_rcv:ffffffff81786110 
+Oct 22 17:45:33 Inspiron kernel: [  176.015626] [tcp_v4_do_rcv] sk_state:10 
+Oct 22 17:45:33 Inspiron kernel: [  176.015630] [tcp_rcv_state_process] sk_state:10,seq:10993,end_seq:10994,len:40,data_len:0,truesize:768 
+Oct 22 17:45:33 Inspiron kernel: [  176.015633] [tcp_v4_conn_request]seq:10993,end_seq:10994,tcp_request_sock:320
+Oct 22 17:45:33 Inspiron kernel: [  176.015674] [tcp_v4_send_synack]seq:782628012,end_seq:782628013,sk_state:10,ireq_state:12,gattach_req:1,req:ffff880122008148 
+Oct 22 17:45:33 Inspiron kernel: [  176.065940] [tcp_v4_rcv] seq:10994,len:0,pid:3017,uid:0,sk_state:12,sk_addr:ffff880122008148,ack_seq:782628013,cwnd:0,ssthresh:0,cwnd_cnt:0,sk_flags:ffff88013204e900,num:1
+Oct 22 17:45:33 Inspiron kernel: [  176.065947] [tcp_get_cookie_sock] sk_state:10,ireq_state:12 
+Oct 22 17:45:33 Inspiron kernel: [  176.065952] [tcp_v4_syn_recv_sock]:ffffffff81785990 sk_state:10,ireq_state:12,seq:10994,end_seq:10994,len:32,data_len:0,truesize:768,sk:ffff88013204e900 
+Oct 22 17:45:33 Inspiron kernel: [  176.065969] [tcp_rcv_state_process] sk_state:3,seq:10994,end_seq:10994,len:32,data_len:0,truesize:768 
+Oct 22 17:45:33 Inspiron kernel: [  176.065979] [tcp_init_metrics]ssthreshlock:0,lock:0,cwndtcpm_lock:0,ssthresh:0
+Oct 22 17:45:33 Inspiron kernel: [  176.065981] [tcp_rcv_state_process]
+Oct 22 17:45:33 Inspiron kernel: [  176.066260] [tcp_v4_rcv] seq:10994,len:10,pid:3021,uid:0,sk_state:1,sk_addr:ffff880092d4e180,ack_seq:782628013,cwnd:10,ssthresh:2147483647,cwnd_cnt:0,sk_flags:700,num:2
+Oct 22 17:45:33 Inspiron kernel: [  176.066267] [tcp_v4_do_rcv] seq:10994,len:10,pid:3021,uid:0,sk_state:1,sk_addr:ffff880092d4e180,ack_seq:782628013,sk_flags:1792,tcp_v4_do_rcv:ffffffff81786110 
+Oct 22 17:45:33 Inspiron kernel: [  176.066271] [tcp_rcv_established]sk_forward_alloc:0,seq:10994,end_seq:11004,len:42,data_len:0,truesize:768,pfmemalloc:0,tailroom:114
+Oct 22 17:45:33 Inspiron kernel: [  176.066276] [sk_forced_mem_schedule]sk_forward_alloc:0,size:768,amt:1,SK_MEM_QUANTUM:4096
+Oct 22 17:45:33 Inspiron kernel: [  176.066279] [sk_mem_charge]sk_forward_alloc:3328,size:768
+Oct 22 17:45:33 Inspiron kernel: [  176.066284] [tcp_transmit_skb] seq:782628013, end_seq:782628013, pcount:1,pid:3021,uid:0,data_len:0,cwnd:10,ssthresh:2147483647,skb:ffff88011b0e4600
+Oct 22 17:45:33 Inspiron kernel: [  176.069390] [tcp_v4_rcv] seq:10999,len:10,pid:3021,uid:0,sk_state:1,sk_addr:ffff880092d4e180,ack_seq:782628013,cwnd:10,ssthresh:2147483647,cwnd_cnt:0,sk_flags:700,num:3
+Oct 22 17:45:33 Inspiron kernel: [  176.069395] [tcp_v4_do_rcv] seq:10999,len:10,pid:3021,uid:0,sk_state:1,sk_addr:ffff880092d4e180,ack_seq:782628013,sk_flags:1792,tcp_v4_do_rcv:ffffffff81786110 
+Oct 22 17:45:33 Inspiron kernel: [  176.069398] [tcp_rcv_established]sk_forward_alloc:3328,seq:10999,end_seq:11009,len:42,data_len:0,truesize:768,pfmemalloc:0,tailroom:114
+Oct 22 17:45:33 Inspiron kernel: [  176.069401] partial packet: rcv_next 2AFC seq 2AF7 - 2B01
+Oct 22 17:45:33 Inspiron kernel: [  176.069404] [sk_mem_charge]sk_forward_alloc:2560,size:768
+Oct 22 17:45:33 Inspiron kernel: [  176.069407] [tcp_transmit_skb] seq:782628013, end_seq:782628013, pcount:1,pid:3021,uid:0,data_len:0,cwnd:10,ssthresh:2147483647,skb:ffff88011b0e4000
+Oct 22 17:45:41 Inspiron kernel: [  184.071738] [sk_mem_uncharge]sk_forward_alloc:3328,size:768
+Oct 22 17:45:41 Inspiron kernel: [  184.071749] [sk_mem_uncharge]sk_forward_alloc:4096,size:768
+Oct 22 17:45:49 Inspiron kernel: [  192.387105] [__sk_mem_reclaim]sk_forward_alloc:0,amount:1,SK_MEM_QUANTUM_SHIFT:12
+Oct 22 17:45:49 Inspiron kernel: [  192.387112] [sk_forced_mem_schedule]sk_forward_alloc:0,size:1280,amt:1,SK_MEM_QUANTUM:4096
+Oct 22 17:45:49 Inspiron kernel: [  192.387114] [sk_mem_charge]sk_forward_alloc:2816,size:1280
+Oct 22 17:45:49 Inspiron kernel: [  192.387117] [__tcp_push_pending_frames]cur_mss:50,timeer:63
+Oct 22 17:45:49 Inspiron kernel: [  192.387120] [tcp_write_xmit] seq:782628013,tso_segs:1,push_one:0,qlen:1 
+Oct 22 17:45:49 Inspiron kernel: [  192.387124] [tcp_transmit_skb] seq:782628013, end_seq:782628014, pcount:1,pid:3020,uid:0,data_len:0,cwnd:10,ssthresh:2147483647,skb:ffff8800a50aac00
+Oct 22 17:45:49 Inspiron kernel: [  192.387157] [tcp_cwnd_application_limited]init_win:10,cwnd_used:1,cwnd:10,ssthresh:2147483647
+Oct 22 17:45:50 Inspiron kernel: [  192.437238] [tcp_v4_rcv] seq:11009,len:0,pid:3019,uid:0,sk_state:4,sk_addr:ffff880092d4e180,ack_seq:782628014,cwnd:10,ssthresh:2147483647,cwnd_cnt:0,sk_flags:701,num:4
+Oct 22 17:45:50 Inspiron kernel: [  192.437252] [tcp_v4_do_rcv] seq:11009,len:0,pid:3019,uid:0,sk_state:4,sk_addr:ffff880092d4e180,ack_seq:782628014,sk_flags:1793,tcp_v4_do_rcv:ffffffff81786110 
+Oct 22 17:45:50 Inspiron kernel: [  192.437258] [tcp_rcv_state_process] sk_state:4,seq:11009,end_seq:11009,len:32,data_len:0,truesize:768 
+Oct 22 17:45:50 Inspiron kernel: [  192.437265] [sk_mem_uncharge]sk_forward_alloc:4096,size:1280
+Oct 22 17:45:50 Inspiron kernel: [  192.437273] [tcp_ack]Ack 782628014 after 782628014:782628014,flag:17670,dupack:0
+Oct 22 17:45:50 Inspiron kernel: [  192.437285] [tcp_time_wait] update tcp metric state:5
+Oct 22 17:45:50 Inspiron kernel: [  192.437292] [__sk_mem_reclaim]sk_forward_alloc:0,amount:1,SK_MEM_QUANTUM_SHIFT:12
+Oct 22 17:45:50 Inspiron kernel: [  192.437370] [tcp_v4_rcv] seq:11009,len:1,pid:3019,uid:0,sk_state:6,sk_addr:ffff88008dd8c000,ack_seq:782628014,cwnd:16777215,ssthresh:16777215,cwnd_cnt:16777215,sk_flags:ffffffff81efa440,num:5
