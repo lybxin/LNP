@@ -21,6 +21,7 @@ extern u32 tcptsopt;
 extern char srcip[];
 extern char dstip[];
 extern u32 dsackenable;
+extern u16 clientport;
 
 #define TCP_TSOPT    (1<<0)
 #define TCP_SACKOPT  (1<<1)
