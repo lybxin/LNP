@@ -8,8 +8,6 @@ void *recv_function(void *arg);
 void *send_function(void *arg); 
 
 
-int dropno=3;
-
 
 void *send_function(void *arg)
 {
@@ -41,8 +39,9 @@ void *recv_function(void *arg)
 
     int sockfd;
     u16 recvlen,i = 0;
+    u32 dropseq=0;
     u8 thflag=0;
-    u32 ackflag = TCP_TSOPT|TCP_SACKOPT;
+    u32 ackflag = TCP_TSOPT|TCP_SACKOPT|TCP_TSADV;
     unsigned char buffer[MAX_PKT_SIZE];
     
     //接收线程detach自己
@@ -53,28 +52,47 @@ void *recv_function(void *arg)
     while(1)
     {   
     
-   
+  
         //等待接收ACK
-        recvlen = rawadvrecv(sockfd, buffer, MAX_PKT_SIZE,TCP_SACKOPT);
+        recvlen = rawadvrecv(sockfd, buffer, MAX_PKT_SIZE,TCP_SACKOPT|TCP_DISCARD);
+        printf("[recv_function]i:%d,dropseq:%u,startseq:%u,condata:%u,flag:%u\n",
+                i,dropseq,getstartseq(buffer),containdata(buffer, recvlen),(getthflag(buffer)&TH_FIN));
         
-        if(i>=dropno)
+        if((i>0 && i<7) || i==8 )
         {
+            
             i++;
             continue;
-        } 
+        }  
         
-        thflag = getthflag(buffer);
+        if(dropseq == getstartseq(buffer))
+        {
+            dropseq=0;
+            i++;
+            continue;
+        }
 
+        
+        updaterecvstate(buffer, recvlen, TCP_SACKOPT);
+        
+        
+        if(i==0)
+        {
+            dropseq = recvacknumber+200;
+        }
+        
+        
         //判断是否收到了需要回复ACK的报文
-        if(containdata(buffer, recvlen) || recvseq<recvacknumber)
+        if(containdata(buffer, recvlen))
         {   
             adddelaylinktail(50, recvacknumber,ackflag);
         } 
-
+        
+        thflag = getthflag(buffer);
+        
         //判断是否收到了FIN
         if(thflag&TH_FIN)
         {   
-            
             adddelaylinktail(50, recvacknumber,ackflag|TCP_SACKOPT|TCP_FIN);
             break;
 
@@ -128,12 +146,8 @@ int main(int argc, char **argv)
     int res;  
     pthread_t recv_thread, send_thread, ack_thread;  
     void *thread_result;  
-    
-    if(argc==2)
-    {
-        dropno = atoi(argv[1]);
-    }
-        
+
+
     strncpy(srcip, "127.0.0.2", 32);
     //延迟500ms发包 模拟500ms的rtt
     senddelay = 50;
@@ -141,8 +155,8 @@ int main(int argc, char **argv)
     //connect前设置mss为200
     mssval = (50+12);
     
-    //关闭TSopt
-    //tcptsopt = 0;
+    //是否关闭TSopt
+    tcptsopt = 1;
 
     sockfd = Socket(AF_INET, SOCK_RAW, IPPROTO_TCP);
   

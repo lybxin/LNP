@@ -1089,6 +1089,23 @@ u16 containdata(u8 *buffer, u16 recvlen)
 
 	return datalen;
 }
+
+
+u32 getstartseq(u8 *buffer)
+{
+    struct iphdr *iph;
+    struct tcphdr *th;
+	
+
+    iph = (struct iphdr*)buffer;
+    th = (struct tcphdr*)(buffer + iph->ihl * 4);
+
+	//caution:ihl doff is big endian
+
+	return htonl(th->seq);
+}
+
+
 u16 containfin(u8 *buffer, u16 recvlen)
 {
     struct iphdr *iph;

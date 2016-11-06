@@ -1,0 +1,11 @@
+gso tso 测试  使用tcpclient
+
+
+ip route change local 127.0.0.1 dev lo src 127.0.0.2 advmss 62
+
+
+root@Inspiron:/home/lybxin/MyRes/LNP/tcp/05_cc/tcp25$ip route show table local | grep 127.0.0.2
+local 127.0.0.2 dev lo  scope host  ssthresh lock 30 initcwnd 12 congctl reno
+
+
+

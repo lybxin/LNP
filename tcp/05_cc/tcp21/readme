@@ -1,0 +1,16 @@
+前向传输(forward retransmit)与rack重传
+
+lybxin@Inspiron:~/MyRes/LNP/tcp/05_cc/tcp21$ip route show table local | grep 127.0.0.2
+local 127.0.0.2 dev lo  scope host  ssthresh lock 30 initcwnd 12 congctl reno
+
+******@Inspiron:~$ sudo ethtool -K lo tso off gso off  #关闭tso gso以方便观察cwnd变化 
+
+
+
+/proc/sys/net/ipv4/tcp_recovery
+/proc/sys/net/ipv4/tcp_timestamps
+
+1、设置tcp_timestamps=1，tcp_recovery=0，FACK重传后触发前向重传
+2、设置tcp_timestamps=0，tcp_recovery=1，FACK重传后触发RACK重传
+
+

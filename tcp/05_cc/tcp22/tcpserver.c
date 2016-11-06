@@ -3,51 +3,82 @@
 #include "../../common/rawops.h"
 #include "../../common/tcp_private.h"
 #include <pthread.h> 
+//该flag有多线程竞争关系 需要同步  此处影响不大 忽略
+int openflag = 1;
+//int pktnum = 8;
+int pktnum = 7;
 
 void *send_function(void *arg)
 {
-    int sockfd;
+    int sockfd,val,len,i=0;
 
-    //char buffer[MAX_PKT_SIZE] = {"welcome to linux hello\0"};  //MAX_PKT_SIZE
+    char buffer[MAX_PKT_SIZE] = {"welcome to linux hello\0"};  //MAX_PKT_SIZE
     
     //接收线程detach自己
     pthread_detach(pthread_self());
     
     sockfd = *( (int*)arg );
+    //printf("[send_function]sockfd:%d \n",sockfd);
+    //fflush(stdout);
     
-    printf("\n[send_function]----------sockfd %d--------------\n",sockfd);
+    val = 1;
+    len = sizeof(int);
+    Setsockopt(sockfd, SOL_TCP, TCP_NODELAY,(void *)&val, len);
     
-    sleep(500);
-    close(sockfd);
-   // Write(sockfd,buffer,200);
+    
+    //根据不同测试场景需要选择是否设置sndbuf
+    val = 40000;
+    len = sizeof(int);
+    Setsockopt(sockfd, SOL_SOCKET, SO_SNDBUF,(void *)&val, len);
+    
+    sleep_ms(1000);
+
+
+    while(i<pktnum)
+    {
+        Write(sockfd,buffer,50);
         
+        sleep_ms(6);
+        i++;
+    }
+    
+    
+    sleep(300);
+    
+    Close(sockfd);  
     
     return 0;
 }
 
 void *recv_function(void *arg)
 {
-    int sockfd;
-
-    //char buffer[MAX_PKT_SIZE] = {"welcome to linux hello\0"};  //MAX_PKT_SIZE
-    
     //接收线程detach自己
     pthread_detach(pthread_self());
+    
+/*
+    int sockfd;
+    int num;
+    char buffer[MAX_PKT_SIZE] = {"welcome to linux hello\0"};  //MAX_PKT_SIZE
+    
+    
         
     sockfd = *( (int*)arg );
-    sleep(100);
-    close(sockfd);
-    //num = Read(sockfd,buffer,MAX_PKT_SIZE);
-    printf("\n[recv_function]----------sockfd %d--------------\n",sockfd);
+    //printf("[recv_function]sockfd:%d \n",sockfd);
     
+    num = Read(sockfd,buffer,MAX_PKT_SIZE);
+    printf("\n----------read %d bytes--------------\n",num);
+    
+    */
     return 0;
+    
 }
 
 void *get_info(void *arg)
 {
-    int sockfd,ret;
+    int sockfd;
     int len,i=0,last_in = 0,last_out = 0;;
     struct tcp_info_user info;
+    FILE *stream = fopen("rst_server","w+"); 
     
     //接收线程detach自己
     pthread_detach(pthread_self());  
@@ -57,99 +88,75 @@ void *get_info(void *arg)
     
             
     i = 0;
-    while(i < 100*200000)
+    while(i < 100*200000 && openflag>0)
     {
         len = sizeof(info);
-        ret = Getsockopt(sockfd, SOL_TCP, TCP_INFO,(void *)&info, (socklen_t *)&len);
-        if(ret<0)
+        errno = 0;
+        Getsockopt(sockfd, SOL_TCP, TCP_INFO,(void *)&info, (socklen_t *)&len);
+        if(errno != 0)
         {
+            //perror("get sock error\n");
             break;
         }
         if( (last_in != info.tcpi_segs_in) || (last_out != info.tcpi_segs_out) )
-        {       
-            printftcpinfo(&info);
+        {
+            sleep_ms(1);
+            len = sizeof(info);
+            Getsockopt(sockfd, SOL_TCP, TCP_INFO,(void *)&info, (socklen_t *)&len);
+            
+            fprintftcpinfo(stream,&info);
 
-            printf("i=%d\n",i);
+            //printf("i=%d\n",i);
+            
             
             last_in = info.tcpi_segs_in;
             last_out = info.tcpi_segs_out;
+            i++;
+            continue;
         }
      
         
         sleep_ms(1);
         i++;
     }  
-    
+    fclose(stream);
     return 0;
 }
 
-void setkeepalive(int sockfd, int keepaliveidle, int keepintvl, int keepcnt)
-{
-    int val,len;
-    
-    val = 1;
-    len = sizeof(int);
-    Setsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE,(void *)&val, len);
-    
-    val = keepaliveidle;
-    len = sizeof(int);
-    Setsockopt(sockfd, SOL_TCP, TCP_KEEPIDLE,(void *)&val, len);
-    
-    
-    val = keepintvl;
-    len = sizeof(int);
-    Setsockopt(sockfd, SOL_TCP, TCP_KEEPINTVL,(void *)&val, len);
-    
-    
-    val = keepcnt;
-    len = sizeof(int);
-    Setsockopt(sockfd, SOL_TCP, TCP_KEEPCNT,(void *)&val, len);
-
-}
-
-int main(int argc, char **argv)
+int main()
 {
     int Listenfd,connfd;
     socklen_t clilen;
     struct sockaddr_in cliaddr, servaddr;
-    int val=0,len;
+    int val,len;
     pthread_t recv_thread, send_thread,getinfo_thread; 
     int res;
-    
-    
-    if(argc >= 2)
-    {
-        val =atoi(argv[1]);
-    }
-
+  
     Listenfd = Socket(AF_INET,SOCK_STREAM,0);
     
-    //val = 1;
+    val = 1;
     len = sizeof(int);
     Setsockopt(Listenfd, SOL_SOCKET, SO_DEBUG,(void *)&val, len);
     
+    val = 1;
+    len = sizeof(int);
+    Setsockopt(Listenfd, SOL_SOCKET, SO_REUSEPORT,(void *)&val, len);
+
+    memset(&servaddr,0,sizeof(servaddr));
+    servaddr.sin_family = AF_INET;
+    servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    servaddr.sin_port =  htons(SERV_PORT);//
     
-
-
-    initskaddr(&servaddr, "0.0.0.0", SERV_PORT);
     Bind(Listenfd,(SA*)&servaddr,sizeof(servaddr));
+    Listen(Listenfd,LISTENQ);
     
-    Listen(Listenfd,5);
+
+    for( ; ;){
     
-    //sleep(2000);
-    
-    setkeepalive(Listenfd, 5, 1, 3);
-    printf("set keepalive 0\n");
-        
-    for( ; ;){  
-             
         clilen = sizeof(cliaddr);
         connfd = Accept(Listenfd,(SA*)&cliaddr,&clilen);
         
-        setkeepalive(connfd, 5, 1, 3);
-        printf("set keepalive \n");            
-
-        
+        openflag=1;
         res = pthread_create(&getinfo_thread, NULL, get_info, (void *)(&connfd));  
         if (res != 0)  
         {  
@@ -175,7 +182,7 @@ int main(int argc, char **argv)
         
         //sleep(200);
         
-        printf("close\n");
+        //printf("close\n");
         //交由系统回收关闭文件描述符
         //Close(connfd);
     }

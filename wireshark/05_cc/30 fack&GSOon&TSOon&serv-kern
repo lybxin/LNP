@@ -1,0 +1,139 @@
+
+Nov  6 17:41:34 lybxin-Inspiron-N5010 kernel: [23559.313660] [inet_bind]snum:9877,chk_addr_ret:3,tb_id:255,bind_address_no_port:0,sk_bound_dev_if:0,freebind&transparent:0,nonlocal:0
+Nov  6 17:41:34 lybxin-Inspiron-N5010 kernel: [23559.313671] [inet_csk_get_port]sk_reuse:0,sk_reuseport:1,sk_state:7,uid:0,fastreuse:0,fastreuseport:1,fastuid:0
+Nov  6 17:41:34 lybxin-Inspiron-N5010 kernel: [23559.313677] [inet_csk_get_port]attempt_half:0,remaining:0,rover:0,low:0,high:0,ret:0,smallest_size:4294967295,bhash_size:32768,snum:9877
+Nov  6 17:41:34 lybxin-Inspiron-N5010 kernel: [23559.313822] [inet_csk_get_port]sk_reuse:0,sk_reuseport:1,sk_state:10,uid:0,fastreuse:0,fastreuseport:1,fastuid:0
+Nov  6 17:41:34 lybxin-Inspiron-N5010 kernel: [23559.313828] [inet_csk_get_port]attempt_half:0,remaining:0,rover:0,low:0,high:0,ret:0,smallest_size:4294967295,bhash_size:32768,snum:9877
+Nov  6 17:41:38 lybxin-Inspiron-N5010 kernel: [23562.499519] [tcp_v4_rcv] seq:5776,len:1,sk_state:6,sk_addr:ffff880075929d88,ack_seq:0,cwnd:2147483648,ssthresh:2349512805,cwnd_cnt:2349508711,sk_flags:ffffffff81efa3c0,twstate:6 
+Nov  6 17:41:38 lybxin-Inspiron-N5010 kernel: [23562.499528] [tcp_v4_rcv]pid:9117,uid:0,own:2502297350 
+Nov  6 17:41:38 lybxin-Inspiron-N5010 kernel: [23562.499536] [inet_twsk_kill]tw_kill:0,tw_refcnt:4,tw_count:3 
+Nov  6 17:41:38 lybxin-Inspiron-N5010 kernel: [23562.499547] [tcp_v4_do_rcv] seq:5776,len:1,pid:9117,uid:0,sk_state:10,sk_addr:ffff880131820780,ack_seq:0,sk_flags:1792,tcp_v4_do_rcv:ffffffff81781da0 
+Nov  6 17:41:38 lybxin-Inspiron-N5010 kernel: [23562.499552] [tcp_rcv_state_process] sk_state:10,seq:5776,end_seq:5777,len:40,data_len:0,truesize:768 
+Nov  6 17:41:38 lybxin-Inspiron-N5010 kernel: [23562.499558] [tcp_v4_conn_request]seq:5776,end_seq:5777,tcp_request_sock:320,tcp_sock:1896,twsock:272,sa:608,young:0,sk_ack_backlog:0,qlen:0 
+Nov  6 17:41:38 lybxin-Inspiron-N5010 kernel: [23562.499584] [tcp_v4_send_synack]seq:3383404513,end_seq:3383404514,sk_state:10,ireq_state:12,gattach_req:1,req:ffff880129c71338,sk_flags:ffff880131820780 
+Nov  6 17:41:38 lybxin-Inspiron-N5010 kernel: [23562.549910] [tcp_v4_rcv] seq:5777,len:0,sk_state:12,sk_addr:ffff880129c71338,ack_seq:3383404514,cwnd:0,ssthresh:0,cwnd_cnt:2175541312,sk_flags:ffff880131820780,twstate:0 
+Nov  6 17:41:38 lybxin-Inspiron-N5010 kernel: [23562.549919] [tcp_v4_rcv]pid:9117,uid:0,own:0 
+Nov  6 17:41:38 lybxin-Inspiron-N5010 kernel: [23562.549924] [tcp_check_req] sk_state:10,ireq_state:12 
+Nov  6 17:41:38 lybxin-Inspiron-N5010 kernel: [23562.549931] [tcp_v4_syn_recv_sock]:ffffffff81781540 sk_state:10,ireq_state:12,seq:5777,end_seq:5777,len:32,data_len:0,truesize:768,sk:ffff880131820780 
+Nov  6 17:41:38 lybxin-Inspiron-N5010 kernel: [23562.549950] [tcp_v4_syn_recv_sock]caps:0,max_size:0,max_segs:0,can_gso:1,hdr_len:0,gso_type:0
+Nov  6 17:41:38 lybxin-Inspiron-N5010 kernel: [23562.549957] [tcp_rcv_state_process] sk_state:3,seq:5777,end_seq:5777,len:32,data_len:0,truesize:768 
+Nov  6 17:41:38 lybxin-Inspiron-N5010 kernel: [23562.549967] [tcp_init_metrics]ssthreshlock:64,lock:64,cwndtcpm_lock:4,ssthresh:30
+Nov  6 17:41:38 lybxin-Inspiron-N5010 kernel: [23562.549969] [tcp_rcv_state_process]
+Nov  6 17:41:38 lybxin-Inspiron-N5010 kernel: [23562.550034] [inet_csk_wait_for_connect]empty:0,state:10,pending:0,timeo:9223372036854775807
+Nov  6 17:41:38 lybxin-Inspiron-N5010 kernel: [23562.550039] [inet_csk_accept]reqstate:12
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.550421] [tcp_sendmsg]copy:0,copied:0,size_goal:2000,mss_now:50,sk_route_caps:86974889065,dataleft:450,pid:9123,uid:0 
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.550432] [select_size]MAX_TCP_HEADER:304,MAX_SKB_FRAGS:17,PAGE_SIZE:4096,sg:1,gso:1,tmp:1424,max_header:304
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.550438] [sk_forced_mem_schedule]sk_forward_alloc:0,size:2304,amt:1,SK_MEM_QUANTUM:4096
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.550445] [tcp_sendmsg]head:ffff8800af22b800,data:ffff8800af22b930,tail:304,end:1728,reserved_tailroom:0,data_len:0,len:0,truesize:2304
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.550448] [sk_mem_charge]sk_forward_alloc:1792,size:2304
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.550454] [tcp_push]seq:3383404514,end_seq:3383404964,size_goal:2000
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.550457] [__tcp_push_pending_frames]cur_mss:50,timeer:62
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.550462] [tcp_write_xmit] seq:3383404514,tso_segs:9,push_one:0,qlen:1 
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.550467] [sk_forced_mem_schedule]sk_forward_alloc:1792,size:1280,amt:1,SK_MEM_QUANTUM:4096
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.550471] [sk_mem_charge]sk_forward_alloc:512,size:1280
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.550478] [tcp_transmit_skb] seq:3383404514, end_seq:3383404614, pcount:2,pid:9123,uid:0,data_len:0,cwnd:12,ssthresh:30,skb:ffff88011e937c00,pending:0
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.550525] [tcp_write_xmit] seq:3383404614,tso_segs:7,push_one:0,qlen:2 
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.550529] [sk_forced_mem_schedule]sk_forward_alloc:512,size:1280,amt:1,SK_MEM_QUANTUM:4096
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.550531] [sk_mem_charge]sk_forward_alloc:3328,size:1280
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.550534] [tcp_transmit_skb] seq:3383404614, end_seq:3383404714, pcount:2,pid:9123,uid:0,data_len:0,cwnd:12,ssthresh:30,skb:ffff88011e936200,pending:1
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.550546] [tcp_write_xmit] seq:3383404714,tso_segs:5,push_one:0,qlen:3 
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.550548] [sk_forced_mem_schedule]sk_forward_alloc:3328,size:1280,amt:1,SK_MEM_QUANTUM:4096
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.550550] [sk_mem_charge]sk_forward_alloc:2048,size:1280
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.550554] [tcp_transmit_skb] seq:3383404714, end_seq:3383404814, pcount:2,pid:9123,uid:0,data_len:0,cwnd:12,ssthresh:30,skb:ffff88011e937e00,pending:1
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.550560] [tcp_write_xmit] seq:3383404814,tso_segs:3,push_one:0,qlen:4 
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.550563] [sk_forced_mem_schedule]sk_forward_alloc:2048,size:1280,amt:1,SK_MEM_QUANTUM:4096
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.550564] [sk_mem_charge]sk_forward_alloc:768,size:1280
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.550568] [tcp_transmit_skb] seq:3383404814, end_seq:3383404914, pcount:2,pid:9123,uid:0,data_len:0,cwnd:12,ssthresh:30,skb:ffff88011e936400,pending:1
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.550574] [tcp_write_xmit] seq:3383404914,tso_segs:1,push_one:0,qlen:5 
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.550578] [tcp_transmit_skb] seq:3383404914, end_seq:3383404964, pcount:1,pid:9123,uid:0,data_len:0,cwnd:12,ssthresh:30,skb:ffff88011e936e00,pending:1
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.601007] [tcp_v4_rcv] seq:5777,len:0,sk_state:1,sk_addr:ffff8800a49e2580,ack_seq:3383404614,cwnd:12,ssthresh:30,cwnd_cnt:0,sk_flags:700,twstate:0 
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.601013] [tcp_v4_rcv]pid:9120,uid:0,own:0 
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.601019] [tcp_v4_do_rcv] seq:5777,len:0,pid:9120,uid:0,sk_state:1,sk_addr:ffff8800a49e2580,ack_seq:3383404614,sk_flags:1792,tcp_v4_do_rcv:ffffffff81781da0 
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.601023] [tcp_rcv_established]sk_forward_alloc:768,seq:5777,end_seq:5777,len:32,data_len:0,truesize:768,pfmemalloc:0,tailroom:124
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.601029] [sk_mem_uncharge]sk_forward_alloc:3072,size:2304
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.601037] [tcp_ack]Ack 3383404614 after 3383404614:3383404964,flag:1542,dupack:0
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.704441] [tcp_write_timer_handler]event:5,state:1
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.704456] [tcp_transmit_skb] seq:3383404914, end_seq:3383404964, pcount:1,pid:0,uid:0,data_len:0,cwnd:14,ssthresh:30,skb:ffff88011e936e00,pending:5
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.956431] [tcp_write_timer_handler]event:1,state:1
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.956487] [sk_forced_mem_schedule]sk_forward_alloc:3072,size:1280,amt:1,SK_MEM_QUANTUM:4096
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.956499] [sk_mem_charge]sk_forward_alloc:1792,size:1280
+Nov  6 17:41:39 lybxin-Inspiron-N5010 kernel: [23563.956514] [tcp_transmit_skb] seq:3383404614, end_seq:3383404664, pcount:1,pid:0,uid:0,data_len:0,cwnd:1,ssthresh:7,skb:ffff88011e936200,pending:0
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.460479] [tcp_write_timer_handler]event:1,state:1
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.460496] [tcp_transmit_skb] seq:3383404614, end_seq:3383404664, pcount:1,pid:0,uid:0,data_len:0,cwnd:1,ssthresh:7,skb:ffff88011e936200,pending:0
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.510862] [tcp_v4_rcv] seq:5777,len:0,sk_state:1,sk_addr:ffff8800a49e2580,ack_seq:3383404664,cwnd:1,ssthresh:7,cwnd_cnt:0,sk_flags:700,twstate:0 
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.510868] [tcp_v4_rcv]pid:9120,uid:0,own:0 
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.510875] [tcp_v4_do_rcv] seq:5777,len:0,pid:9120,uid:0,sk_state:1,sk_addr:ffff8800a49e2580,ack_seq:3383404664,sk_flags:1792,tcp_v4_do_rcv:ffffffff81781da0 
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.510879] [tcp_rcv_established]sk_forward_alloc:1792,seq:5777,end_seq:5777,len:32,data_len:0,truesize:768,pfmemalloc:0,tailroom:124
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.510884] [sk_mem_uncharge]sk_forward_alloc:3072,size:1280
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.510892] [__tcp_push_pending_frames]cur_mss:50,timeer:63
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.510898] [tcp_xmit_retransmit_queue]seq:3383404664, end_seq:3383404714, pcount:1,pid:9120,uid:0,data_len:0,cwnd:1,skb:ffff8800b6e9fa00,retransmit_high:3383404964,hint:          (null),sack:4
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.510901] [tcp_xmit_retransmit_queue]highest_sack_seq:3383404664,fwd_rexmitting:0,in_flight:0,hole:          (null)
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.510906] [tcp_transmit_skb] seq:3383404664, end_seq:3383404714, pcount:1,pid:9120,uid:0,data_len:0,cwnd:1,ssthresh:7,skb:ffff8800b6e9fa00,pending:1
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.510917] [tcp_xmit_retransmit_queue]seq:3383404714, end_seq:3383404814, pcount:2,pid:9120,uid:0,data_len:0,cwnd:1,skb:ffff88011e937e00,retransmit_high:3383404964,hint:ffff8800b6e9fa00,sack:4
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.510919] [tcp_xmit_retransmit_queue]highest_sack_seq:3383404664,fwd_rexmitting:0,in_flight:1,hole:          (null)
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.510923] [tcp_ack]Ack 3383404664 after 3383404664:3383404964,flag:1038,dupack:0
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.561320] [tcp_v4_rcv] seq:5777,len:0,sk_state:1,sk_addr:ffff8800a49e2580,ack_seq:3383404714,cwnd:2,ssthresh:7,cwnd_cnt:0,sk_flags:700,twstate:0 
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.561328] [tcp_v4_rcv]pid:9120,uid:0,own:0 
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.561338] [tcp_v4_do_rcv] seq:5777,len:0,pid:9120,uid:0,sk_state:1,sk_addr:ffff8800a49e2580,ack_seq:3383404714,sk_flags:1792,tcp_v4_do_rcv:ffffffff81781da0 
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.561344] [tcp_rcv_established]sk_forward_alloc:3072,seq:5777,end_seq:5777,len:32,data_len:0,truesize:768,pfmemalloc:0,tailroom:124
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.561350] [sk_mem_uncharge]sk_forward_alloc:4352,size:1280
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.561364] [tcp_xmit_retransmit_queue]seq:3383404714, end_seq:3383404814, pcount:2,pid:9120,uid:0,data_len:0,cwnd:2,skb:ffff88011e937e00,retransmit_high:3383404964,hint:ffff88011e937e00,sack:4
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.561369] [tcp_xmit_retransmit_queue]highest_sack_seq:3383404714,fwd_rexmitting:0,in_flight:0,hole:          (null)
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.561377] [sk_forced_mem_schedule]sk_forward_alloc:4352,size:1280,amt:1,SK_MEM_QUANTUM:4096
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.561380] [sk_mem_charge]sk_forward_alloc:3072,size:1280
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.561387] [tcp_transmit_skb] seq:3383404714, end_seq:3383404764, pcount:1,pid:9120,uid:0,data_len:0,cwnd:2,ssthresh:7,skb:ffff88011e937e00,pending:1
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.561404] [tcp_xmit_retransmit_queue]seq:3383404764, end_seq:3383404814, pcount:1,pid:9120,uid:0,data_len:0,cwnd:2,skb:ffff880121066a00,retransmit_high:3383404964,hint:ffff88011e937e00,sack:4
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.561410] [tcp_xmit_retransmit_queue]highest_sack_seq:3383404714,fwd_rexmitting:0,in_flight:1,hole:          (null)
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.561414] [tcp_transmit_skb] seq:3383404764, end_seq:3383404814, pcount:1,pid:9120,uid:0,data_len:0,cwnd:2,ssthresh:7,skb:ffff880121066a00,pending:1
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.561420] [tcp_xmit_retransmit_queue]seq:3383404814, end_seq:3383404914, pcount:2,pid:9120,uid:0,data_len:0,cwnd:2,skb:ffff88011e936400,retransmit_high:3383404964,hint:ffff880121066a00,sack:4
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.561422] [tcp_xmit_retransmit_queue]highest_sack_seq:3383404714,fwd_rexmitting:0,in_flight:2,hole:          (null)
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.561426] [tcp_ack]Ack 3383404714 after 3383404714:3383404964,flag:1038,dupack:0
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.611930] [tcp_v4_rcv] seq:5777,len:0,sk_state:1,sk_addr:ffff8800a49e2580,ack_seq:3383404764,cwnd:3,ssthresh:7,cwnd_cnt:0,sk_flags:700,twstate:0 
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.611936] [tcp_v4_rcv]pid:9120,uid:0,own:0 
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.611943] [tcp_v4_do_rcv] seq:5777,len:0,pid:9120,uid:0,sk_state:1,sk_addr:ffff8800a49e2580,ack_seq:3383404764,sk_flags:1792,tcp_v4_do_rcv:ffffffff81781da0 
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.611947] [tcp_rcv_established]sk_forward_alloc:3072,seq:5777,end_seq:5777,len:32,data_len:0,truesize:768,pfmemalloc:0,tailroom:124
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.611952] [sk_mem_uncharge]sk_forward_alloc:4352,size:1280
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.611962] [tcp_xmit_retransmit_queue]seq:3383404814, end_seq:3383404914, pcount:2,pid:9120,uid:0,data_len:0,cwnd:3,skb:ffff88011e936400,retransmit_high:3383404964,hint:ffff88011e936400,sack:4
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.611965] [tcp_xmit_retransmit_queue]highest_sack_seq:3383404764,fwd_rexmitting:0,in_flight:1,hole:          (null)
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.611971] [sk_forced_mem_schedule]sk_forward_alloc:4352,size:1280,amt:1,SK_MEM_QUANTUM:4096
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.611973] [sk_mem_charge]sk_forward_alloc:3072,size:1280
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.611978] [tcp_transmit_skb] seq:3383404814, end_seq:3383404864, pcount:1,pid:9120,uid:0,data_len:0,cwnd:3,ssthresh:7,skb:ffff88011e936400,pending:1
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.611989] [tcp_xmit_retransmit_queue]seq:3383404864, end_seq:3383404914, pcount:1,pid:9120,uid:0,data_len:0,cwnd:3,skb:ffff880121067200,retransmit_high:3383404964,hint:ffff88011e936400,sack:4
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.611991] [tcp_xmit_retransmit_queue]highest_sack_seq:3383404764,fwd_rexmitting:0,in_flight:2,hole:          (null)
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.611995] [tcp_transmit_skb] seq:3383404864, end_seq:3383404914, pcount:1,pid:9120,uid:0,data_len:0,cwnd:3,ssthresh:7,skb:ffff880121067200,pending:1
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.612001] [tcp_xmit_retransmit_queue]seq:3383404914, end_seq:3383404964, pcount:1,pid:9120,uid:0,data_len:0,cwnd:3,skb:ffff88011e936e00,retransmit_high:3383404964,hint:ffff880121067200,sack:132
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.612003] [tcp_xmit_retransmit_queue]highest_sack_seq:3383404764,fwd_rexmitting:0,in_flight:3,hole:          (null)
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.612007] [tcp_ack]Ack 3383404764 after 3383404764:3383404964,flag:1038,dupack:0
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.612131] [tcp_v4_rcv] seq:5777,len:0,sk_state:1,sk_addr:ffff8800a49e2580,ack_seq:3383404814,cwnd:4,ssthresh:7,cwnd_cnt:0,sk_flags:700,twstate:0 
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.612135] [tcp_v4_rcv]pid:9120,uid:0,own:0 
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.612141] [tcp_v4_do_rcv] seq:5777,len:0,pid:9120,uid:0,sk_state:1,sk_addr:ffff8800a49e2580,ack_seq:3383404814,sk_flags:1792,tcp_v4_do_rcv:ffffffff81781da0 
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.612146] [tcp_rcv_established]sk_forward_alloc:3072,seq:5777,end_seq:5777,len:32,data_len:0,truesize:768,pfmemalloc:0,tailroom:124
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.612149] [sk_mem_uncharge]sk_forward_alloc:4352,size:1280
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.612157] [tcp_xmit_retransmit_queue]seq:3383404914, end_seq:3383404964, pcount:1,pid:9120,uid:0,data_len:0,cwnd:4,skb:ffff88011e936e00,retransmit_high:3383404964,hint:ffff88011e936e00,sack:132
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.612161] [tcp_xmit_retransmit_queue]highest_sack_seq:3383404814,fwd_rexmitting:0,in_flight:2,hole:          (null)
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.612167] [tcp_transmit_skb] seq:3383404914, end_seq:3383404964, pcount:1,pid:9120,uid:0,data_len:0,cwnd:4,ssthresh:7,skb:ffff88011e936e00,pending:1
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.612178] [tcp_ack]Ack 3383404814 after 3383404814:3383404964,flag:1038,dupack:0
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.662424] [tcp_v4_rcv] seq:5777,len:0,sk_state:1,sk_addr:ffff8800a49e2580,ack_seq:3383404864,cwnd:5,ssthresh:7,cwnd_cnt:0,sk_flags:700,twstate:0 
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.662432] [tcp_v4_rcv]pid:9120,uid:0,own:0 
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.662442] [tcp_v4_do_rcv] seq:5777,len:0,pid:9120,uid:0,sk_state:1,sk_addr:ffff8800a49e2580,ack_seq:3383404864,sk_flags:1792,tcp_v4_do_rcv:ffffffff81781da0 
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.662448] [tcp_rcv_established]sk_forward_alloc:4352,seq:5777,end_seq:5777,len:32,data_len:0,truesize:768,pfmemalloc:0,tailroom:124
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.662454] [sk_mem_uncharge]sk_forward_alloc:5632,size:1280
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.662467] [tcp_xmit_retransmit_queue]seq:3383404914, end_seq:3383404964, pcount:1,pid:9120,uid:0,data_len:0,cwnd:5,skb:ffff88011e936e00,retransmit_high:3383404964,hint:ffff88011e936e00,sack:150
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.662472] [tcp_xmit_retransmit_queue]highest_sack_seq:3383404864,fwd_rexmitting:0,in_flight:2,hole:          (null)
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.662477] [tcp_ack]Ack 3383404864 after 3383404864:3383404964,flag:1038,dupack:0
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.662545] [tcp_v4_rcv] seq:5777,len:0,sk_state:1,sk_addr:ffff8800a49e2580,ack_seq:3383404914,cwnd:6,ssthresh:7,cwnd_cnt:0,sk_flags:700,twstate:0 
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.662549] [tcp_v4_rcv]pid:9120,uid:0,own:0 
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.662555] [tcp_v4_do_rcv] seq:5777,len:0,pid:9120,uid:0,sk_state:1,sk_addr:ffff8800a49e2580,ack_seq:3383404914,sk_flags:1792,tcp_v4_do_rcv:ffffffff81781da0 
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.662560] [tcp_rcv_established]sk_forward_alloc:5632,seq:5777,end_seq:5777,len:32,data_len:0,truesize:768,pfmemalloc:0,tailroom:124
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.662564] [sk_mem_uncharge]sk_forward_alloc:6912,size:1280
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.662572] [tcp_xmit_retransmit_queue]seq:3383404914, end_seq:3383404964, pcount:1,pid:9120,uid:0,data_len:0,cwnd:6,skb:ffff88011e936e00,retransmit_high:3383404964,hint:ffff88011e936e00,sack:150
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.662576] [tcp_xmit_retransmit_queue]highest_sack_seq:3383404914,fwd_rexmitting:0,in_flight:1,hole:          (null)
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.662581] [tcp_ack]Ack 3383404914 after 3383404914:3383404964,flag:1038,dupack:0
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.662633] [tcp_v4_rcv] seq:5777,len:0,sk_state:1,sk_addr:ffff8800a49e2580,ack_seq:3383404964,cwnd:7,ssthresh:7,cwnd_cnt:0,sk_flags:700,twstate:0 
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.662637] [tcp_v4_rcv]pid:9120,uid:0,own:0 
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.662643] [tcp_v4_do_rcv] seq:5777,len:0,pid:9120,uid:0,sk_state:1,sk_addr:ffff8800a49e2580,ack_seq:3383404964,sk_flags:1792,tcp_v4_do_rcv:ffffffff81781da0 
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.662648] [tcp_rcv_established]sk_forward_alloc:6912,seq:5777,end_seq:5777,len:32,data_len:0,truesize:768,pfmemalloc:0,tailroom:124
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.662652] [sk_mem_uncharge]sk_forward_alloc:8192,size:1280
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.662659] [tcp_ack]Ack 3383404964 after 3383404964:3383404964,flag:1038,dupack:0
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.912509] [tcp_write_timer_handler]event:0,state:1
+Nov  6 17:41:40 lybxin-Inspiron-N5010 kernel: [23564.912518] [__sk_mem_reclaim]sk_forward_alloc:0,amount:2,SK_MEM_QUANTUM_SHIFT:12

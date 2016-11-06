@@ -90,6 +90,7 @@ void get_adv_time(struct timespec *timeout, u32 time_ms);
 u16 buildadvdatapkt(u8 *buffer, u32 acknumber,u16 buflen, u32 flag);
 int rawadvconnect(int sockfd, u32 synflag, u32 synackflag);
 u8 getthflag(u8 *buffer);
+u32 getstartseq(u8 *buffer);
 
 
 
