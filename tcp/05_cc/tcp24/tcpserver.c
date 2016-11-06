@@ -10,7 +10,7 @@ int pktnum = 9;
 
 void *send_function(void *arg)
 {
-    int sockfd,val,len,i=0;
+    int sockfd,val,len;
 
     char buffer[MAX_PKT_SIZE] = {"welcome to linux hello\0"};  //MAX_PKT_SIZE
     
