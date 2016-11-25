@@ -20,10 +20,12 @@ main:
 	#gcc -D_REENTRANT -Wall -o $(client_out) $(tcpclient_c)  $(common_c) $(rawops_c) $(tcp_private_c) -lpthread
 
 nowarn:
+	@echo "test nowarn"
 	gcc -D_REENTRANT -o $(rawtest_out) $(testraw_c) $(common_c) $(rawops_c) -lpthread -g
 	gcc -D_REENTRANT -o $(server_out) $(tcpserver_c) $(common_c) $(rawops_c) $(tcp_private_c) -lpthread -g
 	#gcc -D_REENTRANT -o $(client_out) $(tcpclient_c)  $(common_c) $(rawops_c) $(tcp_private_c) -lpthread
 	
 clean:
 	rm $(rm_out)
+	@echo "test clean"
 	

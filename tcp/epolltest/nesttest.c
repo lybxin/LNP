@@ -460,7 +460,45 @@ void test9()
 
 
 
+void test10()
+{
+    int epfd,fd,nfds,i=0;
+ 
+    struct epoll_event ev,events[10];
+    
+    fd=open("test.txt",O_RDWR);
+    if(fd<0)
+    {
+        printf("open error:%s(errno:%d)\n",strerror(errno),errno);
+    }
+    
+    epfd = epoll_create1(1);
 
+    
+    printf("-----------test10 EPOLLONESHOT epfd:%d,fd:%d----------- \n",epfd,fd);
+    
+    
+    sleep(100000);
+    
+    ev.events = EPOLLIN|EPOLLOUT;
+    ev.data.fd = fd;
+    if (epoll_ctl(epfd, EPOLL_CTL_ADD, fd, &ev) == -1) {
+        printf("add error:%s(errno:%d)\n",strerror(errno),errno);
+    }
+    
+    //while(1)
+    {
+        nfds = epoll_wait(epfd, events, MAX_EVENTS, -1);
+        printf("epoll_wait return \n");
+        for(i=0;i<nfds;++i)
+        {
+            printf("i:%d,nfds:%d,fd:%d\n",i,nfds,events[i].data.fd);
+        }
+        
+    }
+
+    printf("---------------test10 end--------------- \n\n");
+}
 
 
 void main()
@@ -533,14 +571,21 @@ void main()
     }
     
     sleep(1);
-  */
+
   
     if(fork()==0)
     {
         test9();
         return;
     }
-  
+
+*/
+   if(fork()==0)
+    {
+        test10();
+        return;
+    }
+    
   
 }
 
